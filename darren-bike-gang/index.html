@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Flat 037: The Bicycle Gang</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- START SCREEN -->
+  <div id="start-screen" class="screen">
+    <div class="screen-inner">
+      <h1>🚲 Flat 037: The Bicycle Gang 🚲</h1>
+      <p>Darren needs a crew. Recruit everyone in the flat before Griffith Accommodation Security shows up.</p>
+      <button id="start-btn" class="big-btn">Start</button>
+    </div>
+  </div>
+
+  <!-- END SCREENS -->
+  <div id="win-screen" class="screen hidden">
+    <div class="screen-inner">
+      <h1>💰 Darren is a Millionaire 💰</h1>
+      <p id="win-text">The whole gang stole every bike in Dublin. Legendary.</p>
+      <button id="restart-btn-win" class="big-btn">Play Again</button>
+    </div>
+  </div>
+
+  <div id="lose-screen" class="screen hidden">
+    <div class="screen-inner">
+      <h1>🚨 Security Is Here 🚨</h1>
+      <p id="lose-text">Someone started crying. Game over.</p>
+      <button id="restart-btn-lose" class="big-btn">Try Again</button>
+    </div>
+  </div>
+
+  <!-- GAME HUD -->
+  <div id="hud" class="hidden">
+    <div id="security-meter-wrap">
+      <span class="hud-label">Security Alert</span>
+      <div id="security-meter"><div id="security-fill"></div></div>
+    </div>
+    <div id="recruited-count" class="hud-label">Recruited: 0 / 5</div>
+  </div>
+
+  <!-- ROOM -->
+  <div id="room" class="hidden">
+    <!-- Background is set in CSS (#room), swap in assets/room.jpg -->
+
+    <!-- Interactive hidden-item spots -->
+    <div class="hotspot" id="spot-fridge" data-spot="fridge">Fridge</div>
+    <div class="hotspot" id="spot-cabinet" data-spot="cabinet">Cabinet</div>
+    <div class="hotspot" id="spot-table" data-spot="table">Under Table</div>
+    <div class="hotspot" id="spot-oven" data-spot="oven">Oven</div>
+    <div class="hotspot" id="spot-window" data-spot="window">Window</div>
+
+    <!-- Character sprites get inserted here dynamically by main.js -->
+    <div id="characters-layer"></div>
+
+    <!-- Inventory bar -->
+    <div id="inventory-bar"></div>
+  </div>
+
+  <!-- DIALOG BOX (used for all character/item pop-ups) -->
+  <div id="dialog-box" class="hidden">
+    <div id="dialog-portrait"></div>
+    <div id="dialog-text"></div>
+    <div id="dialog-actions"></div>
+  </div>
+
+  <!-- Only main.js is loaded here. It imports room.js, ui.js, and every -->
+  <!-- character file itself (each character stays its own separate file). -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

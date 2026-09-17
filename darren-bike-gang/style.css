@@ -1,0 +1,194 @@
+/* ========================================================
+   Flat 037: The Bicycle Gang — styles
+   Swap the background-image on #room for your generated art.
+   ======================================================== */
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Comic Sans MS', 'Segoe UI', sans-serif; /* swap for a nicer cartoon font later */
+  background: #1a1a1a;
+  color: #fff;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.hidden { display: none !important; }
+
+/* ---------- Start / Win / Lose screens ---------- */
+.screen {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  text-align: center;
+  padding: 20px;
+}
+.screen-inner { max-width: 420px; }
+.screen h1 { font-size: 1.6rem; margin-bottom: 12px; }
+.screen p { font-size: 1rem; line-height: 1.4; margin-bottom: 24px; }
+
+.big-btn {
+  font-size: 1.1rem;
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: none;
+  background: #ffd166;
+  color: #222;
+  font-weight: bold;
+  cursor: pointer;
+}
+.big-btn:active { transform: scale(0.97); }
+
+/* ---------- HUD ---------- */
+#hud {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(0,0,0,0.55);
+  z-index: 50;
+  font-size: 0.85rem;
+}
+.hud-label { white-space: nowrap; margin-right: 8px; }
+#security-meter-wrap { display: flex; align-items: center; }
+#security-meter {
+  width: 120px;
+  height: 12px;
+  background: #333;
+  border-radius: 6px;
+  overflow: hidden;
+}
+#security-fill {
+  height: 100%;
+  width: 0%;
+  background: #e63946;
+  transition: width 0.3s ease;
+}
+
+/* ---------- Room ---------- */
+#room {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  /* TODO: replace this gradient with your generated room background:
+     background: url('assets/room.jpg') center/cover no-repeat; */
+  background: linear-gradient(180deg, #6d597a 0%, #b56576 100%);
+  overflow: hidden;
+}
+
+.hotspot {
+  position: absolute;
+  min-width: 70px;
+  min-height: 44px;
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.15);
+  border: 2px dashed rgba(255,255,255,0.6);
+  border-radius: 10px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-align: center;
+}
+/* Rough placeholder positions — move these to match your background art */
+#spot-fridge  { top: 15%; left: 5%;  width: 15%; height: 25%; }
+#spot-cabinet { top: 12%; left: 25%; width: 15%; height: 15%; }
+#spot-table   { top: 55%; left: 40%; width: 20%; height: 15%; }
+#spot-oven    { top: 15%; left: 45%; width: 15%; height: 20%; }
+#spot-window  { top: 8%;  left: 70%; width: 20%; height: 20%; }
+
+#characters-layer { position: absolute; inset: 0; pointer-events: none; }
+
+.character-sprite {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #444 center/cover no-repeat;
+  border: 3px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+.character-sprite.recruited { border-color: #06d6a0; }
+.character-sprite .sprite-name {
+  position: absolute;
+  bottom: -18px;
+  font-size: 0.65rem;
+  background: rgba(0,0,0,0.6);
+  padding: 1px 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* ---------- Inventory ---------- */
+#inventory-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  min-height: 46px;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 10px;
+  z-index: 40;
+  overflow-x: auto;
+}
+.inventory-item {
+  background: #ffd166;
+  color: #222;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+/* ---------- Dialog box ---------- */
+#dialog-box {
+  position: fixed;
+  left: 50%;
+  bottom: 60px;
+  transform: translateX(-50%);
+  width: min(90vw, 420px);
+  background: #2b2d42;
+  border-radius: 14px;
+  padding: 14px;
+  z-index: 60;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+#dialog-portrait {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #555 center/cover no-repeat;
+  flex-shrink: 0;
+}
+#dialog-text { flex: 1; font-size: 0.9rem; line-height: 1.3; }
+#dialog-actions { display: flex; flex-direction: column; gap: 6px; margin-left: 8px; }
+#dialog-actions button {
+  font-size: 0.8rem;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  background: #ffd166;
+  cursor: pointer;
+  min-height: 40px; /* touch target */
+}
