@@ -1,20 +1,16 @@
 // ========================================================
-// sharad.js — every 50s he says "Yo bro!" and you must say it back
-// in time. 10 successful replies = recruited.
-// 3 MISSED replies IN A ROW = he starts crying = security called = game over.
+// sharad.js — recruited through a right-click dialogue menu. Right-
+// click his sprite to get 4 things you can say:
+//   "How's your mum?"          -> just a reply, no effect
+//   "Hi yourself"               -> just a reply, no effect
+//   "Yo bro"                    -> +1 toward recruiting him
+//   "I love you my best bro"    -> maxes him out and recruits him instantly
+// Left-clicking him just shows his current status.
 // ========================================================
-import { showDialog, hideDialog } from '../ui.js';
+import { showDialog, hideDialog, showContextMenu, hideContextMenu } from '../ui.js';
 
-const YO_BRO_INTERVAL_MS = 50000;   // how often he says it
-const REPLY_WINDOW_MS = 8000;       // how long you have to reply
 const SUCCESSES_NEEDED = 10;
-const MAX_CONSECUTIVE_MISSES = 3;
-
-let intervalId = null;
-let replyTimeoutId = null;
 let successCount = 0;
-let consecutiveMisses = 0;
-let awaitingReply = false;
 
 const sharad = {
   id: 'sharad',
@@ -29,24 +25,8 @@ const sharad = {
     return { done: successCount, total: SUCCESSES_NEEDED };
   },
 
-  // Starts his periodic "yo bro" calls. Call once when the game starts.
-  start(game) {
-    this.stop(); // clear any previous timers first
-    intervalId = setInterval(() => triggerYoBro(game), YO_BRO_INTERVAL_MS);
-  },
-
-  stop() {
-    if (intervalId) clearInterval(intervalId);
-    if (replyTimeoutId) clearTimeout(replyTimeoutId);
-    intervalId = null;
-    replyTimeoutId = null;
-    successCount = 0;
-    consecutiveMisses = 0;
-    awaitingReply = false;
-  },
-
-  // Clicking Sharad directly just shows status — the real interaction
-  // happens through the timed popup triggered by triggerYoBro().
+  // Left-click: just a status check, doesn't do anything by itself —
+  // the real interaction is the right-click menu below.
   onInteract(game) {
     if (game.isRecruited('sharad')) {
       showDialog({
@@ -58,57 +38,70 @@ const sharad = {
     }
     showDialog({
       portraitUrl: sharad.portraitNeutral,
-      text: `${sharad.name}: (${successCount}/${SUCCESSES_NEEDED} yo bros so far — wait for him to say it!)`,
+      text: `${sharad.name}: (${successCount}/${SUCCESSES_NEEDED} — right-click me to chat!)`,
       buttons: [{ label: 'Close', onClick: hideDialog }]
     });
-  }
+  },
+
+  // Right-click: the dialogue menu that actually recruits him.
+  onRightClick(game, x, y) {
+    if (game.isRecruited('sharad')) return;
+
+    showContextMenu(x, y, [
+      {
+        label: `How's your mum?`,
+        onClick: () => reply(`She's grand, thanks for asking! 😄`)
+      },
+      {
+        label: `Hi yourself`,
+        onClick: () => reply(`Haha, sound.`)
+      },
+      {
+        label: `Yo bro`,
+        onClick: () => {
+          successCount = Math.min(SUCCESSES_NEEDED, successCount + 1);
+          if (successCount >= SUCCESSES_NEEDED) {
+            recruitNow(game);
+          } else {
+            reply(`Yo bro!! 🗣️ (${successCount}/${SUCCESSES_NEEDED})`);
+          }
+        }
+      },
+      {
+        label: `I love you my best bro`,
+        onClick: () => {
+          successCount = SUCCESSES_NEEDED;
+          recruitNow(game);
+        }
+      }
+    ]);
+  },
+
+  // Kept so main.js's stopAllTimers()/startGame() calls still work —
+  // there's no background timer to run any more, it's all player-driven.
+  start() {},
+  stop() { successCount = 0; }
 };
 
-function triggerYoBro(game) {
-  if (game.isRecruited('sharad') || game.isGameOver()) return;
-
-  awaitingReply = true;
+function reply(text) {
+  hideContextMenu();
   showDialog({
     portraitUrl: sharad.portraitNeutral,
-    text: `${sharad.name}: Yo bro!! 🗣️`,
-    buttons: [{
-      label: 'Yo bro back!',
-      onClick: () => handleReply(game, true)
-    }]
+    text: `${sharad.name}: ${text}`,
+    buttons: [{ label: 'Close', onClick: hideDialog }],
+    autoHideMs: 1600
   });
-
-  // If the player doesn't click in time, count it as a miss.
-  replyTimeoutId = setTimeout(() => {
-    if (awaitingReply) handleReply(game, false);
-  }, REPLY_WINDOW_MS);
 }
 
-function handleReply(game, replied) {
-  if (!awaitingReply) return;
-  awaitingReply = false;
-  clearTimeout(replyTimeoutId);
-  hideDialog();
-
-  if (replied) {
-    successCount++;
-    consecutiveMisses = 0;
-    if (successCount >= SUCCESSES_NEEDED) {
-      sharad.stop();
-      game.recruit('sharad');
-      showDialog({
-        portraitUrl: sharad.portraitHappy,
-        text: `${sharad.name}: Yooo bro you're solid, I'm in the gang!`,
-        buttons: [{ label: 'Close', onClick: hideDialog }],
-        autoHideMs: 2500
-      });
-    }
-  } else {
-    consecutiveMisses++;
-    if (consecutiveMisses >= MAX_CONSECUTIVE_MISSES) {
-      sharad.stop();
-      game.endGame('lose', `${sharad.name} started crying because you kept ignoring him. Security is here.`);
-    }
-  }
+function recruitNow(game) {
+  hideContextMenu();
+  game.recruit('sharad');
+  showDialog({
+    portraitUrl: sharad.portraitHappy,
+    text: `${sharad.name}: Yooo bro you're solid, I'm in the gang!`,
+    buttons: [{ label: 'Close', onClick: hideDialog }],
+    autoHideMs: 2500
+  });
 }
 
 export default sharad;

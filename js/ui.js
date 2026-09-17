@@ -108,3 +108,72 @@ export function showLoseScreen(text) {
   document.getElementById('lose-text').textContent = text;
   document.getElementById('lose-screen').classList.remove('hidden');
 }
+
+// Shown when the overall game timer runs out — lists whoever's been
+// recruited so far as the final gang, win or not.
+export function showTimesUpScreen(names) {
+  const text = names.length > 0
+    ? `Time's up! Your gang: ${names.join(', ')}.`
+    : `Time's up! You didn't recruit anyone this round — try again?`;
+  document.getElementById('timesup-text').textContent = text;
+  document.getElementById('timesup-screen').classList.remove('hidden');
+}
+
+// Updates the countdown display in the HUD. Pass a formatted string
+// like "4:32" — main.js owns the actual counting.
+const gameTimerEl = document.getElementById('game-timer');
+export function setGameTimer(text) {
+  if (gameTimerEl) gameTimerEl.textContent = `⏱️ ${text}`;
+}
+
+// Small top-right toast, e.g. "🎉 Grace is part of your gang!" — fires
+// once per recruit (see game.recruit() in main.js), separate from each
+// character's own flavour dialog so there's always a consistent cue.
+const recruitToastEl = document.getElementById('recruit-toast');
+let recruitToastTimeout = null;
+export function showRecruitToast(name) {
+  if (!recruitToastEl) return;
+  recruitToastEl.textContent = `🎉 ${name} is part of your gang!`;
+  recruitToastEl.classList.add('show');
+  clearTimeout(recruitToastTimeout);
+  recruitToastTimeout = setTimeout(() => recruitToastEl.classList.remove('show'), 2400);
+}
+
+// ---------------- Right-click dialogue menu ----------------
+// Generic small floating menu near wherever the player right-clicked.
+// Any character can use this — see sharad.js's onRightClick() for the
+// pattern. options = [{ label, onClick }, ...]
+const contextMenuEl = document.getElementById('context-menu');
+function closeContextMenuOnOutsideClick(e) {
+  if (contextMenuEl && !contextMenuEl.contains(e.target)) {
+    hideContextMenu();
+  }
+}
+export function showContextMenu(x, y, options) {
+  if (!contextMenuEl) return;
+  contextMenuEl.innerHTML = '';
+  options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.textContent = opt.label;
+    btn.onclick = () => { opt.onClick(); };
+    contextMenuEl.appendChild(btn);
+  });
+
+  // Keep it on-screen even if the click was near an edge.
+  const menuWidth = 220;
+  const menuHeight = options.length * 42 + 12;
+  const left = Math.min(x, window.innerWidth - menuWidth - 10);
+  const top = Math.min(y, window.innerHeight - menuHeight - 10);
+  contextMenuEl.style.left = `${Math.max(10, left)}px`;
+  contextMenuEl.style.top = `${Math.max(10, top)}px`;
+
+  contextMenuEl.classList.remove('hidden');
+  // Defer so the right-click that opened it doesn't immediately close it.
+  setTimeout(() => document.addEventListener('click', closeContextMenuOnOutsideClick), 0);
+}
+
+export function hideContextMenu() {
+  if (!contextMenuEl) return;
+  contextMenuEl.classList.add('hidden');
+  document.removeEventListener('click', closeContextMenuOnOutsideClick);
+}

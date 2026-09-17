@@ -14,6 +14,10 @@ export const hiddenItems = [
   { spotId: 'table',   owner: 'grace', type: 'juice', label: 'Grape Juice Carton' },
   { spotId: 'oven',    owner: 'grace', type: 'juice', label: 'Grape Juice Carton' },
 
+  // Mimi's movie ticket (needs 1) — second thing you find in the
+  // cabinet, ahead of the waffle backlog so it doesn't take forever.
+  { spotId: 'cabinet', owner: 'mimi', type: 'ticket', label: 'Movie Ticket' },
+
   // Boris's waffles (needs 5) — reuse spots, multiple items per spot allowed
   { spotId: 'fridge',  owner: 'boris', type: 'waffle', label: 'Waffle' },
   { spotId: 'cabinet', owner: 'boris', type: 'waffle', label: 'Waffle' },
@@ -64,6 +68,7 @@ export const ITEM_EMOJI = {
   juice: '🧃',
   waffle: '🧇',
   cat: '🐈‍⬛',
+  ticket: '🎫',
 };
 
 // The backpack only holds this many items at once (regardless of mix —

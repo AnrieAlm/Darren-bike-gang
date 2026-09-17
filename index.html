@@ -34,6 +34,20 @@
     </div>
   </div>
 
+  <div id="timesup-screen" class="screen hidden">
+    <div class="screen-inner">
+      <h1>⏰ Time's Up! ⏰</h1>
+      <p id="timesup-text">Here's your gang so far.</p>
+      <button id="restart-btn-timesup" class="big-btn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Fires once per recruit, separate from each character's own dialog -->
+  <div id="recruit-toast"></div>
+
+  <!-- Generic right-click dialogue menu — see sharad.js -->
+  <div id="context-menu" class="hidden"></div>
+
   <!-- GAME HUD -->
   <div id="hud" class="hidden">
     <div id="security-meter-wrap">
@@ -41,6 +55,7 @@
       <div id="security-meter"><div id="security-fill"></div></div>
     </div>
     <div id="recruited-count" class="hud-label">Recruited: 0 / 5</div>
+    <div id="game-timer" class="hud-label">⏱️ 5:00</div>
   </div>
   <!-- One small bar per character, filled in by ui.js's renderHappinessBars() -->
   <div id="happiness-bars" class="hidden"></div>

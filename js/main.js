@@ -19,21 +19,27 @@ import {
 import {
   showDialog, hideDialog, setSecurityMeter,
   setRecruitedCount, renderInventory, showWinScreen, showLoseScreen,
-  renderHappinessBars
+  renderHappinessBars, showTimesUpScreen, setGameTimer, showRecruitToast
 } from './ui.js';
 
 // All playable characters. Add/remove ids here to change who's required.
 const ALL_CHARACTERS = [esgi, sharad, grace, boris, maya, mimi];
 
-// Characters that must be recruited to win. Mimi is left out until her
-// mechanic is built — add 'mimi' here once js/characters/mimi.js is ready.
-const requiredCharacters = ['esgi', 'sharad', 'grace', 'boris', 'maya'];
+// Characters that must be recruited to win.
+const requiredCharacters = ['esgi', 'sharad', 'grace', 'boris', 'maya', 'mimi'];
 
 // ---------------- Game state ----------------
 let inventory = [];           // array of { owner, type, label }
 let recruited = new Set();    // set of character ids
 let security = 0;             // 0-100
 let over = false;
+
+// Overall game timer — when it runs out, the game ends and shows
+// whoever's been recruited so far as the final gang (win or not).
+// Change TIME_LIMIT_SECONDS to whatever length feels right.
+const TIME_LIMIT_SECONDS = 300; // 5 minutes
+let timeRemaining = TIME_LIMIT_SECONDS;
+let gameTimerId = null;
 
 const game = {
   getInventoryCount(owner, type) {
@@ -66,6 +72,8 @@ const game = {
     setRecruitedCount(recruited.size, requiredCharacters.length);
     updateSpriteState(id);
     refreshHappiness();
+    const character = ALL_CHARACTERS.find(c => c.id === id);
+    if (character) showRecruitToast(character.name);
     checkWinCondition();
   },
   // Chore tasks (sweeping, dishes) — no inventory involved, just marks
@@ -92,6 +100,15 @@ const game = {
     } else {
       showLoseScreen(message);
     }
+  },
+  // Fired when the overall game timer hits zero — not a win or a loss,
+  // just "here's how far you got."
+  timeUp() {
+    if (over) return;
+    over = true;
+    stopAllTimers();
+    const names = ALL_CHARACTERS.filter(c => recruited.has(c.id)).map(c => c.name);
+    showTimesUpScreen(names);
   }
 };
 
@@ -131,6 +148,31 @@ function startHeistSequence() {
 
 function stopAllTimers() {
   sharad.stop();
+  if (gameTimerId) {
+    clearInterval(gameTimerId);
+    gameTimerId = null;
+  }
+}
+
+// ---------------- Overall game timer ----------------
+function startGameTimer() {
+  timeRemaining = TIME_LIMIT_SECONDS;
+  updateTimerDisplay();
+  gameTimerId = setInterval(() => {
+    timeRemaining--;
+    updateTimerDisplay();
+    if (timeRemaining <= 0) {
+      clearInterval(gameTimerId);
+      gameTimerId = null;
+      game.timeUp();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timeRemaining / 60);
+  const s = timeRemaining % 60;
+  setGameTimer(`${m}:${s.toString().padStart(2, '0')}`);
 }
 
 // ---------------- Rendering character sprites ----------------
@@ -152,6 +194,12 @@ function renderCharacterSprites() {
     el.appendChild(nameTag);
 
     el.addEventListener('click', () => character.onInteract(game));
+    el.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      if (typeof character.onRightClick === 'function') {
+        character.onRightClick(game, e.clientX, e.clientY);
+      }
+    });
     layer.appendChild(el);
   });
 }
@@ -393,6 +441,7 @@ function startGame() {
   document.getElementById('start-screen').classList.add('hidden');
   document.getElementById('win-screen').classList.add('hidden');
   document.getElementById('lose-screen').classList.add('hidden');
+  document.getElementById('timesup-screen').classList.add('hidden');
   document.getElementById('hud').classList.remove('hidden');
   document.getElementById('happiness-bars').classList.remove('hidden');
   document.getElementById('room').classList.remove('hidden');
@@ -400,11 +449,13 @@ function startGame() {
   renderCharacterSprites();
   refreshHappiness();
   sharad.start(game);
+  startGameTimer();
 }
 
 document.getElementById('start-btn').addEventListener('click', startGame);
 document.getElementById('restart-btn-win').addEventListener('click', () => location.reload());
 document.getElementById('restart-btn-lose').addEventListener('click', () => location.reload());
+document.getElementById('restart-btn-timesup').addEventListener('click', () => location.reload());
 
 wireHotspots();
 wireChoreSpots();
