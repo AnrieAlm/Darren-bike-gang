@@ -63,276 +63,2686 @@
   <!-- One small bar per character, filled in by ui.js's renderHappinessBars() -->
   <div id="happiness-bars" class="hidden"></div>
 
-  <!-- ROOM -->
-  <div id="room" class="hidden">
-    <div id="room-viewport">
-      <button id="zoom-back" class="hidden">↩ back</button>
+ 
+  <svg id="kitchen-svg" viewBox="0 0 1600 1000"
+     xmlns="http://www.w3.org/2000/svg">
 
-      <div id="room-zoom">
-        <!-- Background art + all interactive spots live in one inline SVG
-             so the door/sash animations (pure CSS, see style.css) can
-             target real DOM elements. viewBox stays 1600x1000 — scale
-             everything else off that if you add more to the scene. -->
-        <svg id="kitchen-svg" viewBox="0 0 1600 1000" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="wallShade" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#f5eee2"/><stop offset="1" stop-color="#ece2d2"/>
-            </linearGradient>
-            <linearGradient id="woodGrain" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#dcae6b"/><stop offset="0.5" stop-color="#e6bd80"/><stop offset="1" stop-color="#d3a35f"/>
-            </linearGradient>
-            <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#c9a06a"/><stop offset="1" stop-color="#b48750"/>
-            </linearGradient>
-            <linearGradient id="counterGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#3a3a3d"/><stop offset="1" stop-color="#1f1f22"/>
-            </linearGradient>
-            <clipPath id="window-clip"><rect x="246" y="94" width="268" height="238"/></clipPath>
-          </defs>
+  <defs>
 
-          <!-- WALL / FLOOR -->
-          <rect x="0" y="0" width="1600" height="700" fill="url(#wallShade)"/>
-          <rect x="0" y="0" width="1600" height="18" fill="#e4d9c6"/>
-          <rect x="0" y="700" width="1600" height="300" fill="url(#floorGrad)"/>
-          <g stroke="#a37c47" stroke-width="2" opacity="0.5">
-            <line x1="0" y1="760" x2="1600" y2="760"/><line x1="0" y1="830" x2="1600" y2="830"/>
-            <line x1="0" y1="900" x2="1600" y2="900"/><line x1="0" y1="970" x2="1600" y2="970"/>
-          </g>
+    <!-- =========================================================
+         REFERENCE PHOTO PALETTE
+         ========================================================= -->
 
-          <!-- ============ CHORE: floor mess (sweep) ============ -->
-          <g id="mess-spots">
-            <g class="mess-spot" data-chore="sweep-0" transform="translate(600,770)">
-              <g class="mess-blob">
-                <ellipse cx="0" cy="0" rx="20" ry="7" fill="#8a6a42" opacity="0.5"/>
-                <circle cx="-11" cy="-2" r="3.4" fill="#6b4e2d"/><circle cx="3" cy="3" r="2.8" fill="#6b4e2d"/>
-                <circle cx="13" cy="-3" r="2.4" fill="#6b4e2d"/><circle cx="-3" cy="-4" r="2" fill="#6b4e2d"/>
-              </g>
-              <text class="broom-icon" x="0" y="-6">🧹</text>
-              <rect class="hit" x="-30" y="-24" width="60" height="48" fill="#fff" opacity="0"/>
-            </g>
-            <g class="mess-spot" data-chore="sweep-1" transform="translate(1000,780)">
-              <g class="mess-blob">
-                <ellipse cx="0" cy="0" rx="18" ry="6" fill="#8a6a42" opacity="0.5"/>
-                <circle cx="-9" cy="2" r="3" fill="#6b4e2d"/><circle cx="5" cy="-3" r="2.6" fill="#6b4e2d"/>
-                <circle cx="11" cy="2" r="2.2" fill="#6b4e2d"/>
-              </g>
-              <text class="broom-icon" x="0" y="-6">🧹</text>
-              <rect class="hit" x="-28" y="-22" width="56" height="44" fill="#fff" opacity="0"/>
-            </g>
-            <g class="mess-spot" data-chore="sweep-2" transform="translate(1300,760)">
-              <g class="mess-blob">
-                <ellipse cx="0" cy="0" rx="19" ry="6" fill="#8a6a42" opacity="0.5"/>
-                <circle cx="-10" cy="-1" r="3.2" fill="#6b4e2d"/><circle cx="4" cy="3" r="2.6" fill="#6b4e2d"/>
-                <circle cx="12" cy="-2" r="2.2" fill="#6b4e2d"/>
-              </g>
-              <text class="broom-icon" x="0" y="-6">🧹</text>
-              <rect class="hit" x="-29" y="-22" width="58" height="44" fill="#fff" opacity="0"/>
-            </g>
-            <g class="mess-spot" data-chore="sweep-3" transform="translate(750,830)">
-              <g class="mess-blob">
-                <ellipse cx="0" cy="0" rx="17" ry="6" fill="#8a6a42" opacity="0.5"/>
-                <circle cx="-8" cy="2" r="2.8" fill="#6b4e2d"/><circle cx="4" cy="-2" r="2.4" fill="#6b4e2d"/>
-                <circle cx="10" cy="3" r="2" fill="#6b4e2d"/>
-              </g>
-              <text class="broom-icon" x="0" y="-6">🧹</text>
-              <rect class="hit" x="-27" y="-22" width="54" height="44" fill="#fff" opacity="0"/>
-            </g>
-          </g>
+    <!-- Warm white upper wall -->
+    <linearGradient id="wallWhite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f7f7f4"/>
+      <stop offset="100%" stop-color="#eeeeeb"/>
+    </linearGradient>
 
-          <!-- ============ WINDOW (esgi's cat) ============ -->
-          <g id="spot-window" class="hotspot" data-spot="window">
-            <rect x="222" y="70" width="316" height="286" fill="#ffffff"/>
-            <rect x="222" y="70" width="316" height="286" fill="none" stroke="#e2ddd2" stroke-width="2"/>
-            <g clip-path="url(#window-clip)">
-              <rect x="246" y="94" width="268" height="238" fill="#c3d3c6"/>
-              <rect x="246" y="94" width="268" height="238" fill="#dfe9dc" opacity="0.5"/>
-              <g stroke="#6f6656" stroke-width="4" fill="none" opacity="0.85" stroke-linecap="round">
-                <path d="M300 332 L296 196 M296 236 L272 206 M296 216 L320 192 M296 256 L277 232"/>
-                <path d="M462 332 L460 216 M460 246 L438 222 M460 230 L482 206"/>
-              </g>
-              <g transform="translate(330,258)">
-                <text id="window-cat" class="cat" font-size="54" text-anchor="middle" dominant-baseline="middle">🐈‍⬛</text>
-              </g>
-            </g>
-            <g class="window-sash">
-              <rect x="246" y="94" width="268" height="238" fill="none" stroke="#c9a05f" stroke-width="4"/>
-              <rect x="238" y="86" width="284" height="254" fill="none" stroke="#c9a05f" stroke-width="10"/>
-              <line x1="380" y1="86" x2="380" y2="340" stroke="#c9a05f" stroke-width="8"/>
-              <line x1="238" y1="248" x2="522" y2="248" stroke="#c9a05f" stroke-width="8"/>
-              <rect x="228" y="338" width="304" height="14" fill="#f4efe4" stroke="#d8cfba" stroke-width="1.5"/>
-              <rect x="234" y="74" width="292" height="14" fill="#c9a05f"/>
-              <rect x="240" y="88" width="280" height="62" fill="#efe6cf"/>
-              <rect x="240" y="145" width="280" height="7" fill="#d7c69a"/>
-            </g>
-            <rect class="hit" x="222" y="70" width="316" height="286"/>
-            <rect class="glow" x="222" y="70" width="316" height="286" rx="4"/>
-          </g>
+    <!-- Blue/grey painted wall -->
+    <linearGradient id="blueWall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dce3e6"/>
+      <stop offset="100%" stop-color="#cbd5da"/>
+    </linearGradient>
 
-          <!-- ============ BROOM (pick up, then drag across the floor mess) ============ -->
-          <!-- Click to equip/unequip (see wireBroom() in main.js). While
-               equipped, dragging the pointer/finger across the floor
-               sweeps any mess-spot it passes near — tapping a mess-spot
-               directly still works too, this is just the nicer way to
-               do it. -->
-          <g id="broom-pickup" class="broom-pickup">
-            <ellipse cx="518" cy="632" rx="24" ry="7" fill="#00000018"/>
-            <text class="broom-prop-emoji" x="572" y="600" font-size="120" text-anchor="middle" dominant-baseline="middle" transform="rotate(-8 572 600)">🧹</text>
-            <rect class="hit" x="510" y="500" width="130" height="220" fill="#fff" opacity="0"/>
-            <rect class="glow" x="510" y="500" width="130" height="220" rx="10"/>
-          </g>
+    <!-- Warm wooden floor -->
+    <linearGradient id="floorWood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d6b68d"/>
+      <stop offset="100%" stop-color="#b99066"/>
+    </linearGradient>
 
-          <!-- Follows the pointer while the broom is equipped -->
-          <text id="broom-cursor" font-size="46" text-anchor="middle" dominant-baseline="middle">🧹</text>
+    <!-- White kitchen cabinetry -->
+    <linearGradient id="cabinetWhite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f7f6f1"/>
+      <stop offset="100%" stop-color="#dddcd6"/>
+    </linearGradient>
 
-          <!-- ============ ZOOM ZONE: kitchen counter cluster ============ -->
-          <!-- Fridge / cabinet / oven / sink are small and fiddly — wrap them
-               in a zoom-zone so mobile players can tap to get in close.
-               data-origin-x/y is the zone's own center (as a % of the
-               1600x1000 viewBox) so the zoom always frames the same way,
-               regardless of where inside the zone the player actually tapped —
-               otherwise tapping near one edge could push the far side of a
-               wide cluster like this one off-screen. -->
-          <g class="zoom-zone" data-zoom-target="counter" data-origin-x="69%" data-origin-y="32%">
-            <rect x="595" y="25" width="1005" height="580" fill="#fff" opacity="0"/>
+    <!-- Dark countertop -->
+    <linearGradient id="counterBlack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#48494a"/>
+      <stop offset="100%" stop-color="#292a2b"/>
+    </linearGradient>
 
-            <g id="upper-cabinets">
-              <rect x="600" y="30" width="1000" height="190" fill="url(#woodGrain)" stroke="#a9793f" stroke-width="3"/>
-              <g stroke="#a9793f" stroke-width="3">
-                <line x1="720" y1="30" x2="720" y2="220"/><line x1="840" y1="30" x2="840" y2="220"/>
-                <line x1="960" y1="30" x2="960" y2="220"/><line x1="1080" y1="30" x2="1080" y2="220"/>
-                <line x1="1200" y1="30" x2="1200" y2="220"/><line x1="1320" y1="30" x2="1320" y2="220"/>
-                <line x1="1440" y1="30" x2="1440" y2="220"/>
-              </g>
-            </g>
+    <!-- Fridge -->
+    <linearGradient id="fridgeWhite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f1f2ef"/>
+      <stop offset="100%" stop-color="#d2d4d1"/>
+    </linearGradient>
 
-            <g id="extractor-hood">
-              <path d="M745 222 L915 222 L875 268 L785 268 Z" fill="#bfc0c2" stroke="#8f8f92" stroke-width="2"/>
-              <rect x="800" y="150" width="60" height="76" fill="#c8c8ca" stroke="#8f8f92" stroke-width="2"/>
-              <rect x="785" y="258" width="90" height="10" rx="2" fill="#a8a8ab"/>
-            </g>
+    <!-- Window -->
+    <linearGradient id="windowSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f4fafb"/>
+      <stop offset="100%" stop-color="#cbdfe5"/>
+    </linearGradient>
 
-            <rect x="600" y="220" width="1000" height="110" fill="#f4f1ec"/>
-            <rect x="900" y="216" width="700" height="6" fill="#fff3c9"/>
-            <rect x="600" y="330" width="1000" height="40" fill="url(#counterGrad)"/>
+    <!-- Sofa -->
+    <linearGradient id="sofaBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#aebcc7"/>
+      <stop offset="100%" stop-color="#82929e"/>
+    </linearGradient>
 
-            <!-- ============ DIRTY PLATES (wash task) ============ -->
-            <g id="dirty-plates">
-              <g class="dirty-plate" data-chore="dish-0" transform="translate(1225,305)">
-                <ellipse cx="0" cy="0" rx="24" ry="10" fill="#ffffff" stroke="#ddd" stroke-width="2"/>
-                <ellipse cx="0" cy="0" rx="12" ry="5" fill="none" stroke="#e6e6e6" stroke-width="1.5"/>
-                <path class="smudge" d="M-11,-2 q5,-7 10,-1 q5,6 11,-1" stroke="#8a6a42" stroke-width="3" fill="none" opacity="0.75" stroke-linecap="round"/>
-                <circle class="smudge" cx="-7" cy="3" r="2.2" fill="#8a6a42" opacity="0.7"/>
-                <text class="soap-icon" x="0" y="-10">🧼</text>
-                <rect class="hit" x="-30" y="-20" width="60" height="40" fill="#fff" opacity="0"/>
-              </g>
-              <g class="dirty-plate" data-chore="dish-1" transform="translate(1268,318)">
-                <ellipse cx="0" cy="0" rx="22" ry="9" fill="#ffffff" stroke="#ddd" stroke-width="2"/>
-                <ellipse cx="0" cy="0" rx="11" ry="4.5" fill="none" stroke="#e6e6e6" stroke-width="1.5"/>
-                <path class="smudge" d="M-9,2 q4,-6 9,-1 q4,5 9,0" stroke="#8a6a42" stroke-width="2.6" fill="none" opacity="0.75" stroke-linecap="round"/>
-                <circle class="smudge" cx="6" cy="-2" r="1.9" fill="#8a6a42" opacity="0.7"/>
-                <text class="soap-icon" x="0" y="-9">🧼</text>
-                <rect class="hit" x="-28" y="-18" width="56" height="36" fill="#fff" opacity="0"/>
-              </g>
-            </g>
+    <filter id="roomShadow"
+            x="-30%" y="-30%"
+            width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
 
-            <g id="sink">
-              <rect x="1330" y="332" width="180" height="6" fill="#5a5a5d"/>
-              <rect x="1345" y="336" width="150" height="60" rx="6" fill="#9fa3a6"/>
-              <rect x="1355" y="342" width="130" height="46" rx="4" fill="#7d8184"/>
-              <path d="M1490 336 C1490 310 1500 300 1520 298 C1540 300 1545 315 1540 330" fill="none" stroke="#b8bcc0" stroke-width="8" stroke-linecap="round"/>
-            </g>
+    <!-- Window clipping -->
+    <clipPath id="referenceWindowClip">
+      <rect x="1215" y="125" width="275" height="255"/>
+    </clipPath>
 
-            <g id="lower-cabinets">
-              <rect x="600" y="370" width="1000" height="230" fill="url(#woodGrain)" stroke="#a9793f" stroke-width="3"/>
-            </g>
+  </defs>
 
-            <!-- ============ OVEN ============ -->
-            <g id="spot-oven" class="hotspot" data-spot="oven">
-              <rect class="hit" x="760" y="370" width="150" height="200"/>
-              <rect x="760" y="370" width="150" height="200" fill="#1a1a1a"/>
-              <g class="interior">
-                <rect x="772" y="382" width="126" height="95" fill="#0c0c0c"/>
-                <rect x="778" y="440" width="114" height="4" fill="#333"/>
-                <text class="found-item-emoji" data-spot="oven" x="835" y="429" font-size="36"></text>
-              </g>
-              <g class="door-drop">
-                <rect x="760" y="370" width="150" height="200" fill="#232323" stroke="#0f0f0f" stroke-width="3"/>
-                <rect x="772" y="382" width="126" height="95" rx="4" fill="#151515" stroke="#3a3a3a" stroke-width="3"/>
-                <rect x="780" y="390" width="110" height="78" fill="#3a3a3d" opacity="0.7"/>
-                <circle cx="795" cy="490" r="9" fill="#555"/><circle cx="825" cy="490" r="9" fill="#555"/>
-                <circle cx="855" cy="490" r="9" fill="#555"/><circle cx="885" cy="490" r="9" fill="#555"/>
-                <rect x="770" y="512" width="130" height="50" fill="#1c1c1c"/>
-              </g>
-              
-              <rect class="glow" x="760" y="370" width="150" height="200" rx="4"/>
-            </g>
 
-            <!-- ============ CABINET ============ -->
-            <g id="spot-cabinet" class="hotspot" data-spot="cabinet">
-              <rect class="hit" x="920" y="436" width="150" height="134"/>
-              <rect x="920" y="436" width="150" height="134" fill="#2a1c0d"/>
-              <g class="interior">
-                <rect x="928" y="444" width="134" height="118" fill="#171008"/>
-                <rect x="932" y="500" width="126" height="4" fill="#3a2a17"/>
-                <text class="found-item-emoji" data-spot="cabinet" x="995" y="491" font-size="36"></text>
-              </g>
-              <g class="door-swing">
-                <rect x="920" y="436" width="150" height="134" fill="url(#woodGrain)" stroke="#a9793f" stroke-width="2"/>
-                <rect x="985" y="480" width="20" height="6" rx="3" fill="#cfcfcf"/>
-              </g>
-              
-              <rect class="glow" x="920" y="436" width="150" height="134" rx="4"/>
-            </g>
+  <!-- =========================================================
+       ROOM BACKGROUND
+       ========================================================= -->
 
-            <g id="drawers">
-              <rect x="920" y="370" width="150" height="60" fill="url(#woodGrain)" stroke="#a9793f" stroke-width="2"/>
-              <rect x="985" y="396" width="20" height="6" rx="3" fill="#cfcfcf"/>
-            </g>
+  <!-- Entire room -->
+  <rect x="0" y="0"
+        width="1600"
+        height="1000"
+        fill="#eeeeeb"/>
 
-            <!-- ============ FRIDGE ============ -->
-            <g id="spot-fridge" class="hotspot" data-spot="fridge">
-              <rect class="hit" x="1090" y="400" width="200" height="200"/>
-              <rect x="1090" y="400" width="200" height="200" fill="#d8d8d4"/>
-              <g class="interior">
-                <rect x="1098" y="408" width="184" height="184" fill="#eef3f2"/>
-                <rect x="1104" y="470" width="172" height="5" fill="#c7d0ce"/>
-                <rect x="1104" y="530" width="172" height="5" fill="#c7d0ce"/>
-                <text class="found-item-emoji" data-spot="fridge" x="1190" y="442" font-size="36"></text>
-              </g>
-              <g class="door-swing">
-                <rect x="1090" y="400" width="200" height="200" fill="#f2f2f0" stroke="#d2d2ce" stroke-width="3"/>
-                <rect x="1090" y="400" width="200" height="8" fill="#e3e3df"/>
-                <rect x="1270" y="410" width="10" height="60" rx="4" fill="#c9c9c5"/>
-                <text x="1190" y="440" font-family="Arial, sans-serif" font-size="13" fill="#bdbdb8" text-anchor="middle" letter-spacing="1">NORDIQUE</text>
-              </g>
-              
-              <rect class="glow" x="1090" y="400" width="200" height="200" rx="4"/>
-            </g>
+  <!-- Upper white wall -->
+  <rect x="0" y="0"
+        width="1600"
+        height="185"
+        fill="url(#wallWhite)"/>
 
-            <g id="end-cabinet">
-              <rect x="1290" y="396" width="240" height="204" fill="url(#woodGrain)" stroke="#a9793f" stroke-width="3"/>
-              <rect x="1355" y="480" width="20" height="6" rx="3" fill="#cfcfcf"/>
-              <rect x="1465" y="480" width="20" height="6" rx="3" fill="#cfcfcf"/>
-            </g>
+  <!-- Blue-grey middle wall exactly like reference -->
+  <rect x="0" y="185"
+        width="1600"
+        height="370"
+        fill="url(#blueWall)"/>
 
-            <rect x="600" y="595" width="1000" height="14" fill="#00000030"/>
-          </g>
+  <!-- Lower pale wall -->
+  <rect x="0" y="555"
+        width="1600"
+        height="145"
+        fill="#e9eceb"/>
 
-          <!-- ============ DINING TABLE (peek under) ============ -->
-          <g id="spot-table" class="hotspot table" data-spot="table">
-              <rect class="hit" x="180" y="560" width="300" height="160"/>
-            <ellipse cx="330" cy="700" rx="150" ry="20" fill="#00000018"/>
-            <rect x="322" y="600" width="16" height="100" fill="#4b4b4e"/>
-            <ellipse cx="330" cy="700" rx="55" ry="10" fill="#3a3a3d"/>
-            <g class="interior">
-              <text class="found-item-emoji" data-spot="table" x="268" y="655" font-size="34"></text>
-            </g>
-            <ellipse cx="330" cy="580" rx="150" ry="42" fill="#ffffff" stroke="#e4e4e4" stroke-width="3"/>
-            <ellipse cx="330" cy="573" rx="150" ry="38" fill="#fbfbfb"/>
-            
-            <rect class="glow" x="180" y="640" width="300" height="70" rx="20"/>
-          </g>
-        </svg>
+
+  <!-- =========================================================
+       FLOOR
+       ========================================================= -->
+
+  <rect x="0" y="700"
+        width="1600"
+        height="300"
+        fill="url(#floorWood)"/>
+
+  <!-- Subtle wooden floor boards -->
+  <g stroke="#987654"
+     stroke-width="2"
+     opacity=".28">
+
+    <line x1="0" y1="755"
+          x2="1600" y2="755"/>
+
+    <line x1="0" y1="815"
+          x2="1600" y2="815"/>
+
+    <line x1="0" y1="875"
+          x2="1600" y2="875"/>
+
+    <line x1="0" y1="935"
+          x2="1600" y2="935"/>
+
+    <line x1="0" y1="995"
+          x2="1600" y2="995"/>
+
+  </g>
+
+
+  <!-- =========================================================
+       LEFT KITCHEN
+       This is deliberately positioned on the LEFT,
+       matching the reference photograph.
+       ========================================================= -->
+
+  <g id="reference-kitchen">
+
+
+    <!-- ---------------------------------------------------------
+         TALL LEFT CABINET
+         --------------------------------------------------------- -->
+
+    <rect x="0" y="0"
+          width="125"
+          height="700"
+          fill="url(#cabinetWhite)"
+          stroke="#b8b7b2"
+          stroke-width="3"/>
+
+    <!-- Tall cabinet divisions -->
+    <line x1="0" y1="285"
+          x2="125" y2="285"
+          stroke="#b9b8b3"
+          stroke-width="3"/>
+
+    <line x1="0" y1="510"
+          x2="125" y2="510"
+          stroke="#b9b8b3"
+          stroke-width="3"/>
+
+    <!-- Cabinet handles -->
+    <rect x="90" y="375"
+          width="9"
+          height="65"
+          rx="4"
+          fill="#858581"/>
+
+    <rect x="90" y="555"
+          width="9"
+          height="65"
+          rx="4"
+          fill="#858581"/>
+
+
+    <!-- ---------------------------------------------------------
+         MAIN UPPER KITCHEN CABINETS
+         --------------------------------------------------------- -->
+
+    <g id="upper-cabinets">
+
+      <!-- Large upper cabinet block -->
+      <rect x="125" y="0"
+            width="460"
+            height="275"
+            fill="url(#cabinetWhite)"
+            stroke="#b8b7b2"
+            stroke-width="3"/>
+
+      <!-- Cabinet doors -->
+      <line x1="285" y1="0"
+            x2="285" y2="275"
+            stroke="#b7b6b1"
+            stroke-width="3"/>
+
+      <line x1="440" y1="0"
+            x2="440" y2="275"
+            stroke="#b7b6b1"
+            stroke-width="3"/>
+
+      <!-- Handles -->
+      <rect x="255" y="145"
+            width="45"
+            height="5"
+            rx="2"
+            fill="#8b8b87"/>
+
+      <rect x="410" y="145"
+            width="45"
+            height="5"
+            rx="2"
+            fill="#8b8b87"/>
+
+    </g>
+
+
+    <!-- ---------------------------------------------------------
+         RANGE HOOD
+         --------------------------------------------------------- -->
+
+    <g id="extractor-hood">
+
+      <!-- Hood chimney -->
+      <rect x="205" y="170"
+            width="120"
+            height="75"
+            fill="#c7c8c6"
+            stroke="#969794"
+            stroke-width="3"/>
+
+      <!-- Hood body -->
+      <path d="
+        M175 240
+        L355 240
+        L330 292
+        L200 292
+        Z"
+        fill="#b8bab8"
+        stroke="#8e908e"
+        stroke-width="3"/>
+
+      <!-- Vent -->
+      <rect x="200" y="273"
+            width="130"
+            height="15"
+            rx="3"
+            fill="#777976"/>
+
+    </g>
+
+
+    <!-- ---------------------------------------------------------
+         SUBWAY TILE BACKSPLASH
+         --------------------------------------------------------- -->
+
+    <rect x="125" y="275"
+          width="460"
+          height="210"
+          fill="#e7e8e5"/>
+
+    <!-- Horizontal grout -->
+    <g stroke="#b8bab7"
+       stroke-width="2">
+
+      <line x1="125" y1="325"
+            x2="585" y2="325"/>
+
+      <line x1="125" y1="375"
+            x2="585" y2="375"/>
+
+      <line x1="125" y1="425"
+            x2="585" y2="425"/>
+
+      <line x1="125" y1="475"
+            x2="585" y2="475"/>
+
+    </g>
+
+    <!-- Vertical grout -->
+    <g stroke="#b8bab7"
+       stroke-width="2">
+
+      <line x1="200" y1="275"
+            x2="200" y2="325"/>
+
+      <line x1="355" y1="275"
+            x2="355" y2="325"/>
+
+      <line x1="510" y1="275"
+            x2="510" y2="325"/>
+
+      <line x1="125" y1="325"
+            x2="125" y2="375"/>
+
+      <line x1="280" y1="325"
+            x2="280" y2="375"/>
+
+      <line x1="435" y1="325"
+            x2="435" y2="375"/>
+
+      <line x1="585" y1="325"
+            x2="585" y2="375"/>
+
+      <line x1="200" y1="375"
+            x2="200" y2="425"/>
+
+      <line x1="355" y1="375"
+            x2="355" y2="425"/>
+
+      <line x1="510" y1="375"
+            x2="510" y2="425"/>
+
+      <line x1="125" y1="425"
+            x2="125" y2="475"/>
+
+      <line x1="280" y1="425"
+            x2="280" y2="475"/>
+
+      <line x1="435" y1="425"
+            x2="435" y2="475"/>
+
+      <line x1="585" y1="425"
+            x2="585" y2="475"/>
+
+    </g>
+
+
+    <!-- ---------------------------------------------------------
+         DARK COUNTERTOP
+         --------------------------------------------------------- -->
+
+    <rect x="0" y="480"
+          width="600"
+          height="42"
+          fill="url(#counterBlack)"/>
+
+    <rect x="0" y="518"
+          width="600"
+          height="12"
+          fill="#202123"/>
+
+
+    <!-- ---------------------------------------------------------
+         HOB / PAN
+         --------------------------------------------------------- -->
+
+    <ellipse cx="90" cy="478"
+             rx="58"
+             ry="15"
+             fill="#17181a"/>
+
+    <ellipse cx="90" cy="472"
+             rx="45"
+             ry="10"
+             fill="#303134"/>
+
+    <!-- Pan handle -->
+    <path d="
+      M130 470
+      L205 455"
+      stroke="#252629"
+      stroke-width="13"
+      stroke-linecap="round"/>
+
+
+    <!-- ---------------------------------------------------------
+         MICROWAVE
+         --------------------------------------------------------- -->
+
+    <g id="microwave">
+
+      <rect x="355" y="370"
+            width="170"
+            height="110"
+            rx="5"
+            fill="#d9d9d5"
+            stroke="#aaa9a4"
+            stroke-width="4"/>
+
+      <!-- Microwave door -->
+      <rect x="370" y="385"
+            width="105"
+            height="78"
+            fill="#27282a"/>
+
+      <rect x="378" y="393"
+            width="89"
+            height="62"
+            fill="#111214"/>
+
+      <!-- Control panel -->
+      <rect x="487" y="385"
+            width="25"
+            height="30"
+            rx="3"
+            fill="#c2c3bf"/>
+
+      <rect x="487" y="423"
+            width="25"
+            height="30"
+            rx="3"
+            fill="#c2c3bf"/>
+
+    </g>
+
+
+    <!-- ---------------------------------------------------------
+         SMALL FOOD / JARS ABOVE MICROWAVE
+         --------------------------------------------------------- -->
+
+    <g id="counter-jars">
+
+      <rect x="365" y="332"
+            width="27"
+            height="38"
+            rx="4"
+            fill="#d5d1b8"/>
+
+      <rect x="400" y="330"
+            width="27"
+            height="40"
+            rx="4"
+            fill="#8d9d83"/>
+
+      <rect x="435" y="329"
+            width="27"
+            height="41"
+            rx="4"
+            fill="#c68b4f"/>
+
+      <rect x="470" y="331"
+            width="27"
+            height="39"
+            rx="4"
+            fill="#b55d45"/>
+
+    </g>
+
+
+    <!-- ---------------------------------------------------------
+         LOWER CABINETS
+         --------------------------------------------------------- -->
+
+    <g id="lower-cabinets">
+
+      <rect x="0" y="530"
+            width="600"
+            height="300"
+            fill="url(#cabinetWhite)"
+            stroke="#b5b4af"
+            stroke-width="3"/>
+
+      <!-- cabinet divisions -->
+      <line x1="125" y1="530"
+            x2="125" y2="830"
+            stroke="#b5b4af"
+            stroke-width="3"/>
+
+      <line x1="390" y1="530"
+            x2="390" y2="830"
+            stroke="#b5b4af"
+            stroke-width="3"/>
+
+      <!-- handles -->
+      <rect x="40" y="665"
+            width="48"
+            height="6"
+            rx="3"
+            fill="#898985"/>
+
+      <rect x="165" y="665"
+            width="48"
+            height="6"
+            rx="3"
+            fill="#898985"/>
+
+      <rect x="430" y="665"
+            width="48"
+            height="6"
+            rx="3"
+            fill="#898985"/>
+
+    </g>
+
+
+    <!-- =========================================================
+         OVEN
+         KEEPING id/classes FOR YOUR GAME
+         ========================================================= -->
+
+    <g id="spot-oven"
+       class="hotspot"
+       data-spot="oven">
+
+      <rect class="hit"
+            x="145" y="530"
+            width="230"
+            height="295"
+            fill="#fff"
+            opacity="0"/>
+
+      <!-- oven body -->
+      <rect x="145" y="530"
+            width="230"
+            height="295"
+            fill="#292a2b"
+            stroke="#171819"
+            stroke-width="4"/>
+
+      <!-- oven glass -->
+      <rect x="160" y="555"
+            width="200"
+            height="120"
+            rx="4"
+            fill="#171819"/>
+
+      <rect x="170" y="565"
+            width="180"
+            height="100"
+            fill="#343638"/>
+
+      <!-- oven controls -->
+      <circle cx="190" cy="710"
+              r="13"
+              fill="#858685"/>
+
+      <circle cx="235" cy="710"
+              r="13"
+              fill="#858685"/>
+
+      <circle cx="280" cy="710"
+              r="13"
+              fill="#858685"/>
+
+      <circle cx="325" cy="710"
+              r="13"
+              fill="#858685"/>
+
+      <!-- oven lower panel -->
+      <rect x="160" y="750"
+            width="200"
+            height="58"
+            fill="#202123"/>
+
+      <!-- preserve game glow -->
+      <rect class="glow"
+            x="145" y="530"
+            width="230"
+            height="295"
+            rx="5"/>
+
+    </g>
+
+
+    <!-- =========================================================
+         FRIDGE
+         ========================================================= -->
+
+    <g id="spot-fridge"
+       class="hotspot"
+       data-spot="fridge">
+
+      <rect class="hit"
+            x="390" y="525"
+            width="190"
+            height="305"
+            fill="#fff"
+            opacity="0"/>
+
+      <rect x="390" y="525"
+            width="190"
+            height="305"
+            fill="url(#fridgeWhite)"
+            stroke="#b5b6b3"
+            stroke-width="4"/>
+
+      <!-- freezer divide -->
+      <line x1="390" y1="635"
+            x2="580" y2="635"
+            stroke="#b6b8b5"
+            stroke-width="3"/>
+
+      <!-- handles -->
+      <rect x="548" y="550"
+            width="10"
+            height="70"
+            rx="5"
+            fill="#969895"/>
+
+      <rect x="548" y="660"
+            width="10"
+            height="115"
+            rx="5"
+            fill="#969895"/>
+
+      <!-- subtle label -->
+      <text x="485"
+            y="605"
+            font-family="Arial, sans-serif"
+            font-size="14"
+            fill="#9c9d99"
+            text-anchor="middle"
+            letter-spacing="2">
+        NORDMENOK
+      </text>
+
+      <!-- preserve game glow -->
+      <rect class="glow"
+            x="390" y="525"
+            width="190"
+            height="305"
+            rx="5"/>
+
+    </g>
+
+  </g>
+
+
+  <!-- =========================================================
+       REFERENCE WINDOW — RIGHT SIDE
+       ========================================================= -->
+
+  <g id="spot-window"
+     class="hotspot"
+     data-spot="window">
+
+    <!-- window wall recess -->
+    <rect x="1180" y="70"
+          width="350"
+          height="370"
+          fill="#e9e9e4"/>
+
+    <!-- outer frame -->
+    <rect x="1200" y="105"
+          width="305"
+          height="305"
+          fill="#b38a61"/>
+
+    <!-- glass -->
+    <rect x="1215" y="125"
+          width="275"
+          height="255"
+          fill="url(#windowSky)"/>
+
+    <g clip-path="url(#referenceWindowClip)">
+
+      <!-- bright outdoor light -->
+      <rect x="1215" y="125"
+            width="275"
+            height="255"
+            fill="#edf7f8"/>
+
+      <!-- subtle outside shapes -->
+      <path d="
+        M1215 310
+        C1270 280 1310 295 1350 315
+        C1390 335 1435 300 1490 280
+        L1490 380
+        L1215 380 Z"
+        fill="#c7dce0"
+        opacity=".65"/>
+
+    </g>
+
+    <!-- window cross frame -->
+    <line x1="1352"
+          y1="125"
+          x2="1352"
+          y2="380"
+          stroke="#a98058"
+          stroke-width="7"/>
+
+    <line x1="1215"
+          y1="250"
+          x2="1490"
+          y2="250"
+          stroke="#a98058"
+          stroke-width="7"/>
+
+    <!-- sill -->
+    <rect x="1185" y="380"
+          width="335"
+          height="28"
+          fill="#e2dfd7"/>
+
+    <rect x="1185" y="405"
+          width="335"
+          height="18"
+          fill="#cfcac0"/>
+
+    <!-- interaction -->
+    <rect class="hit"
+          x="1180" y="70"
+          width="350"
+          height="370"
+          fill="#fff"
+          opacity="0"/>
+
+    <rect class="glow"
+          x="1180" y="70"
+          width="350"
+          height="370"
+          rx="5"/>
+
+  </g>
+
+    <!-- =========================================================
+       RIGHT-SIDE LIVING ROOM
+       BLUE-GREY SECTIONAL SOFA
+       ========================================================= -->
+
+  <g id="living-room">
+
+
+    <!-- ---------------------------------------------------------
+         SOFA FLOOR SHADOW
+         --------------------------------------------------------- -->
+
+    <ellipse cx="1115"
+             cy="720"
+             rx="410"
+             ry="72"
+             fill="#66717a"
+             opacity=".18"
+             filter="url(#roomShadow)"/>
+
+
+    <!-- ---------------------------------------------------------
+         MAIN SOFA BASE
+         --------------------------------------------------------- -->
+
+    <path d="
+      M825 505
+      Q825 465 865 445
+      L1180 445
+      Q1225 445 1250 475
+      L1450 475
+      Q1495 475 1515 515
+      L1515 700
+      L1435 700
+      L1435 735
+      L870 735
+      L870 700
+      L810 700
+      L810 545
+      Q810 520 825 505
+      Z"
+      fill="url(#sofaBlue)"
+      stroke="#778691"
+      stroke-width="5"/>
+
+
+    <!-- ---------------------------------------------------------
+         LEFT / MAIN BACKREST
+         --------------------------------------------------------- -->
+
+    <path d="
+      M835 505
+      Q835 465 875 450
+      L1010 450
+      L1010 615
+      L835 615
+      Z"
+      fill="#9eacb7"
+      stroke="#75838e"
+      stroke-width="4"/>
+
+
+    <!-- ---------------------------------------------------------
+         CENTER BACKREST
+         --------------------------------------------------------- -->
+
+    <path d="
+      M1005 450
+      L1165 450
+      Q1190 455 1200 485
+      L1200 615
+      L1005 615
+      Z"
+      fill="#a5b3bd"
+      stroke="#788791"
+      stroke-width="4"/>
+
+
+    <!-- ---------------------------------------------------------
+         RIGHT BACKREST
+         --------------------------------------------------------- -->
+
+    <path d="
+      M1195 475
+      L1355 475
+      Q1380 475 1400 505
+      L1400 625
+      L1195 625
+      Z"
+      fill="#a1afb9"
+      stroke="#778691"
+      stroke-width="4"/>
+
+
+    <!-- ---------------------------------------------------------
+         SEAT CUSHIONS
+         --------------------------------------------------------- -->
+
+    <g id="sofa-seat-cushions">
+
+      <!-- left seat -->
+      <path d="
+        M845 590
+        Q850 570 875 565
+        L1005 565
+        Q1020 570 1025 595
+        L1025 690
+        L845 690
+        Z"
+        fill="#8f9da8"
+        stroke="#74828d"
+        stroke-width="3"/>
+
+      <!-- center seat -->
+      <path d="
+        M1020 590
+        Q1025 570 1050 565
+        L1175 565
+        Q1195 570 1200 595
+        L1200 690
+        L1020 690
+        Z"
+        fill="#929faa"
+        stroke="#74828d"
+        stroke-width="3"/>
+
+      <!-- right seat -->
+      <path d="
+        M1195 595
+        Q1200 575 1225 570
+        L1370 570
+        Q1390 575 1400 600
+        L1400 690
+        L1195 690
+        Z"
+        fill="#8e9ca7"
+        stroke="#73818c"
+        stroke-width="3"/>
+
+    </g>
+
+
+    <!-- ---------------------------------------------------------
+         SOFA SEAT SEAMS
+         --------------------------------------------------------- -->
+
+    <g fill="none"
+       stroke="#6f7d87"
+       stroke-width="3"
+       opacity=".75">
+
+      <line x1="1025"
+            y1="600"
+            x2="1025"
+            y2="680"/>
+
+      <line x1="1200"
+            y1="600"
+            x2="1200"
+            y2="680"/>
+
+      <line x1="845"
+            y1="690"
+            x2="1400"
+            y2="690"/>
+
+    </g>
+
+
+    <!-- ---------------------------------------------------------
+         RIGHT-HAND LOUNGE / CHAISE
+         --------------------------------------------------------- -->
+
+    <path d="
+      M1370 565
+      L1510 565
+      Q1540 565 1550 595
+      L1550 760
+      L1370 760
+      Z"
+      fill="url(#sofaBlue)"
+      stroke="#778691"
+      stroke-width="5"/>
+
+
+    <!-- chaise top cushion -->
+    <path d="
+      M1370 570
+      Q1380 550 1405 548
+      L1515 548
+      Q1535 555 1540 580
+      L1540 690
+      L1370 690
+      Z"
+      fill="#929faa"
+      stroke="#74828d"
+      stroke-width="3"/>
+
+
+    <!-- chaise front -->
+    <path d="
+      M1370 690
+      L1540 690
+      L1540 760
+      L1370 760
+      Z"
+      fill="#7f8e99"
+      stroke="#6f7d87"
+      stroke-width="3"/>
+
+
+    <!-- ---------------------------------------------------------
+         SOFA ARMREST — LEFT
+         --------------------------------------------------------- -->
+
+    <path d="
+      M805 525
+      Q810 490 845 480
+      L875 480
+      L875 690
+      L805 690
+      Z"
+      fill="#8998a3"
+      stroke="#6f7d88"
+      stroke-width="5"/>
+
+
+    <!-- ---------------------------------------------------------
+         SOFA ARMREST — RIGHT
+         --------------------------------------------------------- -->
+
+    <path d="
+      M1400 500
+      Q1440 485 1475 510
+      L1475 690
+      L1400 690
+      Z"
+      fill="#8998a3"
+      stroke="#6f7d88"
+      stroke-width="5"/>
+
+
+    <!-- =========================================================
+         BACK CUSHIONS
+         ========================================================= -->
+
+    <g id="sofa-back-cushions">
+
+
+      <!-- cushion 1 -->
+      <rect x="850"
+            y="465"
+            width="145"
+            height="125"
+            rx="22"
+            fill="#aebbc4"
+            stroke="#84919b"
+            stroke-width="3"
+            transform="rotate(-1 922 527)"/>
+
+
+      <!-- cushion 2 -->
+      <rect x="1000"
+            y="465"
+            width="150"
+            height="130"
+            rx="22"
+            fill="#aebbc4"
+            stroke="#84919b"
+            stroke-width="3"
+            transform="rotate(1 1075 530)"/>
+
+
+      <!-- cushion 3 -->
+      <rect x="1150"
+            y="475"
+            width="150"
+            height="130"
+            rx="22"
+            fill="#aab8c1"
+            stroke="#808e98"
+            stroke-width="3"
+            transform="rotate(-1 1225 540)"/>
+
+
+      <!-- cushion 4 -->
+      <rect x="1300"
+            y="490"
+            width="145"
+            height="125"
+            rx="22"
+            fill="#aab8c1"
+            stroke="#808e98"
+            stroke-width="3"
+            transform="rotate(2 1372 552)"/>
+
+    </g>
+
+
+    <!-- ---------------------------------------------------------
+         CUSHION FABRIC DETAILS
+         --------------------------------------------------------- -->
+
+    <g fill="none"
+       stroke="#91a0aa"
+       stroke-width="2"
+       opacity=".65">
+
+      <path d="
+        M870 485
+        Q925 475 975 488"/>
+
+      <path d="
+        M1020 485
+        Q1075 475 1130 490"/>
+
+      <path d="
+        M1170 495
+        Q1225 485 1280 500"/>
+
+      <path d="
+        M1320 510
+        Q1375 500 1425 515"/>
+
+    </g>
+
+
+    <!-- =========================================================
+         YELLOW THROW PILLOW
+         Seen near the window in the reference.
+         ========================================================= -->
+
+    <g id="yellow-pillow"
+       transform="rotate(8 1300 480)">
+
+      <rect x="1250"
+            y="445"
+            width="100"
+            height="75"
+            rx="14"
+            fill="#d7c98c"
+            stroke="#b5a96f"
+            stroke-width="3"/>
+
+      <path d="
+        M1260 458
+        Q1300 445 1340 460"
+        fill="none"
+        stroke="#e4d9a7"
+        stroke-width="5"
+        opacity=".7"/>
+
+    </g>
+
+
+    <!-- =========================================================
+         LIGHT GREY / WHITE THROW
+         On the right side of the sofa.
+         ========================================================= -->
+
+    <g id="sofa-throw"
+       transform="rotate(5 1390 545)">
+
+      <path d="
+        M1335 520
+        Q1370 500 1425 520
+        Q1450 530 1465 555
+        L1435 575
+        Q1400 555 1360 565
+        Z"
+        fill="#d9d9d3"
+        stroke="#b6b7b2"
+        stroke-width="3"/>
+
+      <!-- folds -->
+      <path d="
+        M1360 525
+        Q1390 545 1430 555"
+        fill="none"
+        stroke="#b9bab5"
+        stroke-width="4"/>
+
+      <path d="
+        M1375 515
+        Q1405 540 1445 548"
+        fill="none"
+        stroke="#b9bab5"
+        stroke-width="3"/>
+
+    </g>
+
+
+    <!-- =========================================================
+         DARK GAP UNDER SOFA
+         ========================================================= -->
+
+    <path d="
+      M870 735
+      L1435 735
+      L1435 790
+      L870 790
+      Z"
+      fill="#59636b"
+      opacity=".55"/>
+
+
+    <!-- =========================================================
+         SOFA LEGS
+         ========================================================= -->
+
+    <g fill="#4d5559">
+
+      <rect x="895"
+            y="735"
+            width="18"
+            height="55"
+            rx="3"/>
+
+      <rect x="1375"
+            y="735"
+            width="18"
+            height="55"
+            rx="3"/>
+
+      <rect x="1500"
+            y="750"
+            width="16"
+            height="48"
+            rx="3"/>
+
+    </g>
+
+
+    <!-- =========================================================
+         INTERACTION AREA
+         ========================================================= -->
+
+    <rect class="hit"
+          x="800"
+          y="435"
+          width="720"
+          height="350"
+          fill="#fff"
+          opacity="0"/>
+
+  </g>
+
+    <!-- =========================================================
+       FOREGROUND DINING AREA
+       LARGE ROUND TABLE FROM REFERENCE PHOTO
+       ========================================================= -->
+
+  <g id="dining-area">
+
+
+    <!-- ---------------------------------------------------------
+         TABLE FLOOR SHADOW
+         --------------------------------------------------------- -->
+
+    <ellipse cx="835"
+             cy="875"
+             rx="515"
+             ry="105"
+             fill="#555b5d"
+             opacity=".22"
+             filter="url(#roomShadow)"/>
+
+
+    <!-- =========================================================
+         LEFT CHAIR
+         ========================================================= -->
+
+    <g id="left-chair"
+       transform="rotate(-12 270 790)">
+
+      <!-- back -->
+      <rect x="205"
+            y="665"
+            width="115"
+            height="180"
+            rx="22"
+            fill="#535d61"
+            stroke="#3f474b"
+            stroke-width="4"/>
+
+      <!-- perforations -->
+      <g fill="#30373a"
+         opacity=".75">
+
+        <ellipse cx="235" cy="700" rx="5" ry="3"/>
+        <ellipse cx="265" cy="700" rx="5" ry="3"/>
+        <ellipse cx="295" cy="700" rx="5" ry="3"/>
+
+        <ellipse cx="235" cy="725" rx="5" ry="3"/>
+        <ellipse cx="265" cy="725" rx="5" ry="3"/>
+        <ellipse cx="295" cy="725" rx="5" ry="3"/>
+
+        <ellipse cx="235" cy="750" rx="5" ry="3"/>
+        <ellipse cx="265" cy="750" rx="5" ry="3"/>
+        <ellipse cx="295" cy="750" rx="5" ry="3"/>
+
+        <ellipse cx="235" cy="775" rx="5" ry="3"/>
+        <ellipse cx="265" cy="775" rx="5" ry="3"/>
+        <ellipse cx="295" cy="775" rx="5" ry="3"/>
+
+        <ellipse cx="235" cy="800" rx="5" ry="3"/>
+        <ellipse cx="265" cy="800" rx="5" ry="3"/>
+        <ellipse cx="295" cy="800" rx="5" ry="3"/>
+
+      </g>
+
+      <!-- legs -->
+      <path d="M225 820 L205 930"
+            stroke="#42494c"
+            stroke-width="12"
+            stroke-linecap="round"/>
+
+      <path d="M300 820 L320 930"
+            stroke="#42494c"
+            stroke-width="12"
+            stroke-linecap="round"/>
+
+    </g>
+
+
+    <!-- =========================================================
+         RIGHT CHAIR
+         ========================================================= -->
+
+    <g id="right-chair"
+       transform="rotate(9 1375 750)">
+
+      <!-- chair back -->
+      <rect x="1315"
+            y="600"
+            width="125"
+            height="205"
+            rx="24"
+            fill="#505a5e"
+            stroke="#3e4649"
+            stroke-width="4"/>
+
+      <!-- perforations -->
+      <g fill="#30373a"
+         opacity=".75">
+
+        <ellipse cx="1345" cy="640" rx="5" ry="3"/>
+        <ellipse cx="1375" cy="640" rx="5" ry="3"/>
+        <ellipse cx="1405" cy="640" rx="5" ry="3"/>
+
+        <ellipse cx="1345" cy="665" rx="5" ry="3"/>
+        <ellipse cx="1375" cy="665" rx="5" ry="3"/>
+        <ellipse cx="1405" cy="665" rx="5" ry="3"/>
+
+        <ellipse cx="1345" cy="690" rx="5" ry="3"/>
+        <ellipse cx="1375" cy="690" rx="5" ry="3"/>
+        <ellipse cx="1405" cy="690" rx="5" ry="3"/>
+
+        <ellipse cx="1345" cy="715" rx="5" ry="3"/>
+        <ellipse cx="1375" cy="715" rx="5" ry="3"/>
+        <ellipse cx="1405" cy="715" rx="5" ry="3"/>
+
+        <ellipse cx="1345" cy="740" rx="5" ry="3"/>
+        <ellipse cx="1375" cy="740" rx="5" ry="3"/>
+        <ellipse cx="1405" cy="740" rx="5" ry="3"/>
+
+        <ellipse cx="1345" cy="765" rx="5" ry="3"/>
+        <ellipse cx="1375" cy="765" rx="5" ry="3"/>
+        <ellipse cx="1405" cy="765" rx="5" ry="3"/>
+
+      </g>
+
+      <!-- legs -->
+      <path d="M1335 785 L1310 925"
+            stroke="#42494c"
+            stroke-width="12"
+            stroke-linecap="round"/>
+
+      <path d="M1415 785 L1440 925"
+            stroke="#42494c"
+            stroke-width="12"
+            stroke-linecap="round"/>
+
+    </g>
+
+
+    <!-- =========================================================
+         ROUND TABLE
+         The table is deliberately large and low in the frame,
+         matching the reference photograph.
+         ========================================================= -->
+
+    <g id="spot-table"
+       class="hotspot"
+       data-spot="table">
+
+      <!-- invisible interaction area -->
+      <ellipse class="hit"
+               cx="800"
+               cy="825"
+               rx="505"
+               ry="155"
+               fill="#fff"
+               opacity="0"/>
+
+
+      <!-- table top -->
+      <ellipse cx="800"
+               cy="815"
+               rx="505"
+               ry="145"
+               fill="#c7c9c7"
+               stroke="#8d9190"
+               stroke-width="7"/>
+
+
+      <!-- subtle tabletop inner edge -->
+      <ellipse cx="800"
+               cy="815"
+               rx="488"
+               ry="130"
+               fill="none"
+               stroke="#b0b3b1"
+               stroke-width="3"/>
+
+
+      <!-- tabletop highlight -->
+      <ellipse cx="780"
+               cy="785"
+               rx="390"
+               ry="82"
+               fill="#e0e1de"
+               opacity=".30"/>
+
+
+      <!-- =====================================================
+           TABLE EDGE
+           ===================================================== -->
+
+      <path d="
+        M295 815
+        Q300 925 800 955
+        Q1300 925 1305 815
+        Q1280 925 800 950
+        Q320 925 295 815
+        Z"
+        fill="#9b9e9c"
+        opacity=".9"/>
+
+
+      <!-- table front rim -->
+      <path d="
+        M300 820
+        Q355 915 800 945
+        Q1245 915 1300 820"
+        fill="none"
+        stroke="#777b79"
+        stroke-width="10"
+        opacity=".75"/>
+
+
+      <!-- =====================================================
+           TABLE PEDESTAL
+           ===================================================== -->
+
+      <path d="
+        M745 905
+        L855 905
+        L890 990
+        L710 990
+        Z"
+        fill="#858987"
+        stroke="#686c6a"
+        stroke-width="5"/>
+
+      <ellipse cx="800"
+               cy="990"
+               rx="125"
+               ry="22"
+               fill="#666a68"/>
+
+
+      <!-- =====================================================
+           TABLE OBJECTS
+           ===================================================== -->
+
+
+      <!-- -----------------------------------------------------
+           GREEN BOTTLE — LEFT FOREGROUND
+           ----------------------------------------------------- -->
+
+      <g id="green-bottle"
+         transform="rotate(-2 430 725)">
+
+        <path d="
+          M410 770
+          L410 680
+          Q410 665 420 655
+          L425 610
+          L445 610
+          L450 655
+          Q460 665 460 680
+          L460 770
+          Z"
+          fill="#39784b"
+          stroke="#285936"
+          stroke-width="4"/>
+
+        <!-- neck -->
+        <rect x="425"
+              y="600"
+              width="20"
+              height="30"
+              rx="5"
+              fill="#39784b"/>
+
+        <!-- cap -->
+        <rect x="424"
+              y="592"
+              width="22"
+              height="10"
+              rx="2"
+              fill="#b0a886"/>
+
+        <!-- label -->
+        <path d="
+          M413 690
+          L457 690
+          L457 735
+          L413 735
+          Z"
+          fill="#d2d1bd"/>
+
+        <text x="435"
+              y="716"
+              text-anchor="middle"
+              font-family="Arial, sans-serif"
+              font-size="12"
+              font-weight="bold"
+              fill="#4c5b49">
+          LAGER
+        </text>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           WINE GLASS — LEFT
+           ----------------------------------------------------- -->
+
+      <g id="wine-glass"
+         transform="translate(510 690)">
+
+        <path d="
+          M0 0
+          L75 0
+          L63 70
+          Q38 88 12 70
+          Z"
+          fill="#bfc9c7"
+          opacity=".65"
+          stroke="#737d7c"
+          stroke-width="3"/>
+
+        <!-- liquid -->
+        <path d="
+          M7 42
+          L68 42
+          L63 68
+          Q38 83 13 68
+          Z"
+          fill="#c7a85c"
+          opacity=".65"/>
+
+        <!-- stem -->
+        <rect x="35"
+              y="73"
+              width="6"
+              height="65"
+              fill="#737d7c"/>
+
+        <!-- base -->
+        <ellipse cx="38"
+                 cy="140"
+                 rx="42"
+                 ry="9"
+                 fill="#8b9492"
+                 opacity=".75"/>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           PINK DRINK GLASS
+           ----------------------------------------------------- -->
+
+      <g id="pink-drink"
+         transform="rotate(-3 610 730)">
+
+        <path d="
+          M565 670
+          L650 670
+          L638 790
+          Q608 805 577 790
+          Z"
+          fill="#d4d6d1"
+          opacity=".65"
+          stroke="#858987"
+          stroke-width="3"/>
+
+        <!-- pink liquid -->
+        <path d="
+          M570 715
+          L645 715
+          L638 785
+          Q608 798 578 785
+          Z"
+          fill="#d58e91"
+          opacity=".78"/>
+
+        <!-- ice -->
+        <g fill="#f0eeee"
+           opacity=".65">
+
+          <rect x="582" y="730"
+                width="15" height="12"
+                transform="rotate(12 589 736)"/>
+
+          <rect x="610" y="720"
+                width="17" height="13"
+                transform="rotate(-10 618 726)"/>
+
+          <rect x="625" y="748"
+                width="14" height="12"
+                transform="rotate(15 632 754)"/>
+
+        </g>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           LARGE CLEAR BOTTLE — CENTER
+           ----------------------------------------------------- -->
+
+      <g id="clear-bottle"
+         transform="rotate(4 790 650)">
+
+        <path d="
+          M750 750
+          L750 600
+          Q750 580 765 570
+          L770 510
+          L805 510
+          L810 570
+          Q825 580 825 600
+          L825 750
+          Z"
+          fill="#d7ddd9"
+          opacity=".58"
+          stroke="#858b88"
+          stroke-width="4"/>
+
+        <!-- bottle neck -->
+        <rect x="770"
+              y="490"
+              width="35"
+              height="85"
+              rx="6"
+              fill="#cdd4d0"
+              opacity=".65"/>
+
+        <!-- cap -->
+        <rect x="768"
+              y="482"
+              width="39"
+              height="12"
+              rx="3"
+              fill="#8d918e"/>
+
+        <!-- liquid -->
+        <path d="
+          M755 665
+          L820 665
+          L820 745
+          L755 745
+          Z"
+          fill="#b8aa7b"
+          opacity=".45"/>
+
+        <!-- label -->
+        <rect x="760"
+              y="625"
+              width="55"
+              height="65"
+              rx="3"
+              fill="#eeeeea"
+              opacity=".9"/>
+
+        <text x="787"
+              y="652"
+              text-anchor="middle"
+              font-family="Arial, sans-serif"
+              font-size="10"
+              font-weight="bold"
+              fill="#565955">
+          VODKA
+        </text>
+
+        <line x1="770"
+              y1="662"
+              x2="805"
+              y2="662"
+              stroke="#777a76"
+              stroke-width="2"/>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           DARK BOTTLE — CENTER/RIGHT
+           ----------------------------------------------------- -->
+
+      <g id="dark-bottle"
+         transform="rotate(2 875 665)">
+
+        <path d="
+          M845 760
+          L845 615
+          Q845 595 857 585
+          L862 525
+          L890 525
+          L895 585
+          Q907 595 907 615
+          L907 760
+          Z"
+          fill="#505f58"
+          stroke="#39453f"
+          stroke-width="4"/>
+
+        <rect x="862"
+              y="505"
+              width="28"
+              height="30"
+              rx="5"
+              fill="#4e5b55"/>
+
+        <rect x="860"
+              y="498"
+              width="32"
+              height="9"
+              rx="2"
+              fill="#242927"/>
+
+        <!-- label -->
+        <rect x="852"
+              y="650"
+              width="48"
+              height="65"
+              rx="3"
+              fill="#ddd8bd"/>
+
+        <text x="876"
+              y="678"
+              text-anchor="middle"
+              font-family="Arial, sans-serif"
+              font-size="9"
+              font-weight="bold"
+              fill="#4d5049">
+          DRINK
+        </text>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           CLEAR TUMBLER
+           ----------------------------------------------------- -->
+
+      <g id="tumbler"
+         transform="translate(700 755)">
+
+        <path d="
+          M0 0
+          L65 0
+          L58 75
+          Q32 88 7 75
+          Z"
+          fill="#dce2df"
+          opacity=".65"
+          stroke="#818986"
+          stroke-width="3"/>
+
+        <ellipse cx="32"
+                 cy="0"
+                 rx="32"
+                 ry="7"
+                 fill="#eef1ef"
+                 opacity=".75"/>
+
+        <!-- liquid -->
+        <path d="
+          M5 38
+          L61 38
+          L57 73
+          Q32 84 8 73
+          Z"
+          fill="#d7bd74"
+          opacity=".58"/>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           WHITE CERAMIC MUG
+           ----------------------------------------------------- -->
+
+      <g id="coffee-mug"
+         transform="translate(870 790)">
+
+        <path d="
+          M0 0
+          L80 0
+          L72 72
+          Q40 88 8 72
+          Z"
+          fill="#e6e5df"
+          stroke="#a5a5a0"
+          stroke-width="3"/>
+
+        <!-- handle -->
+        <path d="
+          M72 15
+          Q110 12 103 42
+          Q98 62 74 55"
+          fill="none"
+          stroke="#a5a5a0"
+          stroke-width="12"/>
+
+        <!-- floral decoration -->
+        <g transform="translate(22 25)">
+
+          <circle cx="15"
+                  cy="12"
+                  r="8"
+                  fill="#a56c4d"/>
+
+          <ellipse cx="5"
+                   cy="8"
+                   rx="6"
+                   ry="10"
+                   fill="#7c9b72"/>
+
+          <ellipse cx="23"
+                   cy="3"
+                   rx="6"
+                   ry="10"
+                   fill="#7c9b72"/>
+
+          <ellipse cx="26"
+                   cy="20"
+                   rx="6"
+                   ry="10"
+                   fill="#7c9b72"/>
+
+        </g>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           PLATE OF FOOD — RIGHT
+           ----------------------------------------------------- -->
+
+      <g id="food-plate"
+         transform="rotate(-3 1030 750)">
+
+        <!-- plate -->
+        <ellipse cx="1030"
+                 cy="770"
+                 rx="130"
+                 ry="48"
+                 fill="#eeeeea"
+                 stroke="#b7b7b2"
+                 stroke-width="4"/>
+
+        <ellipse cx="1030"
+                 cy="765"
+                 rx="105"
+                 ry="34"
+                 fill="#d6d4cc"/>
+
+
+        <!-- food -->
+        <path d="
+          M950 755
+          Q980 725 1010 745
+          Q1040 720 1070 748
+          Q1100 730 1120 760
+          L1110 785
+          L960 785
+          Z"
+          fill="#c98e50"/>
+
+        <!-- darker food -->
+        <path d="
+          M970 752
+          Q1000 735 1020 755
+          Q1040 735 1060 755
+          L1050 778
+          L980 778
+          Z"
+          fill="#8d603e"/>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           ORANGE SNACK BAG
+           ----------------------------------------------------- -->
+
+      <g id="snack-bag"
+         transform="rotate(8 1120 675)">
+
+        <path d="
+          M1040 625
+          Q1120 605 1190 630
+          L1170 720
+          Q1110 735 1050 710
+          Z"
+          fill="#b86d31"
+          stroke="#8d5128"
+          stroke-width="4"/>
+
+        <!-- folded top -->
+        <path d="
+          M1045 630
+          Q1115 650 1185 635"
+          fill="none"
+          stroke="#df9a55"
+          stroke-width="12"/>
+
+        <!-- packet marking -->
+        <path d="
+          M1080 655
+          Q1120 640 1150 660
+          L1135 695
+          Q1105 680 1080 690
+          Z"
+          fill="#e4d6aa"/>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           SMALL FOOD CONTAINERS
+           ----------------------------------------------------- -->
+
+      <g id="food-containers">
+
+        <rect x="590"
+              y="810"
+              width="100"
+              height="50"
+              rx="8"
+              fill="#e4e0d2"
+              stroke="#aaa89f"
+              stroke-width="3"
+              transform="rotate(-4 640 835)"/>
+
+        <rect x="640"
+              y="840"
+              width="105"
+              height="45"
+              rx="8"
+              fill="#d9d7ca"
+              stroke="#a8a69e"
+              stroke-width="3"
+              transform="rotate(5 692 862)"/>
+
+        <rect x="750"
+              y="820"
+              width="75"
+              height="45"
+              rx="7"
+              fill="#eeeae0"
+              stroke="#aaa79f"
+              stroke-width="3"/>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           SMALL BLACK BOX
+           ----------------------------------------------------- -->
+
+      <g id="black-food-box"
+         transform="rotate(4 760 805)">
+
+        <rect x="720"
+              y="765"
+              width="78"
+              height="75"
+              rx="4"
+              fill="#373a38"
+              stroke="#252725"
+              stroke-width="3"/>
+
+        <rect x="728"
+              y="775"
+              width="62"
+              height="20"
+              fill="#625847"/>
+
+        <line x1="730"
+              y1="805"
+              x2="788"
+              y2="805"
+              stroke="#878278"
+              stroke-width="3"/>
+
+        <line x1="730"
+              y1="815"
+              x2="780"
+              y2="815"
+              stroke="#878278"
+              stroke-width="3"/>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           SMALL ROUND CONTAINER
+           ----------------------------------------------------- -->
+
+      <g id="round-container">
+
+        <ellipse cx="900"
+                 cy="835"
+                 rx="42"
+                 ry="18"
+                 fill="#617451"
+                 stroke="#4c5c41"
+                 stroke-width="3"/>
+
+        <rect x="858"
+              y="832"
+              width="84"
+              height="22"
+              rx="8"
+              fill="#758b61"/>
+
+        <ellipse cx="900"
+                 cy="832"
+                 rx="42"
+                 ry="14"
+                 fill="#91a578"/>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           PAPER / BAG BEHIND BOTTLES
+           ----------------------------------------------------- -->
+
+      <g id="table-bags">
+
+        <path d="
+          M675 610
+          L760 620
+          L745 720
+          L665 700
+          Z"
+          fill="#d9d4c6"
+          stroke="#aaa69b"
+          stroke-width="3"/>
+
+        <path d="
+          M680 615
+          Q700 580 725 615"
+          fill="none"
+          stroke="#aaa69b"
+          stroke-width="4"/>
+
+
+        <path d="
+          M790 570
+          L870 575
+          L860 690
+          L780 680
+          Z"
+          fill="#b9a3c3"
+          opacity=".85"/>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           EXTRA PLATES
+           ----------------------------------------------------- -->
+
+      <ellipse cx="570"
+               cy="825"
+               rx="72"
+               ry="28"
+               fill="#ecebe6"
+               stroke="#b4b4af"
+               stroke-width="3"/>
+
+      <ellipse cx="1115"
+               cy="820"
+               rx="75"
+               ry="27"
+               fill="#e8e7e1"
+               stroke="#b1b1ac"
+               stroke-width="3"/>
+
+
+      <!-- -----------------------------------------------------
+           SMALL SPILLED / MESS MARKS
+           ----------------------------------------------------- -->
+
+      <g fill="#8b8980"
+         opacity=".25">
+
+        <ellipse cx="480" cy="850" rx="18" ry="6"/>
+        <ellipse cx="520" cy="860" rx="9" ry="4"/>
+        <ellipse cx="1180" cy="850" rx="15" ry="5"/>
+        <ellipse cx="1210" cy="835" rx="7" ry="3"/>
+
+      </g>
+
+
+      <!-- -----------------------------------------------------
+           TABLE INTERACTION GLOW
+           ----------------------------------------------------- -->
+
+      <ellipse class="glow"
+               cx="800"
+               cy="815"
+               rx="505"
+               ry="145"/>
+
+    </g>
+
+  </g>
+
+    <!-- =========================================================
+       PART 4 — FINAL ROOM DETAILS
+       ========================================================= -->
+
+  <!-- =========================================================
+       WALL ART
+       Reference: framed abstract artwork above the living area
+       ========================================================= -->
+
+  <g id="wall-art"
+     transform="rotate(-1 830 190)">
+
+    <!-- shadow behind frame -->
+    <rect x="720"
+          y="105"
+          width="170"
+          height="155"
+          fill="#596168"
+          opacity=".14"
+          transform="translate(6 8)"/>
+
+    <!-- wooden frame -->
+    <rect x="720"
+          y="105"
+          width="170"
+          height="155"
+          fill="#b68e62"
+          stroke="#8f6d4c"
+          stroke-width="5"/>
+
+    <!-- inner frame -->
+    <rect x="733"
+          y="118"
+          width="144"
+          height="129"
+          fill="#eee7d9"
+          stroke="#d0c0a5"
+          stroke-width="3"/>
+
+    <!-- artwork background -->
+    <rect x="741"
+          y="126"
+          width="128"
+          height="113"
+          fill="#d9d9cf"/>
+
+    <!-- abstract shapes -->
+    <path d="
+      M742 210
+      Q770 180 793 195
+      Q815 210 832 177
+      Q848 148 869 160
+      L869 239
+      L742 239
+      Z"
+      fill="#c4b89f"
+      opacity=".85"/>
+
+    <path d="
+      M742 185
+      Q765 165 786 175
+      Q808 185 825 145
+      L850 126
+      L742 126
+      Z"
+      fill="#e4d9c4"
+      opacity=".9"/>
+
+    <path d="
+      M790 239
+      Q810 210 826 190
+      Q840 170 854 180
+      L869 195
+      L869 239
+      Z"
+      fill="#9b9b8e"
+      opacity=".8"/>
+
+    <!-- subtle abstract vertical forms -->
+    <path d="
+      M775 132
+      L790 132
+      L785 190
+      L770 190
+      Z"
+      fill="#a9a18e"
+      opacity=".55"/>
+
+    <path d="
+      M812 130
+      L830 130
+      L825 170
+      L808 170
+      Z"
+      fill="#aaa38e"
+      opacity=".55"/>
+
+  </g>
+
+
+  <!-- =========================================================
+       CEILING PENDANT LIGHT
+       Reference: wire-frame hanging lamp at upper-right
+       ========================================================= -->
+
+  <g id="ceiling-light">
+
+    <!-- ceiling mount -->
+    <ellipse cx="1390"
+             cy="20"
+             rx="30"
+             ry="12"
+             fill="#414548"/>
+
+    <rect x="1380"
+          y="20"
+          width="20"
+          height="80"
+          fill="#44484a"/>
+
+    <!-- hanging wire -->
+    <path d="
+      M1390 95
+      L1390 165"
+      stroke="#34383a"
+      stroke-width="4"/>
+
+    <!-- wire-frame shade -->
+    <g fill="none"
+       stroke="#454a4c"
+       stroke-width="4">
+
+      <path d="
+        M1340 95
+        L1390 165
+        L1440 95
+        Z"/>
+
+      <path d="
+        M1340 95
+        L1440 95"/>
+
+      <path d="
+        M1360 70
+        L1420 70
+        L1440 95"/>
+
+      <path d="
+        M1360 70
+        L1340 95"/>
+
+      <path d="
+        M1360 70
+        L1390 165"/>
+
+      <path d="
+        M1420 70
+        L1390 165"/>
+
+    </g>
+
+    <!-- bulb -->
+    <ellipse cx="1390"
+             cy="135"
+             rx="15"
+             ry="20"
+             fill="#f3e7b7"
+             opacity=".85"/>
+
+    <circle cx="1390"
+            cy="135"
+            r="27"
+            fill="#f3e6ae"
+            opacity=".14"/>
+
+  </g>
+
+
+  <!-- =========================================================
+       CEILING SMOKE / FIRE ALARM
+       Small circular detail visible in reference.
+       ========================================================= -->
+
+  <g id="ceiling-alarm">
+
+    <ellipse cx="1100"
+             cy="65"
+             rx="22"
+             ry="10"
+             fill="#d8d9d5"
+             stroke="#b5b7b4"
+             stroke-width="2"/>
+
+    <circle cx="1092"
+            cy="65"
+            r="3"
+            fill="#777b78"/>
+
+    <circle cx="1106"
+            cy="65"
+            r="3"
+            fill="#777b78"/>
+
+  </g>
+
+
+  <!-- =========================================================
+       WINDOW CURTAIN / BLIND
+       ========================================================= -->
+
+  <g id="window-blind">
+
+    <!-- blind above window -->
+    <rect x="1190"
+          y="85"
+          width="325"
+          height="48"
+          fill="#74869b"/>
+
+    <!-- subtle folds -->
+    <g stroke="#66788b"
+       stroke-width="4"
+       opacity=".65">
+
+      <line x1="1210" y1="90"
+            x2="1210" y2="128"/>
+
+      <line x1="1240" y1="90"
+            x2="1240" y2="128"/>
+
+      <line x1="1270" y1="90"
+            x2="1270" y2="128"/>
+
+      <line x1="1300" y1="90"
+            x2="1300" y2="128"/>
+
+      <line x1="1330" y1="90"
+            x2="1330" y2="128"/>
+
+    </g>
+
+  </g>
+
+
+  <!-- =========================================================
+       WINDOW SILL OBJECT
+       Reference has a pale object sitting beside the window.
+       ========================================================= -->
+
+  <g id="window-sill-object">
+
+    <path d="
+      M1400 365
+      Q1425 345 1450 365
+      L1455 390
+      L1395 390
+      Z"
+      fill="#d7ddd8"/>
+
+    <path d="
+      M1410 365
+      Q1430 350 1445 365"
+      fill="none"
+      stroke="#b9c2bd"
+      stroke-width="5"/>
+
+  </g>
+
+
+  <!-- =========================================================
+       SMALL KITCHEN ITEMS
+       ========================================================= -->
+
+  <g id="kitchen-counter-items">
+
+
+    <!-- kettle -->
+    <g id="kettle">
+
+      <ellipse cx="555"
+               cy="470"
+               rx="38"
+               ry="25"
+               fill="#4a4c4b"/>
+
+      <path d="
+        M525 465
+        Q525 425 555 425
+        Q585 425 585 465"
+        fill="#555856"
+        stroke="#333534"
+        stroke-width="4"/>
+
+      <path d="
+        M535 430
+        Q555 395 575 430"
+        fill="none"
+        stroke="#363837"
+        stroke-width="7"/>
+
+      <path d="
+        M585 442
+        Q620 435 618 460"
+        fill="none"
+        stroke="#383a39"
+        stroke-width="7"/>
+
+    </g>
+
+
+    <!-- fruit bowl -->
+    <g id="fruit-bowl">
+
+      <ellipse cx="285"
+               cy="470"
+               rx="58"
+               ry="18"
+               fill="#b7b8b4"
+               stroke="#858784"
+               stroke-width="3"/>
+
+      <circle cx="265"
+              cy="455"
+              r="16"
+              fill="#c57d47"/>
+
+      <circle cx="292"
+              cy="450"
+              r="17"
+              fill="#d3a04f"/>
+
+      <circle cx="315"
+              cy="457"
+              r="15"
+              fill="#9b7547"/>
+
+    </g>
+
+
+    <!-- little bottle -->
+    <g id="counter-bottle">
+
+      <rect x="525"
+            y="390"
+            width="28"
+            height="65"
+            rx="7"
+            fill="#d2d6cf"
+            stroke="#999e99"
+            stroke-width="3"/>
+
+      <rect x="531"
+            y="377"
+            width="16"
+            height="17"
+            rx="3"
+            fill="#9ca29c"/>
+
+      <rect x="528"
+            y="425"
+            width="22"
+            height="16"
+            fill="#b3c3aa"/>
+
+    </g>
+
+  </g>
+
+
+  <!-- =========================================================
+       OVEN TOWELS
+       Reference: striped and cream towels hanging from oven.
+       ========================================================= -->
+
+  <g id="oven-towels">
+
+    <!-- cream towel -->
+    <path d="
+      M215 735
+      L265 735
+      L260 835
+      L220 835
+      Z"
+      fill="#e7dfc9"/>
+
+    <!-- blue striped towel -->
+    <path d="
+      M255 735
+      L320 735
+      L315 845
+      L260 845
+      Z"
+      fill="#6f8190"/>
+
+    <!-- stripes -->
+    <g stroke="#e8e8dc"
+       stroke-width="8">
+
+      <line x1="270" y1="740"
+            x2="270" y2="840"/>
+
+      <line x1="292" y1="740"
+            x2="292" y2="840"/>
+
+    </g>
+
+    <!-- towel folds -->
+    <g stroke="#b7b2a3"
+       stroke-width="3"
+       opacity=".55">
+
+      <path d="
+        M225 750
+        Q245 770 225 790"/>
+
+      <path d="
+        M225 805
+        Q245 820 225 835"/>
+
+    </g>
+
+  </g>
+
+
+  <!-- =========================================================
+       FRIDGE TOP ITEMS
+       ========================================================= -->
+
+  <g id="fridge-top-items">
+
+    <!-- green container -->
+    <rect x="420"
+          y="500"
+          width="55"
+          height="25"
+          rx="5"
+          fill="#8da37a"/>
+
+    <!-- small white container -->
+    <rect x="485"
+          y="492"
+          width="48"
+          height="33"
+          rx="5"
+          fill="#e3e0d3"
+          stroke="#aaa89f"
+          stroke-width="2"/>
+
+    <!-- bag -->
+    <path d="
+      M535 490
+      L585 490
+      L580 530
+      L540 530
+      Z"
+      fill="#c5b1c7"/>
+
+  </g>
+
+
+  <!-- =========================================================
+       SMALL FLOOR ITEMS
+       ========================================================= -->
+
+  <g id="floor-details">
+
+    <!-- small rug/shadow under kitchen -->
+    <path d="
+      M75 835
+      Q250 800 425 840
+      Q440 880 420 915
+      Q250 885 80 920
+      Z"
+      fill="#9a8975"
+      opacity=".12"/>
+
+    <!-- tiny floor marks -->
+    <ellipse cx="520"
+             cy="940"
+             rx="35"
+             ry="7"
+             fill="#7f6c58"
+             opacity=".13"/>
+
+    <ellipse cx="1240"
+             cy="930"
+             rx="45"
+             ry="8"
+             fill="#7f6c58"
+             opacity=".12"/>
+
+  </g>
+
+
+  <!-- =========================================================
+       BROOM / CLEANING ITEM
+       PRESERVE ORIGINAL GAME INTERACTION
+       ========================================================= -->
+
+  <g id="broom-pickup"
+     class="hotspot"
+     data-spot="broom">
+
+    <!-- invisible hit area -->
+    <rect class="hit"
+          x="585"
+          y="490"
+          width="70"
+          height="350"
+          fill="#fff"
+          opacity="0"/>
+
+    <!-- broom handle -->
+    <path d="
+      M625 490
+      L625 785"
+      stroke="#7a6248"
+      stroke-width="9"
+      stroke-linecap="round"/>
+
+    <!-- broom head -->
+    <path d="
+      M595 780
+      L655 780
+      L670 830
+      L580 830
+      Z"
+      fill="#d3bd8c"
+      stroke="#9f8c67"
+      stroke-width="4"/>
+
+    <!-- bristles -->
+    <g stroke="#8d7957"
+       stroke-width="3">
+
+      <line x1="590" y1="805"
+            x2="580" y2="845"/>
+
+      <line x1="602" y1="805"
+            x2="595" y2="850"/>
+
+      <line x1="614" y1="805"
+            x2="610" y2="850"/>
+
+      <line x1="626" y1="805"
+            x2="625" y2="850"/>
+
+      <line x1="638" y1="805"
+            x2="642" y2="850"/>
+
+      <line x1="650" y1="805"
+            x2="660" y2="845"/>
+
+    </g>
+
+    <!-- preserve interaction glow -->
+    <rect class="glow"
+          x="585"
+          y="490"
+          width="70"
+          height="350"
+          rx="5"/>
+
+  </g>
+
+
+  <!-- =========================================================
+       GENERAL LIGHTING OVERLAY
+       Gives the room the bright natural-light feeling
+       of the reference photograph.
+       ========================================================= -->
+
+  <rect x="0"
+        y="0"
+        width="1600"
+        height="1000"
+        fill="#fff"
+        opacity=".035"
+        pointer-events="none"/>
+
+
+  <!-- =========================================================
+       WINDOW LIGHT ON FLOOR
+       ========================================================= -->
+
+  <path d="
+    M1200 420
+    L1490 420
+    L1580 720
+    L1120 720
+    Z"
+    fill="#fff"
+    opacity=".075"
+    pointer-events="none"/>
+
+
+  <!-- =========================================================
+       FINAL VIGNETTE / ROOM EDGES
+       ========================================================= -->
+
+  <path d="
+    M0 0
+    L1600 0
+    L1600 1000
+    L0 1000
+    Z"
+    fill="none"
+    stroke="#555a5c"
+    stroke-width="12"
+    opacity=".10"
+    pointer-events="none"/>
+
+
+  <!-- =========================================================
+       END OF REFERENCE-BASED ROOM
+       ========================================================= -->
+
+</svg>
+
+
+
+
+
+
 
         <!-- Character sprites get inserted here dynamically by main.js -->
         <div id="characters-layer"></div>
