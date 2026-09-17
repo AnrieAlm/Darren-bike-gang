@@ -47,14 +47,48 @@ export function setRecruitedCount(current, total) {
   recruitedCount.textContent = `Recruited: ${current} / ${total}`;
 }
 
-// Renders the full inventory list (array of item label strings).
+// Renders the backpack: instead of one tag per item (which gets long
+// fast once you're carrying 5 waffles), groups by label and shows a
+// count, e.g. "🧇 Waffle x3". Pass the full inventory array (objects
+// with a .label, same as what game.addInventory stores).
 export function renderInventory(items) {
   inventoryBar.innerHTML = '';
-  items.forEach(label => {
+  const counts = new Map();
+  items.forEach(label => counts.set(label, (counts.get(label) || 0) + 1));
+
+  if (counts.size === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'inventory-empty';
+    empty.textContent = 'Backpack empty';
+    inventoryBar.appendChild(empty);
+    return;
+  }
+
+  counts.forEach((count, label) => {
     const el = document.createElement('div');
     el.className = 'inventory-item';
-    el.textContent = label;
+    el.textContent = count > 1 ? `${label} x${count}` : label;
     inventoryBar.appendChild(el);
+  });
+}
+
+// Renders one small happiness bar per character underneath the main
+// HUD row. entries = [{ id, name, done, total }, ...] — see
+// refreshHappiness() in main.js, which calls this after anything
+// that could move the needle (items found, chores done, recruits).
+const happinessContainer = document.getElementById('happiness-bars');
+export function renderHappinessBars(entries) {
+  if (!happinessContainer) return;
+  happinessContainer.innerHTML = '';
+  entries.forEach(({ id, name, done, total }) => {
+    const pct = total ? Math.round((done / total) * 100) : 0;
+    const row = document.createElement('div');
+    row.className = 'happy-row';
+    row.innerHTML = `
+      <span class="happy-name">${name}</span>
+      <div class="happy-bar-track"><div class="happy-bar-fill" style="width:${pct}%"></div></div>
+    `;
+    happinessContainer.appendChild(row);
   });
 }
 

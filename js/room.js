@@ -47,3 +47,43 @@ export function getItemAtSpot(spotId) {
   pickedUpIndexes.add(index);
   return hiddenItems[index];
 }
+
+// ========================================================
+// CHORE TASKS — Grace's happiness also goes up from tidying the flat:
+// sweeping the floor and washing the dirty plates. These don't go
+// through the inventory (nothing to carry/give), they just mark
+// themselves done when clicked. Add/remove entries here to add more
+// mess spots or plates without touching main.js.
+// ========================================================
+export const choreTasks = [
+  { taskId: 'sweep-0', owner: 'grace', task: 'sweep',  label: 'Sweep the floor' },
+  { taskId: 'sweep-1', owner: 'grace', task: 'sweep',  label: 'Sweep the floor' },
+  { taskId: 'sweep-2', owner: 'grace', task: 'sweep',  label: 'Sweep the floor' },
+  { taskId: 'sweep-3', owner: 'grace', task: 'sweep',  label: 'Sweep the floor' },
+  { taskId: 'dish-0',  owner: 'grace', task: 'dishes', label: 'Wash the dirty plate' },
+  { taskId: 'dish-1',  owner: 'grace', task: 'dishes', label: 'Wash the dirty plate' },
+];
+
+export const completedChores = new Set();
+
+// Marks a chore done (no-op if already done). Returns the task, or null
+// if the id doesn't exist / was already completed.
+export function completeChore(taskId) {
+  if (completedChores.has(taskId)) return null;
+  const chore = choreTasks.find(c => c.taskId === taskId);
+  if (!chore) return null;
+  completedChores.add(taskId);
+  return chore;
+}
+
+export function isChoreDone(taskId) {
+  return completedChores.has(taskId);
+}
+
+// How many of a given owner's chores of a given task type are done,
+// e.g. getChoreProgress('grace', 'sweep') -> { done: 2, total: 4 }
+export function getChoreProgress(owner, task) {
+  const matching = choreTasks.filter(c => c.owner === owner && c.task === task);
+  const done = matching.filter(c => completedChores.has(c.taskId)).length;
+  return { done, total: matching.length };
+}

@@ -14,6 +14,11 @@ const maya = {
   portraitHappy: '../assets/maya_happy.png',
   emojiFallback: '🧇',
 
+  getProgress(game) {
+    if (game.isRecruited('maya')) return { done: 1, total: 1 };
+    return { done: Math.min(game.getInventoryCount('maya', 'waffle'), WAFFLES_NEEDED), total: WAFFLES_NEEDED };
+  },
+
   onInteract(game) {
     if (game.isRecruited('maya')) {
       showDialog({

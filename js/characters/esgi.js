@@ -6,11 +6,16 @@ import { showDialog, hideDialog } from '../ui.js';
 const esgi = {
   id: 'esgi',
   name: 'Esgi',
-  position: { top: '30%', left: '78%' },
+  position: { top: '38%', left: '30%' }, // standing on the floor below the window
   // TODO: swap in your generated portraits
   portraitNeutral: '../assets/esgi_neutral.png',
   portraitHappy: '../assets/esgi_happy.png',
   emojiFallback: '😿', // shown until portrait images exist
+
+  getProgress(game) {
+    if (game.isRecruited('esgi')) return { done: 1, total: 1 };
+    return { done: game.getInventoryCount('esgi', 'cat') > 0 ? 1 : 0, total: 1 };
+  },
 
   // Called whenever the player clicks Esgi's sprite in the room.
   onInteract(game) {

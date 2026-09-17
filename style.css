@@ -80,33 +80,125 @@ html, body {
   position: relative;
   width: 100vw;
   height: 100vh;
-  /* TODO: replace this gradient with your generated room background:
-     background: url('assets/room.jpg') center/cover no-repeat; */
-  background: linear-gradient(180deg, #6d597a 0%, #b56576 100%);
+  overflow: hidden;
+  background: #20211f;
+}
+
+#room-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
-.hotspot {
+/* Everything that should zoom together (background SVG + characters)
+   lives in here. main.js's wireZoom() toggles .zoomed and sets
+   transform-origin to wherever the player tapped. */
+#room-zoom {
   position: absolute;
-  min-width: 70px;
-  min-height: 44px;
-  padding: 8px 10px;
-  background: rgba(255,255,255,0.15);
-  border: 2px dashed rgba(255,255,255,0.6);
-  border-radius: 10px;
-  font-size: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  text-align: center;
+  inset: 0;
+  transition: transform .45s cubic-bezier(.65,0,.35,1);
+  transform-origin: 50% 50%;
 }
-/* Rough placeholder positions — move these to match your background art */
-#spot-fridge  { top: 15%; left: 5%;  width: 15%; height: 25%; }
-#spot-cabinet { top: 12%; left: 25%; width: 15%; height: 15%; }
-#spot-table   { top: 55%; left: 40%; width: 20%; height: 15%; }
-#spot-oven    { top: 15%; left: 45%; width: 15%; height: 20%; }
-#spot-window  { top: 8%;  left: 70%; width: 20%; height: 20%; }
+#room-zoom.zoomed { transform: scale(1.55); }
+
+#zoom-back {
+  position: fixed;
+  top: 60px;
+  right: 14px;
+  z-index: 55;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+#kitchen-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* A zoom-zone is an invisible tap target that zooms #room-zoom in on
+   whatever cluster of hotspots it wraps (e.g. the counter run). It sits
+   BEHIND the hotspots it wraps in paint order, so a tap that actually
+   lands on a working door/plate/mess-spot still fires that element's
+   own click first — this only catches taps on the empty space around them. */
+.zoom-zone { cursor: zoom-in; }
+#room-zoom.zoomed .zoom-zone { cursor: default; }
+
+/* ---------- Interactive spots (doors, window, table) ---------- */
+.hotspot { cursor: pointer; }
+.hit { fill: #fff; opacity: 0; }
+.glow {
+  fill: none; stroke: #ffe27a; stroke-width: 6; opacity: 0;
+  transition: opacity .2s ease; pointer-events: none;
+}
+.hotspot:hover .glow { opacity: 0.85; }
+
+/* Fridge/cabinet doors: swing open, hinge = left edge */
+.door-swing {
+  transform-box: fill-box; transform-origin: 0% 50%;
+  transition: transform .5s cubic-bezier(.65,0,.35,1);
+}
+.hotspot.open .door-swing { transform: scaleX(0.06); }
+
+/* Oven door: drops open, hinge = bottom edge */
+.door-drop {
+  transform-box: fill-box; transform-origin: 50% 100%;
+  transition: transform .5s cubic-bezier(.65,0,.35,1);
+}
+.hotspot.open .door-drop { transform: scaleY(0.08); }
+
+.interior { opacity: 0; transition: opacity .35s ease .15s; }
+.hotspot.open .interior { opacity: 1; }
+
+/* Window: sash slides up, cat slides into view outside */
+.window-sash {
+  transform-box: fill-box; transform-origin: 50% 100%;
+  transition: transform .6s cubic-bezier(.34,1.3,.64,1);
+}
+.hotspot.open .window-sash { transform: translateY(-118px); }
+.cat {
+  transform-box: fill-box; transform-origin: 50% 100%;
+  transform: translateY(140px);
+  transition: transform .55s cubic-bezier(.34,1.4,.64,1) .25s;
+}
+.hotspot.open .cat { transform: translateY(0px); }
+
+/* ---------- Chores: sweeping + dishes ---------- */
+.mess-spot { cursor: pointer; }
+.mess-blob {
+  transition: opacity .35s ease, transform .35s ease;
+  transform-box: fill-box; transform-origin: 50% 50%;
+}
+.mess-spot.done .mess-blob { opacity: 0; transform: scale(0.3); }
+.broom-icon {
+  font-size: 34px; text-anchor: middle; dominant-baseline: middle;
+  opacity: 0; transform: translateX(-30px) rotate(-15deg);
+  transform-box: fill-box; transform-origin: 50% 50%;
+  transition: opacity .3s ease, transform .3s ease;
+  pointer-events: none;
+}
+.mess-spot.done .broom-icon { opacity: 1; transform: translateX(20px) rotate(10deg); }
+.mess-spot.done.faded .broom-icon { opacity: 0; transition: opacity .6s ease .5s; }
+
+.dirty-plate { cursor: pointer; }
+.smudge { transition: opacity .4s ease; transform-box: fill-box; transform-origin: 50% 50%; }
+.dirty-plate.done .smudge { opacity: 0; }
+.soap-icon {
+  font-size: 30px; text-anchor: middle; dominant-baseline: middle;
+  opacity: 0; transform: scale(0.4) translateY(6px);
+  transform-box: fill-box; transform-origin: 50% 50%;
+  transition: opacity .3s ease, transform .3s ease;
+  pointer-events: none;
+}
+.dirty-plate.done .soap-icon { opacity: 1; transform: scale(1) translateY(-14px); }
 
 #characters-layer { position: absolute; inset: 0; pointer-events: none; }
 
@@ -136,7 +228,33 @@ html, body {
   white-space: nowrap;
 }
 
-/* ---------- Inventory ---------- */
+/* ---------- Happiness bars ---------- */
+#happiness-bars {
+  position: fixed;
+  top: 44px; left: 0; right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  padding: 6px 14px;
+  background: rgba(0,0,0,0.4);
+  z-index: 49;
+  font-size: 0.7rem;
+}
+.happy-row { display: flex; align-items: center; gap: 6px; }
+.happy-name { white-space: nowrap; opacity: 0.9; }
+.happy-bar-track {
+  width: 60px; height: 7px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.happy-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffadc6, #ff6f91);
+  transition: width .4s ease;
+}
+
+/* ---------- Backpack (inventory) ---------- */
 #inventory-bar {
   position: fixed;
   bottom: 0; left: 0; right: 0;
@@ -156,6 +274,11 @@ html, body {
   padding: 4px 8px;
   font-size: 0.75rem;
   white-space: nowrap;
+}
+.inventory-empty {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.75rem;
+  font-style: italic;
 }
 
 /* ---------- Dialog box ---------- */

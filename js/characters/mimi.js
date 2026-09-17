@@ -8,10 +8,14 @@ import { showDialog, hideDialog } from '../ui.js';
 const mimi = {
   id: 'mimi',
   name: 'Mimi',
-  position: { top: '10%', left: '45%' },
+  position: { top: '66%', left: '47%' }, // open floor between the table and counter
   portraitNeutral: '../assets/mimi_neutral.png',
   portraitHappy: '../assets/mimi_happy.png',
   emojiFallback: '❓',
+
+  // TODO: once her mechanic is decided, add a getProgress(game) method
+  // here like the other characters have (see grace.js/boris.js) —
+  // main.js will automatically pick it up and give her a happiness bar.
 
   // TODO: replace with her real recruitment logic once you've decided it.
   onInteract(game) {

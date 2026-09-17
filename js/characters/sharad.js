@@ -24,6 +24,11 @@ const sharad = {
   portraitHappy: '../assets/sharad_happy.png',
   emojiFallback: '🧢',
 
+  getProgress(game) {
+    if (game.isRecruited('sharad')) return { done: 1, total: 1 };
+    return { done: successCount, total: SUCCESSES_NEEDED };
+  },
+
   // Starts his periodic "yo bro" calls. Call once when the game starts.
   start(game) {
     this.stop(); // clear any previous timers first
