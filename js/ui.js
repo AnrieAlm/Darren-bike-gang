@@ -122,8 +122,12 @@ export function showTimesUpScreen(names) {
 // Updates the countdown display in the HUD. Pass a formatted string
 // like "4:32" — main.js owns the actual counting.
 const gameTimerEl = document.getElementById('game-timer');
-export function setGameTimer(text) {
-  if (gameTimerEl) gameTimerEl.textContent = `⏱️ ${text}`;
+// urgent = true once time's running low (main.js decides the
+// threshold) — adds a pulsing red flash so it's impossible to miss.
+export function setGameTimer(text, urgent = false) {
+  if (!gameTimerEl) return;
+  gameTimerEl.textContent = text;
+  gameTimerEl.classList.toggle('urgent', urgent);
 }
 
 // Small top-right toast, e.g. "🎉 Grace is part of your gang!" — fires

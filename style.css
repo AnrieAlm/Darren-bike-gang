@@ -391,10 +391,47 @@ html, body {
 }
 
 /* ---------- Recruit toast ---------- */
+/* ---------- Big countdown timer ---------- */
+/* Deliberately loud — bright red, large, fixed in the corner so it's
+   readable at a glance without having to focus on it. Sits below the
+   HUD bar and happiness bars (which together run ~82px tall) so it
+   never overlaps them; adjust the top value if you change those. */
+#game-timer {
+  position: fixed;
+  top: 92px;
+  right: 14px;
+  z-index: 55;
+  font-size: 2.6rem;
+  font-weight: 900;
+  font-family: 'Courier New', Courier, monospace;
+  color: #ff3131;
+  letter-spacing: 1px;
+  line-height: 1;
+  text-shadow:
+    0 0 10px rgba(255,49,49,0.6),
+    2px 2px 0 rgba(0,0,0,0.85),
+    -1px -1px 0 rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.35);
+  padding: 4px 14px;
+  border-radius: 12px;
+  pointer-events: none;
+  user-select: none;
+}
+/* Flashes faster and brighter once time is nearly out — see main.js,
+   which adds this class at 30 seconds left. */
+#game-timer.urgent {
+  animation: timer-pulse 0.6s ease-in-out infinite;
+}
+@keyframes timer-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(1.06); }
+}
+
+/* ---------- Recruit toast ---------- */
 #recruit-toast {
   position: fixed;
   top: 14px;
-  right: 14px;
+  left: 50%;
   z-index: 70;
   background: #ffd166;
   color: #222;
@@ -404,12 +441,12 @@ html, body {
   border-radius: 20px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.4);
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateX(-50%) translateY(-10px);
   transition: opacity .3s ease, transform .3s ease;
   pointer-events: none;
   max-width: 80vw;
 }
-#recruit-toast.show { opacity: 1; transform: translateY(0); }
+#recruit-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 /* ---------- Right-click dialogue menu ---------- */
 #context-menu {

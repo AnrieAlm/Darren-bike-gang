@@ -18,19 +18,19 @@ export const hiddenItems = [
   // cabinet, ahead of the waffle backlog so it doesn't take forever.
   { spotId: 'cabinet', owner: 'mimi', type: 'ticket', label: 'Movie Ticket' },
 
-  // Boris's waffles (needs 5) — reuse spots, multiple items per spot allowed
-  { spotId: 'fridge',  owner: 'boris', type: 'waffle', label: 'Waffle' },
-  { spotId: 'cabinet', owner: 'boris', type: 'waffle', label: 'Waffle' },
-  { spotId: 'table',   owner: 'boris', type: 'waffle', label: 'Waffle' },
-  { spotId: 'oven',    owner: 'boris', type: 'waffle', label: 'Waffle' },
-  { spotId: 'fridge',  owner: 'boris', type: 'waffle', label: 'Waffle' },
-
-  // Maya's waffles (needs 5)
-  { spotId: 'cabinet', owner: 'maya', type: 'waffle', label: 'Waffle' },
-  { spotId: 'table',   owner: 'maya', type: 'waffle', label: 'Waffle' },
-  { spotId: 'oven',    owner: 'maya', type: 'waffle', label: 'Waffle' },
-  { spotId: 'fridge',  owner: 'maya', type: 'waffle', label: 'Waffle' },
-  { spotId: 'cabinet', owner: 'maya', type: 'waffle', label: 'Waffle' },
+  // Waffles — shared pool, not earmarked for anyone. 10 total hidden
+  // around the flat; Boris and Maya each need 5, but any waffle you've
+  // collected can go to whichever of them you hand it to first.
+  { spotId: 'fridge',  owner: 'shared', type: 'waffle', label: 'Waffle' },
+  { spotId: 'cabinet', owner: 'shared', type: 'waffle', label: 'Waffle' },
+  { spotId: 'table',   owner: 'shared', type: 'waffle', label: 'Waffle' },
+  { spotId: 'oven',    owner: 'shared', type: 'waffle', label: 'Waffle' },
+  { spotId: 'fridge',  owner: 'shared', type: 'waffle', label: 'Waffle' },
+  { spotId: 'cabinet', owner: 'shared', type: 'waffle', label: 'Waffle' },
+  { spotId: 'table',   owner: 'shared', type: 'waffle', label: 'Waffle' },
+  { spotId: 'oven',    owner: 'shared', type: 'waffle', label: 'Waffle' },
+  { spotId: 'fridge',  owner: 'shared', type: 'waffle', label: 'Waffle' },
+  { spotId: 'cabinet', owner: 'shared', type: 'waffle', label: 'Waffle' },
 ];
 
 // Esgi's item isn't hidden in a spot — it's revealed by clicking the window.

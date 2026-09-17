@@ -55,8 +55,11 @@
       <div id="security-meter"><div id="security-fill"></div></div>
     </div>
     <div id="recruited-count" class="hud-label">Recruited: 0 / 5</div>
-    <div id="game-timer" class="hud-label">⏱️ 5:00</div>
   </div>
+  <!-- Big, bold, always-visible countdown — deliberately its own
+       element outside #hud so it can be large enough to catch out of
+       the corner of your eye while playing. -->
+  <div id="game-timer" class="hidden">5:00</div>
   <!-- One small bar per character, filled in by ui.js's renderHappinessBars() -->
   <div id="happiness-bars" class="hidden"></div>
 

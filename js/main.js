@@ -172,7 +172,8 @@ function startGameTimer() {
 function updateTimerDisplay() {
   const m = Math.floor(timeRemaining / 60);
   const s = timeRemaining % 60;
-  setGameTimer(`${m}:${s.toString().padStart(2, '0')}`);
+  const urgent = timeRemaining <= 30; // pulses red once 30s are left
+  setGameTimer(`${m}:${s.toString().padStart(2, '0')}`, urgent);
 }
 
 // ---------------- Rendering character sprites ----------------
@@ -444,6 +445,7 @@ function startGame() {
   document.getElementById('timesup-screen').classList.add('hidden');
   document.getElementById('hud').classList.remove('hidden');
   document.getElementById('happiness-bars').classList.remove('hidden');
+  document.getElementById('game-timer').classList.remove('hidden');
   document.getElementById('room').classList.remove('hidden');
 
   renderCharacterSprites();

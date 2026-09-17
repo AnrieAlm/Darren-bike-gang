@@ -1,5 +1,7 @@
 // ========================================================
-// boris.js — recruited by finding 5 hidden waffles for him
+// boris.js — recruited by handing over 5 waffles. Waffles are a
+// shared pool (see room.js) — any waffle found anywhere counts,
+// it doesn't matter whether it was "meant" for him or Maya.
 // ========================================================
 import { showDialog, hideDialog } from '../ui.js';
 
@@ -15,7 +17,7 @@ const boris = {
 
   getProgress(game) {
     if (game.isRecruited('boris')) return { done: 1, total: 1 };
-    return { done: Math.min(game.getInventoryCount('boris', 'waffle'), WAFFLES_NEEDED), total: WAFFLES_NEEDED };
+    return { done: Math.min(game.getInventoryCount('shared', 'waffle'), WAFFLES_NEEDED), total: WAFFLES_NEEDED };
   },
 
   onInteract(game) {
@@ -28,7 +30,7 @@ const boris = {
       return;
     }
 
-    const have = game.getInventoryCount('boris', 'waffle');
+    const have = game.getInventoryCount('shared', 'waffle');
 
     if (have < WAFFLES_NEEDED) {
       showDialog({
@@ -45,7 +47,7 @@ const boris = {
       buttons: [{
         label: 'Give him the waffles',
         onClick: () => {
-          game.removeInventory('boris', 'waffle', WAFFLES_NEEDED);
+          game.removeInventory('shared', 'waffle', WAFFLES_NEEDED);
           game.recruit('boris');
           showDialog({
             portraitUrl: boris.portraitHappy,
