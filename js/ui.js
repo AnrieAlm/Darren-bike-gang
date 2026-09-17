@@ -1,6 +1,7 @@
 // ========================================================
 // ui.js — everything that draws to the screen but isn't game logic.
 // ========================================================
+import { ITEM_EMOJI, MAX_INVENTORY } from './room.js';
 
 const dialogBox = document.getElementById('dialog-box');
 const dialogPortrait = document.getElementById('dialog-portrait');
@@ -47,29 +48,35 @@ export function setRecruitedCount(current, total) {
   recruitedCount.textContent = `Recruited: ${current} / ${total}`;
 }
 
-// Renders the backpack: instead of one tag per item (which gets long
-// fast once you're carrying 5 waffles), groups by label and shows a
-// count, e.g. "🧇 Waffle x3". Pass the full inventory array (objects
-// with a .label, same as what game.addInventory stores).
+// Renders the backpack as a fixed grid of MAX_INVENTORY slots — one
+// per actual item being carried, in the order picked up, plus empty
+// (dashed) slots for whatever room is left. This is what makes the
+// "only 5 items fit" cap visible: the player can see exactly how full
+// they are and how much space picking something up would use.
+// Pass the full inventory array (objects with .type and .label, same
+// shape game.addInventory stores).
 export function renderInventory(items) {
   inventoryBar.innerHTML = '';
-  const counts = new Map();
-  items.forEach(label => counts.set(label, (counts.get(label) || 0) + 1));
 
-  if (counts.size === 0) {
-    const empty = document.createElement('div');
-    empty.className = 'inventory-empty';
-    empty.textContent = 'Backpack empty';
-    inventoryBar.appendChild(empty);
-    return;
+  const capacity = document.createElement('div');
+  capacity.className = 'inventory-capacity';
+  capacity.textContent = `${items.length}/${MAX_INVENTORY}`;
+  inventoryBar.appendChild(capacity);
+
+  for (let i = 0; i < MAX_INVENTORY; i++) {
+    const item = items[i];
+    const slot = document.createElement('div');
+
+    if (item) {
+      slot.className = 'inventory-slot filled';
+      slot.title = item.label; // hover tooltip with the full name
+      slot.textContent = ITEM_EMOJI[item.type] || '❔';
+    } else {
+      slot.className = 'inventory-slot empty';
+    }
+
+    inventoryBar.appendChild(slot);
   }
-
-  counts.forEach((count, label) => {
-    const el = document.createElement('div');
-    el.className = 'inventory-item';
-    el.textContent = count > 1 ? `${label} x${count}` : label;
-    inventoryBar.appendChild(el);
-  });
 }
 
 // Renders one small happiness bar per character underneath the main

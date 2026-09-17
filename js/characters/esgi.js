@@ -65,6 +65,15 @@ const esgi = {
       buttons: [{
         label: 'Bring the cat in',
         onClick: () => {
+          if (game.isInventoryFull()) {
+            showDialog({
+              text: `Your backpack is full! Give something away first, then come back for Boots.`,
+              buttons: [{ label: 'Okay', onClick: hideDialog }],
+              autoHideMs: 2000
+            });
+            return; // Boots stays on the ledge
+          }
+          document.getElementById('window-cat')?.classList.add('collected'); // disappears from the sill
           game.addInventory({ owner: 'esgi', type: 'cat', label: 'Boots the Cat' });
           hideDialog();
         }

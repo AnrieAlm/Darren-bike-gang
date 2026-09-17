@@ -133,7 +133,7 @@
                 <path d="M462 332 L460 216 M460 246 L438 222 M460 230 L482 206"/>
               </g>
               <g transform="translate(330,258)">
-                <text class="cat" font-size="54" text-anchor="middle" dominant-baseline="middle">🐈‍⬛</text>
+                <text id="window-cat" class="cat" font-size="54" text-anchor="middle" dominant-baseline="middle">🐈‍⬛</text>
               </g>
             </g>
             <g class="window-sash">
@@ -230,10 +230,12 @@
 
             <!-- ============ OVEN ============ -->
             <g id="spot-oven" class="hotspot" data-spot="oven">
+              <rect class="hit" x="760" y="370" width="150" height="200"/>
               <rect x="760" y="370" width="150" height="200" fill="#1a1a1a"/>
               <g class="interior">
                 <rect x="772" y="382" width="126" height="95" fill="#0c0c0c"/>
                 <rect x="778" y="440" width="114" height="4" fill="#333"/>
+                <text class="found-item-emoji" data-spot="oven" x="835" y="429" font-size="36"></text>
               </g>
               <g class="door-drop">
                 <rect x="760" y="370" width="150" height="200" fill="#232323" stroke="#0f0f0f" stroke-width="3"/>
@@ -243,22 +245,24 @@
                 <circle cx="855" cy="490" r="9" fill="#555"/><circle cx="885" cy="490" r="9" fill="#555"/>
                 <rect x="770" y="512" width="130" height="50" fill="#1c1c1c"/>
               </g>
-              <rect class="hit" x="760" y="370" width="150" height="200"/>
+              
               <rect class="glow" x="760" y="370" width="150" height="200" rx="4"/>
             </g>
 
             <!-- ============ CABINET ============ -->
             <g id="spot-cabinet" class="hotspot" data-spot="cabinet">
+              <rect class="hit" x="920" y="436" width="150" height="134"/>
               <rect x="920" y="436" width="150" height="134" fill="#2a1c0d"/>
               <g class="interior">
                 <rect x="928" y="444" width="134" height="118" fill="#171008"/>
                 <rect x="932" y="500" width="126" height="4" fill="#3a2a17"/>
+                <text class="found-item-emoji" data-spot="cabinet" x="995" y="491" font-size="36"></text>
               </g>
               <g class="door-swing">
                 <rect x="920" y="436" width="150" height="134" fill="url(#woodGrain)" stroke="#a9793f" stroke-width="2"/>
                 <rect x="985" y="480" width="20" height="6" rx="3" fill="#cfcfcf"/>
               </g>
-              <rect class="hit" x="920" y="436" width="150" height="134"/>
+              
               <rect class="glow" x="920" y="436" width="150" height="134" rx="4"/>
             </g>
 
@@ -269,11 +273,13 @@
 
             <!-- ============ FRIDGE ============ -->
             <g id="spot-fridge" class="hotspot" data-spot="fridge">
+              <rect class="hit" x="1090" y="400" width="200" height="200"/>
               <rect x="1090" y="400" width="200" height="200" fill="#d8d8d4"/>
               <g class="interior">
                 <rect x="1098" y="408" width="184" height="184" fill="#eef3f2"/>
                 <rect x="1104" y="470" width="172" height="5" fill="#c7d0ce"/>
                 <rect x="1104" y="530" width="172" height="5" fill="#c7d0ce"/>
+                <text class="found-item-emoji" data-spot="fridge" x="1190" y="442" font-size="36"></text>
               </g>
               <g class="door-swing">
                 <rect x="1090" y="400" width="200" height="200" fill="#f2f2f0" stroke="#d2d2ce" stroke-width="3"/>
@@ -281,7 +287,7 @@
                 <rect x="1270" y="410" width="10" height="60" rx="4" fill="#c9c9c5"/>
                 <text x="1190" y="440" font-family="Arial, sans-serif" font-size="13" fill="#bdbdb8" text-anchor="middle" letter-spacing="1">NORDIQUE</text>
               </g>
-              <rect class="hit" x="1090" y="400" width="200" height="200"/>
+              
               <rect class="glow" x="1090" y="400" width="200" height="200" rx="4"/>
             </g>
 
@@ -296,12 +302,16 @@
 
           <!-- ============ DINING TABLE (peek under) ============ -->
           <g id="spot-table" class="hotspot table" data-spot="table">
+              <rect class="hit" x="180" y="560" width="300" height="160"/>
             <ellipse cx="330" cy="700" rx="150" ry="20" fill="#00000018"/>
             <rect x="322" y="600" width="16" height="100" fill="#4b4b4e"/>
             <ellipse cx="330" cy="700" rx="55" ry="10" fill="#3a3a3d"/>
+            <g class="interior">
+              <text class="found-item-emoji" data-spot="table" x="268" y="655" font-size="34"></text>
+            </g>
             <ellipse cx="330" cy="580" rx="150" ry="42" fill="#ffffff" stroke="#e4e4e4" stroke-width="3"/>
             <ellipse cx="330" cy="573" rx="150" ry="38" fill="#fbfbfb"/>
-            <rect class="hit" x="180" y="560" width="300" height="160"/>
+            
             <rect class="glow" x="180" y="640" width="300" height="70" rx="20"/>
           </g>
         </svg>

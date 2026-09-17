@@ -48,6 +48,31 @@ export function getItemAtSpot(spotId) {
   return hiddenItems[index];
 }
 
+// Same lookup as getItemAtSpot but does NOT mark it picked up — used to
+// show what's currently sitting at a spot (so the player sees it before
+// tapping it) without consuming it. Call getItemAtSpot() to actually claim it.
+export function peekItemAtSpot(spotId) {
+  const index = hiddenItems.findIndex(
+    (item, i) => item.spotId === spotId && !pickedUpIndexes.has(i)
+  );
+  return index === -1 ? null : hiddenItems[index];
+}
+
+// Emoji shown in the inventory grid and at the spot an item is found —
+// keyed by each item's `type` field.
+export const ITEM_EMOJI = {
+  juice: '🧃',
+  waffle: '🧇',
+  cat: '🐈‍⬛',
+};
+
+// The backpack only holds this many items at once (regardless of mix —
+// e.g. 2 waffles + 2 juices + 1 cat = full). Once full, the player has
+// to give something to a character before picking up anything else.
+// Shared by main.js (enforces it) and ui.js (renders exactly this many
+// slots), so it only needs to change in one place.
+export const MAX_INVENTORY = 5;
+
 // ========================================================
 // CHORE TASKS — Grace's happiness also goes up from tidying the flat:
 // sweeping the floor and washing the dirty plates. These don't go

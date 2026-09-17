@@ -13,8 +13,8 @@ import boris from './characters/boris.js';
 import maya from './characters/maya.js';
 import mimi from './characters/mimi.js';
 import {
-  hiddenItems, windowItem, getItemAtSpot, setWindowOpened, windowOpened,
-  completeChore
+  hiddenItems, windowItem, getItemAtSpot, peekItemAtSpot, ITEM_EMOJI, MAX_INVENTORY,
+  setWindowOpened, windowOpened, completeChore
 } from './room.js';
 import {
   showDialog, hideDialog, setSecurityMeter,
@@ -39,10 +39,13 @@ const game = {
   getInventoryCount(owner, type) {
     return inventory.filter(i => i.owner === owner && i.type === type).length;
   },
+  isInventoryFull() { return inventory.length >= MAX_INVENTORY; },
   addInventory(item) {
+    if (inventory.length >= MAX_INVENTORY) return false; // backpack full — caller should check isInventoryFull() first
     inventory.push(item);
-    renderInventory(inventory.map(i => i.label));
+    renderInventory(inventory);
     refreshHappiness();
+    return true;
   },
   removeInventory(owner, type, count) {
     let removed = 0;
@@ -53,7 +56,7 @@ const game = {
       }
       return true;
     });
-    renderInventory(inventory.map(i => i.label));
+    renderInventory(inventory);
     refreshHappiness();
   },
 
@@ -159,9 +162,12 @@ function updateSpriteState(id) {
 }
 
 // ---------------- Room hotspot clicks (fridge/cabinet/table/oven/window) ----------------
-// These are the "container" spots that open/close (door swings, sash
-// slides) and may hold a hidden item. The CSS in style.css does the
-// animation purely off the .open class — this just toggles it.
+// Opening a door/sash just reveals whatever's there (shown as an emoji
+// sitting in the interior — see showFoundItem()); it does NOT collect
+// it automatically. The player then taps that item specifically to
+// actually pick it up, which is what removes it from the spot and
+// adds it to the backpack. This mirrors how esgi's window already
+// worked (open window -> see the cat -> tap "bring the cat in").
 function wireHotspots() {
   document.querySelectorAll('.hotspot[data-spot]').forEach(spotEl => {
     spotEl.addEventListener('click', () => {
@@ -178,15 +184,9 @@ function wireHotspots() {
         return;
       }
 
-      const item = getItemAtSpot(spotId);
-      if (item) {
-        game.addInventory(item);
-        showDialog({
-          text: `You found: ${item.label}! It went in your backpack.`,
-          buttons: [{ label: 'Nice', onClick: hideDialog }],
-          autoHideMs: 1500
-        });
-      } else {
+      const next = peekItemAtSpot(spotId);
+      showFoundItem(spotId, next);
+      if (!next) {
         showDialog({
           text: `Nothing else here.`,
           buttons: [{ label: 'Close', onClick: hideDialog }],
@@ -195,6 +195,50 @@ function wireHotspots() {
       }
     });
   });
+
+  // The item sitting in an opened spot is its own click target —
+  // tapping it is the actual "pick it up" action.
+  document.querySelectorAll('.found-item-emoji').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!el.textContent) return; // nothing currently shown here
+
+      // Check capacity BEFORE claiming the item — otherwise a full
+      // backpack would consume it from the world with nowhere to put
+      // it, and it'd just vanish. Leave it sitting there instead.
+      if (game.isInventoryFull()) {
+        showDialog({
+          text: `Backpack full (${MAX_INVENTORY}/${MAX_INVENTORY})! Give something to a friend before picking up more.`,
+          buttons: [{ label: 'Okay', onClick: hideDialog }],
+          autoHideMs: 1800
+        });
+        return;
+      }
+
+      const spotId = el.dataset.spot;
+      const item = getItemAtSpot(spotId); // actually claims it this time
+      if (!item) return;
+
+      el.classList.add('collected'); // pop/fade out of the spot
+      game.addInventory(item);
+      showDialog({
+        text: `You found: ${item.label}! It went in your backpack.`,
+        buttons: [{ label: 'Nice', onClick: hideDialog }],
+        autoHideMs: 1500
+      });
+      // A moment later, reveal whatever's next at that spot (if anything).
+      setTimeout(() => showFoundItem(spotId, peekItemAtSpot(spotId)), 400);
+    });
+  });
+}
+
+// Shows (or clears) the emoji for whatever's currently sitting at a
+// spot's interior. item = the object from room.js, or null/undefined.
+function showFoundItem(spotId, item) {
+  const el = document.querySelector(`.found-item-emoji[data-spot="${spotId}"]`);
+  if (!el) return;
+  el.classList.remove('collected');
+  el.textContent = item ? (ITEM_EMOJI[item.type] || '❔') : '';
 }
 
 // ---------------- Chore hotspots (sweep the floor / wash a plate) ----------------
