@@ -274,6 +274,7 @@ html, body {
   cursor: pointer;
   pointer-events: auto;
   box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: top .6s ease, left .6s ease; /* smooth walk for Darren */
 }
 .character-sprite.recruited { border-color: #06d6a0; }
 .character-sprite .sprite-name {
@@ -284,6 +285,71 @@ html, body {
   padding: 1px 5px;
   border-radius: 4px;
   white-space: nowrap;
+}
+
+/* ---------- Joystick (movement + context action) ---------- */
+#joystick {
+  position: fixed;
+  left: 16px;
+  bottom: 76px; /* clears the backpack bar */
+  z-index: 60;
+  display: grid;
+  grid-template-columns: 48px 48px 48px;
+  grid-template-rows: 48px 48px 48px;
+  gap: 4px;
+  user-select: none;
+}
+.joy-btn {
+  border: none;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  touch-action: manipulation;
+}
+.joy-btn:active { background: rgba(0,0,0,0.8); }
+.joy-up    { grid-column: 2; grid-row: 1; }
+.joy-left  { grid-column: 1; grid-row: 2; }
+.joy-right { grid-column: 3; grid-row: 2; }
+.joy-down  { grid-column: 2; grid-row: 3; }
+.joy-center {
+  grid-column: 2; grid-row: 2;
+  border-radius: 50%;
+  background: #ffd166;
+  color: #222;
+  font-size: 1rem;
+  font-weight: 900;
+}
+.joy-center:active { background: #f4b83c; }
+
+/* ---------- Darren (the player's avatar) ---------- */
+.darren-sprite {
+  background: #2b6cb0 center/cover no-repeat;
+  border-color: #ffd166;
+  border-width: 4px;
+  z-index: 6; /* always readable above other sprites */
+  cursor: default; /* he's not clickable himself, just draggable-by-dblclick */
+}
+.darren-sprite .sprite-name {
+  background: #ffd166;
+  color: #222;
+  font-weight: 700;
+}
+
+/* Glowing ring on whichever character Darren is currently close
+   enough to talk to / give things to — see updateProximity() in main.js. */
+.character-sprite.in-range {
+  box-shadow: 0 0 0 5px #ffd166, 0 0 18px 6px rgba(255,209,102,0.75);
+  animation: in-range-pulse 1.1s ease-in-out infinite;
+}
+@keyframes in-range-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.07); }
 }
 
 /* ---------- Happiness bars ---------- */

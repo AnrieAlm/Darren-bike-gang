@@ -34,6 +34,12 @@ let recruited = new Set();    // set of character ids
 let security = 0;             // 0-100
 let over = false;
 
+// Darren — the player's avatar. Double-click/double-tap anywhere on
+// the floor to walk him there; he has to be standing near a character
+// before you can talk to (or give things to) them.
+let darrenPos = { top: 80, left: 50 }; // % of #characters-layer, starting spot
+const DARREN_PROXIMITY_PX = 150; // how close counts as "near", in screen pixels
+
 // Overall game timer — when it runs out, the game ends and shows
 // whoever's been recruited so far as the final gang (win or not).
 // Change TIME_LIMIT_SECONDS to whatever length feels right.
@@ -194,20 +200,191 @@ function renderCharacterSprites() {
     nameTag.textContent = character.name;
     el.appendChild(nameTag);
 
-    el.addEventListener('click', () => character.onInteract(game));
+    el.addEventListener('click', () => {
+      if (!isDarrenNear(character)) {
+        showDialog({
+          text: `Get Darren closer to ${character.name} first! (double-click/double-tap the floor to move him)`,
+          buttons: [{ label: 'Okay', onClick: hideDialog }],
+          autoHideMs: 1800
+        });
+        return;
+      }
+      character.onInteract(game);
+    });
     el.addEventListener('contextmenu', (e) => {
       e.preventDefault();
+      if (!isDarrenNear(character)) {
+        showDialog({
+          text: `Get Darren closer to ${character.name} first!`,
+          buttons: [{ label: 'Okay', onClick: hideDialog }],
+          autoHideMs: 1800
+        });
+        return;
+      }
       if (typeof character.onRightClick === 'function') {
         character.onRightClick(game, e.clientX, e.clientY);
       }
     });
     layer.appendChild(el);
   });
+
+  renderDarrenSprite();
+  updateProximity();
 }
 
 function updateSpriteState(id) {
   const el = document.getElementById(`sprite-${id}`);
   if (el) el.classList.add('recruited');
+}
+
+// ---------------- Darren (the player's avatar) ----------------
+function renderDarrenSprite() {
+  const layer = document.getElementById('characters-layer');
+  const el = document.createElement('div');
+  el.className = 'character-sprite darren-sprite';
+  el.id = 'darren-sprite';
+  el.style.top = `${darrenPos.top}%`;
+  el.style.left = `${darrenPos.left}%`;
+  el.textContent = '🧑';
+  el.title = 'Darren (you)';
+
+  const nameTag = document.createElement('div');
+  nameTag.className = 'sprite-name';
+  nameTag.textContent = 'Darren';
+  el.appendChild(nameTag);
+
+  layer.appendChild(el);
+}
+
+// Whether Darren is currently standing close enough to a character to
+// interact with them — compared in real screen pixels (via the shared
+// #characters-layer box) so it stays accurate whether zoomed in or not.
+function isDarrenNear(character) {
+  const layer = document.getElementById('characters-layer');
+  if (!layer) return false;
+  const rect = layer.getBoundingClientRect();
+  const dx = (darrenPos.left - parseFloat(character.position.left)) / 100 * rect.width;
+  const dy = (darrenPos.top - parseFloat(character.position.top)) / 100 * rect.height;
+  return Math.hypot(dx, dy) <= DARREN_PROXIMITY_PX;
+}
+
+// Refreshes the glowing "in range" ring on every character sprite —
+// call this after Darren moves, and once on game start.
+function updateProximity() {
+  ALL_CHARACTERS.forEach(character => {
+    const el = document.getElementById(`sprite-${character.id}`);
+    if (el) el.classList.toggle('in-range', isDarrenNear(character));
+  });
+}
+
+// Double-click (desktop) / double-tap (touch, via the same dblclick
+// event — touch-action: manipulation in style.css makes browsers fire
+// it reliably for two quick taps) anywhere on the floor moves Darren
+// there. Position is computed as a % of #characters-layer, matching
+// exactly how every character's own position is defined.
+// Moves Darren to an absolute position (% of #characters-layer) and
+// refreshes who he's now close enough to interact with. Shared by
+// double-click-to-walk and the joystick's step-by-step arrows.
+function setDarrenPosition(leftPct, topPct) {
+  darrenPos = {
+    left: Math.max(2, Math.min(98, leftPct)),
+    top: Math.max(2, Math.min(98, topPct))
+  };
+  const el = document.getElementById('darren-sprite');
+  if (el) {
+    el.style.left = `${darrenPos.left}%`;
+    el.style.top = `${darrenPos.top}%`;
+  }
+  updateProximity();
+}
+
+function wireDarrenMovement() {
+  const svg = document.getElementById('kitchen-svg');
+  const layer = document.getElementById('characters-layer');
+  if (!svg || !layer) return;
+
+  svg.addEventListener('dblclick', (e) => {
+    if (svg.classList.contains('broom-mode')) return; // don't fight with sweeping
+    // Only "walk here" on genuinely empty floor/wall — if this landed
+    // on a door/mess-spot/plate/broom/zoom-zone, that element's own
+    // click handling is clearly what the player meant, not movement.
+    if (e.target.closest('.hotspot, .mess-spot, .dirty-plate, .broom-pickup, .zoom-zone')) return;
+
+    const rect = layer.getBoundingClientRect();
+    const leftPct = ((e.clientX - rect.left) / rect.width) * 100;
+    const topPct = ((e.clientY - rect.top) / rect.height) * 100;
+    setDarrenPosition(leftPct, topPct);
+  });
+}
+
+// ---------------- Joystick ----------------
+const JOY_STEP = 6; // % of the room per arrow press
+
+// Roughly where each hotspot sits, as a % of #characters-layer — used
+// only to tell whether Darren is "at" that hotspot for the joystick's
+// center button. Doesn't need to be pixel-perfect, just close enough
+// to line up with DARREN_PROXIMITY_PX.
+const HOTSPOT_POSITIONS = {
+  fridge:  { left: 74, top: 50 },
+  cabinet: { left: 62, top: 50 },
+  oven:    { left: 52, top: 47 },
+  table:   { left: 21, top: 65 },
+};
+
+function isDarrenNearPoint(point) {
+  const layer = document.getElementById('characters-layer');
+  if (!layer) return false;
+  const rect = layer.getBoundingClientRect();
+  const dx = (darrenPos.left - point.left) / 100 * rect.width;
+  const dy = (darrenPos.top - point.top) / 100 * rect.height;
+  return Math.hypot(dx, dy) <= DARREN_PROXIMITY_PX;
+}
+
+// The center button does whichever of these applies, in order:
+//  1. Standing next to Sharad (not yet recruited) -> say "yo bro"
+//  2. Standing next to any other character -> talk to them (opens
+//     their normal dialogue, which offers a give button if you're
+//     carrying enough of what they need — same as clicking them)
+//  3. Standing at a hotspot with a revealed, not-yet-collected item
+//     -> pick it up
+//  4. Otherwise -> a small "nothing here" nudge
+function pressCenterButton() {
+  if (isDarrenNear(sharad) && !game.isRecruited('sharad') && typeof sharad.sayYoBro === 'function') {
+    sharad.sayYoBro(game);
+    return;
+  }
+
+  const nearCharacter = ALL_CHARACTERS.find(c => isDarrenNear(c));
+  if (nearCharacter) {
+    nearCharacter.onInteract(game);
+    return;
+  }
+
+  for (const spotId of Object.keys(HOTSPOT_POSITIONS)) {
+    if (!isDarrenNearPoint(HOTSPOT_POSITIONS[spotId])) continue;
+    const el = document.querySelector(`.found-item-emoji[data-spot="${spotId}"]`);
+    if (el && el.textContent && !el.classList.contains('collected')) {
+      el.dispatchEvent(new Event('click', { bubbles: true })); // reuse the exact same pickup logic as tapping it directly
+      return;
+    }
+  }
+
+  showDialog({ text: `Nothing to do here.`, buttons: [{ label: 'Okay', onClick: hideDialog }], autoHideMs: 900 });
+}
+
+function wireJoystick() {
+  const up = document.getElementById('joy-up');
+  const down = document.getElementById('joy-down');
+  const left = document.getElementById('joy-left');
+  const right = document.getElementById('joy-right');
+  const center = document.getElementById('joy-center');
+  if (!up || !down || !left || !right || !center) return;
+
+  up.addEventListener('click', () => setDarrenPosition(darrenPos.left, darrenPos.top - JOY_STEP));
+  down.addEventListener('click', () => setDarrenPosition(darrenPos.left, darrenPos.top + JOY_STEP));
+  left.addEventListener('click', () => setDarrenPosition(darrenPos.left - JOY_STEP, darrenPos.top));
+  right.addEventListener('click', () => setDarrenPosition(darrenPos.left + JOY_STEP, darrenPos.top));
+  center.addEventListener('click', pressCenterButton);
 }
 
 // ---------------- Room hotspot clicks (fridge/cabinet/table/oven/window) ----------------
@@ -446,6 +623,7 @@ function startGame() {
   document.getElementById('hud').classList.remove('hidden');
   document.getElementById('happiness-bars').classList.remove('hidden');
   document.getElementById('game-timer').classList.remove('hidden');
+  document.getElementById('joystick').classList.remove('hidden');
   document.getElementById('room').classList.remove('hidden');
 
   renderCharacterSprites();
@@ -463,3 +641,5 @@ wireHotspots();
 wireChoreSpots();
 wireZoom();
 wireBroom();
+wireDarrenMovement();
+wireJoystick();

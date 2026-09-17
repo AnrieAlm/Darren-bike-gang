@@ -58,23 +58,31 @@ const sharad = {
       },
       {
         label: `Yo bro`,
-        onClick: () => {
-          successCount = Math.min(SUCCESSES_NEEDED, successCount + 1);
-          if (successCount >= SUCCESSES_NEEDED) {
-            recruitNow(game);
-          } else {
-            reply(`Yo bro!! 🗣️ (${successCount}/${SUCCESSES_NEEDED})`);
-          }
-        }
+        onClick: () => sharad.sayYoBro(game)
       },
       {
         label: `I love you my best bro`,
         onClick: () => {
           successCount = SUCCESSES_NEEDED;
+          hideContextMenu();
           recruitNow(game);
         }
       }
     ]);
+  },
+
+  // The actual "Yo bro" action — pulled out so both the right-click
+  // menu option and the joystick's center button (see main.js's
+  // pressCenterButton()) can trigger the exact same thing.
+  sayYoBro(game) {
+    if (game.isRecruited('sharad')) return;
+    hideContextMenu();
+    successCount = Math.min(SUCCESSES_NEEDED, successCount + 1);
+    if (successCount >= SUCCESSES_NEEDED) {
+      recruitNow(game);
+    } else {
+      reply(`Yo bro!! 🗣️ (${successCount}/${SUCCESSES_NEEDED})`);
+    }
   },
 
   // Kept so main.js's stopAllTimers()/startGame() calls still work —
