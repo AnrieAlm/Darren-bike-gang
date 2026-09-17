@@ -251,6 +251,90 @@ function wireZoom() {
   });
 }
 
+// ---------------- Broom: pick it up, drag it across the mess ----------------
+// Clicking the broom prop equips/unequips it. While equipped, the CSS
+// in style.css disables clicks on doors/plates/mess-spots so a drag
+// across the counter doesn't accidentally open the fridge — sweeping
+// itself is done purely by distance from the pointer to each
+// not-yet-done mess-spot's own translate(x,y), recomputed on every
+// pointermove. This works correctly even while zoomed in, because
+// getScreenCTM() reflects whatever CSS transform (including the zoom
+// scale) is currently applied.
+function wireBroom() {
+  const svg = document.getElementById('kitchen-svg');
+  const pickup = document.getElementById('broom-pickup');
+  const cursor = document.getElementById('broom-cursor');
+  if (!svg || !pickup || !cursor) return;
+
+  const SWEEP_RADIUS = 55; // SVG units — how close the broom head needs to get
+  let equipped = false;
+  let dragging = false;
+
+  function setEquipped(next) {
+    equipped = next;
+    pickup.classList.toggle('equipped', equipped);
+    svg.classList.toggle('broom-mode', equipped);
+    if (equipped) {
+      showDialog({
+        text: `Picked up the broom. Drag it across the floor mess to sweep!`,
+        buttons: [{ label: 'Got it', onClick: hideDialog }],
+        autoHideMs: 1800
+      });
+    }
+  }
+
+  pickup.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setEquipped(!equipped);
+  });
+
+  function toSvgPoint(evt) {
+    const pt = svg.createSVGPoint();
+    pt.x = evt.clientX;
+    pt.y = evt.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+  function sweepNear(pt) {
+    document.querySelectorAll('.mess-spot:not(.done)').forEach(spot => {
+      const m = (spot.getAttribute('transform') || '').match(/translate\(([-\d.]+)[,\s]+([-\d.]+)\)/);
+      if (!m) return;
+      const dx = pt.x - parseFloat(m[1]);
+      const dy = pt.y - parseFloat(m[2]);
+      if (Math.hypot(dx, dy) > SWEEP_RADIUS) return;
+
+      const taskId = spot.dataset.chore;
+      const chore = game.completeChore(taskId);
+      if (!chore) return;
+      spot.classList.add('done');
+      setTimeout(() => spot.classList.add('faded'), 700);
+    });
+
+    // All done? Auto-drop the broom and let the player know.
+    if (![...document.querySelectorAll('.mess-spot')].some(s => !s.classList.contains('done'))) {
+      if (equipped) {
+        setEquipped(false);
+        showDialog({ text: `Floor's spotless! 🧹✨`, buttons: [{ label: 'Nice', onClick: hideDialog }], autoHideMs: 1500 });
+      }
+    }
+  }
+
+  svg.addEventListener('pointerdown', (e) => {
+    if (!equipped) return;
+    dragging = true;
+    const pt = toSvgPoint(e);
+    cursor.setAttribute('transform', `translate(${pt.x},${pt.y})`);
+    sweepNear(pt);
+  });
+  svg.addEventListener('pointermove', (e) => {
+    if (!equipped) return;
+    const pt = toSvgPoint(e);
+    cursor.setAttribute('transform', `translate(${pt.x},${pt.y})`);
+    if (dragging) sweepNear(pt);
+  });
+  window.addEventListener('pointerup', () => { dragging = false; });
+}
+
 // ---------------- Start / restart ----------------
 function startGame() {
   // Reset state
@@ -281,3 +365,4 @@ document.getElementById('restart-btn-lose').addEventListener('click', () => loca
 wireHotspots();
 wireChoreSpots();
 wireZoom();
+wireBroom();

@@ -200,6 +200,43 @@ html, body {
 }
 .dirty-plate.done .soap-icon { opacity: 1; transform: scale(1) translateY(-14px); }
 
+/* ---------- Broom pickup + drag-to-sweep ---------- */
+.broom-pickup {
+  cursor: pointer;
+  transition: transform .2s ease;
+  transform-box: fill-box; transform-origin: 50% 100%;
+}
+.broom-pickup:hover { transform: rotate(-4deg); }
+.broom-pickup.equipped {
+  transform: rotate(-14deg) translate(-6px, -4px);
+  filter: drop-shadow(0 0 6px #ffe27a);
+}
+.broom-pickup .glow {
+  fill: none; stroke: #ffe27a; stroke-width: 5; opacity: 0;
+  transition: opacity .2s ease; pointer-events: none;
+}
+.broom-pickup:hover .glow,
+.broom-pickup.equipped .glow { opacity: 0.7; }
+
+/* The broom that trails the pointer while equipped */
+#broom-cursor {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+#kitchen-svg.broom-mode #broom-cursor { opacity: 1; }
+/* While the broom is equipped, don't let doors/plates/window steal the
+   drag — only the broom pickup itself (to unequip) and the floor stay
+   clickable. Sweeping itself happens via pointermove in main.js, not
+   through these elements' own click handlers. */
+#kitchen-svg.broom-mode .hotspot,
+#kitchen-svg.broom-mode .dirty-plate,
+#kitchen-svg.broom-mode .mess-spot,
+#kitchen-svg.broom-mode .zoom-zone {
+  pointer-events: none;
+}
+#kitchen-svg.broom-mode .broom-pickup { pointer-events: auto; }
+
 #characters-layer { position: absolute; inset: 0; pointer-events: none; }
 
 .character-sprite {
