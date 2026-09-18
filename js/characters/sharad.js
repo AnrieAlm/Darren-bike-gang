@@ -1,18 +1,17 @@
 // ========================================================
-// sharad.js — recruited through a dialogue menu. However you reach
-// him (click, right-click, or the joystick's center button while
-// standing next to him), you get the same 4 things you can say —
-// each one's second line spells out exactly what it does, so you
-// know before you pick it:
-//   "How's your mum?"          -> just a reply, no effect
-//   "Hi yourself"               -> just a reply, no effect
-//   "Yo bro"                    -> +1 toward recruiting him
-//   "I love you my best bro"    -> maxes him out and recruits him instantly
+// sharad.js — recruited through a dialogue menu. 
+// Sharad now initiates contact: every 30s he sends a notification 
+// giving you a 15s window to click him and reply. 
+// Clicking him outside this 15s window does nothing.
 // ========================================================
 import { showDialog, hideDialog, showContextMenu, hideContextMenu } from '../ui.js';
 
-const SUCCESSES_NEEDED = 10;
+const SUCCESSES_NEEDED = 5;
 let successCount = 0;
+let isWindowOpen = false;
+let isRecruited = false; // Local flag to immediately stop notifications
+let cycleInterval = null;
+let windowTimeout = null;
 
 const sharad = {
   id: 'sharad',
@@ -23,14 +22,13 @@ const sharad = {
   emojiFallback: '🧢',
 
   getProgress(game) {
-    if (game.isRecruited('sharad')) return { done: 1, total: 1 };
+    if (isRecruited || game.isRecruited('sharad')) return { done: 1, total: 1 };
     return { done: successCount, total: SUCCESSES_NEEDED };
   },
 
-  // Click (or the joystick center button when standing next to him):
-  // opens the same menu as right-clicking. See openMenu() below.
+  // Click (or joystick center button): only opens menu if the 15s window is active
   onInteract(game, x, y) {
-    if (game.isRecruited('sharad')) {
+    if (isRecruited || game.isRecruited('sharad')) {
       showDialog({
         portraitUrl: sharad.portraitHappy,
         text: `${sharad.name}: Yo bro, let's get these bikes!`,
@@ -38,19 +36,29 @@ const sharad = {
       });
       return;
     }
+    
+    // If not within the 15s reply window, nothing happens (no menu appears)
+    if (!isWindowOpen) {
+      return;
+    }
+    
     openMenu(game, x, y);
   },
 
-  // Right-click: same menu, kept as an extra way in for anyone used to it.
+  // Right-click: same logic, restricted to the 15s window
   onRightClick(game, x, y) {
-    if (game.isRecruited('sharad')) return;
+    if (isRecruited || game.isRecruited('sharad')) return;
+    
+    if (!isWindowOpen) {
+      return;
+    }
+    
     openMenu(game, x, y);
   },
 
-  // The actual "Yo bro" action — used by the menu option below. Kept
-  // as its own method in case anything else wants to trigger it directly.
+  // The actual "Yo bro" action
   sayYoBro(game) {
-    if (game.isRecruited('sharad')) return;
+    if (isRecruited || game.isRecruited('sharad')) return;
     hideContextMenu();
     successCount = Math.min(SUCCESSES_NEEDED, successCount + 1);
     if (successCount >= SUCCESSES_NEEDED) {
@@ -60,21 +68,67 @@ const sharad = {
     }
   },
 
-  // Kept so main.js's stopAllTimers()/startGame() calls still work —
-  // there's no background timer to run any more, it's all player-driven.
-  start() {},
-  stop() { successCount = 0; }
+  // Starts the 30-second notification cycle
+  start(game) {
+    this.stop(); // Clear any existing timers first
+    
+    cycleInterval = setInterval(() => {
+      // Stop entirely if he's already recruited
+      if (isRecruited || (game && game.isRecruited('sharad'))) {
+        this.stop();
+        return;
+      }
+
+      isWindowOpen = true;
+      
+      // Show the 15s notification
+      showDialog({
+        portraitUrl: sharad.portraitNeutral,
+        text: `${sharad.name}: Yo bro! (You have 15s to reply!)`,
+        buttons: [{ label: 'Close', onClick: hideDialog }],
+        autoHideMs: 20000 // Disappears after 15 seconds
+      });
+
+      // Enforce the 15s window limit
+      windowTimeout = setTimeout(() => {
+        isWindowOpen = false;
+        hideDialog();      // Ensure notification is gone
+        hideContextMenu(); // Force-close menu if player left it open
+      }, 15000);
+    }, 30000); // Triggers every 30 seconds
+  },
+
+  // Cleans up all timers and resets state
+  stop() {
+    successCount = 0;
+    isWindowOpen = false;
+    
+    if (cycleInterval) {
+      clearInterval(cycleInterval);
+      cycleInterval = null;
+    }
+    if (windowTimeout) {
+      clearTimeout(windowTimeout);
+      windowTimeout = null;
+    }
+    
+    hideDialog();
+    hideContextMenu();
+  }
 };
 
-// Shared by onInteract and onRightClick so clicking, right-clicking,
-// and the joystick center button all land on the exact same menu.
-// The title line shows current progress; each option's hint spells
-// out its effect before you click it.
+// Shared by onInteract and onRightClick
 function openMenu(game, x, y) {
+  // Safety check: if window closed right as they clicked, abort
+  if (!isWindowOpen) {
+    hideDialog();
+    return;
+  }
+
   showContextMenu(x, y, [
     {
       label: `How's your mum?`,
-      hint: `Just chatting — no effect`,
+      hint: `What kind of bro are you?`,
       onClick: () => reply(`She's grand, thanks for asking! 😄`)
     },
     {
@@ -84,7 +138,7 @@ function openMenu(game, x, y) {
     },
     {
       label: `Yo bro`,
-      hint: `You are a Bro now`,
+      hint: `You are a Bro now (${successCount + 1}/${SUCCESSES_NEEDED})`,
       onClick: () => sharad.sayYoBro(game)
     },
     {
@@ -110,8 +164,12 @@ function reply(text) {
 }
 
 function recruitNow(game) {
+  isRecruited = true; // Set flag to immediately halt the 30s notification cycle
   hideContextMenu();
+  hideDialog(); // Clear the active notification if it's still on screen
+  
   game.recruit('sharad');
+  
   showDialog({
     portraitUrl: sharad.portraitHappy,
     text: `${sharad.name}: Yooo bro you're solid, I'm in the gang!`,

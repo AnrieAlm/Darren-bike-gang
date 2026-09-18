@@ -2,12 +2,14 @@
 // esgi.js — recruited by giving her Boots the Cat (found via the window)
 // ========================================================
 import { showDialog, hideDialog, promptGiveItem } from '../ui.js';
-
+import { setCatCollected } from '../room.js';
 let catGiven = 0;
 
 // --- PROXIMITY SETTINGS ---
-const WINDOW_POS = { top: 30, left: 30 }; // Matches the new hotspot position
-const PROXIMITY_THRESHOLD = 60; // Increased to 60 for a very generous, easy pickup radius!
+// Matches the new center point we set in main.js
+const WINDOW_POS = { top: 21, left: 24 }; 
+// Increased to 100 so the joystick's wide radius isn't blocked by a strict distance check!
+const PROXIMITY_THRESHOLD = 100; 
 // --------------------------
 
 const esgi = {
@@ -89,6 +91,7 @@ const esgi = {
           }
           document.getElementById('window-cat')?.classList.add('collected'); 
           game.addInventory({ owner: 'esgi', type: 'cat', label: 'Boots the Cat' });
+          setCatCollected();
           hideDialog();
         }
       }]

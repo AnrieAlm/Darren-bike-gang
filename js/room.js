@@ -37,6 +37,10 @@ export const hiddenItems = [
 // Esgi's item isn't hidden in a spot — it's revealed by clicking the window.
 export const windowItem = { owner: 'esgi', type: 'cat', label: 'Boots the Cat' };
 
+// Tracks if the cat has been successfully collected (replaces windowOpened)
+export let catCollected = false;
+export function setCatCollected() { catCollected = true; }
+
 // Tracks which specific item instances (by array index) have already
 // been picked up, so clicking the same spot twice doesn't duplicate items.
 export const pickedUpIndexes = new Set();

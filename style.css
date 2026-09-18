@@ -601,3 +601,29 @@ html, body {
     transform: scale(1.1);
     transition: transform 0.2s ease;
 }
+
+/* ---------- Inventory Proximity Hint (Slots Only) ---------- */
+/* Pulses the individual inventory grid squares when Darren is near 
+   someone who needs an item, leaving the main bar background alone. */
+
+@keyframes inventory-slot-hint {
+  0%, 100% {
+    border-color: rgba(255, 209, 102, 0.3);
+    box-shadow: 0 0 5px rgba(255, 209, 102, 0.1);
+  }
+  50% {
+    border-color: #ffd166;
+    box-shadow: 0 0 15px rgba(255, 209, 102, 0.7), 0 0 8px rgba(255, 209, 102, 0.3) inset;
+  }
+}
+
+/* Target ONLY the slots when the parent bar has the .near-character class */
+#inventory-bar.near-character .inventory-slot {
+  animation: inventory-slot-hint 1.5s infinite ease-in-out;
+}
+
+/* Optional: Make filled slots glow a bit brighter than empty ones 
+   to subtly guide the player to the items they actually hold */
+#inventory-bar.near-character .inventory-slot.filled {
+  animation: inventory-slot-hint 1.2s infinite ease-in-out; /* Slightly faster pulse for filled items */
+}

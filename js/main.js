@@ -14,8 +14,9 @@ import maya from './characters/maya.js';
 import mimi from './characters/mimi.js';
 import {
   hiddenItems, windowItem, getItemAtSpot, peekItemAtSpot, ITEM_EMOJI, MAX_INVENTORY,
-  setWindowOpened, windowOpened, completeChore
+  setCatCollected, catCollected, completeChore // <-- Changed here
 } from './room.js';
+
 import {
   showDialog, hideDialog, setSecurityMeter,
   setRecruitedCount, renderInventory, showWinScreen, showLoseScreen,
@@ -271,11 +272,28 @@ function isDarrenNear(character) {
 
 // Refreshes the glowing "in range" ring on every character sprite —
 // call this after Darren moves, and once on game start.
+// Refreshes the glowing "in range" ring on every character sprite AND 
+// hints to the player to check their inventory if near someone who needs items.
 function updateProximity() {
+  let nearItemGiver = false;
+
   ALL_CHARACTERS.forEach(character => {
     const el = document.getElementById(`sprite-${character.id}`);
-    if (el) el.classList.toggle('in-range', isDarrenNear(character));
+    const isNear = isDarrenNear(character);
+    
+    if (el) el.classList.toggle('in-range', isNear);
+    
+    // If Darren is near an unrecruited character who needs items (not Sharad)
+    if (isNear && !recruited.has(character.id) && character.id !== 'sharad') {
+      nearItemGiver = true;
+    }
   });
+
+  // Toggle the glowing hint on the inventory bar
+  const invBar = document.getElementById('inventory-bar');
+  if (invBar) {
+    invBar.classList.toggle('near-character', nearItemGiver);
+  }
 }
 
 // Double-click (desktop) / double-tap (touch, via the same dblclick
@@ -330,7 +348,7 @@ const HOTSPOT_POSITIONS = {
   cabinet: { left: 62, top: 50 },
   oven:    { left: 52, top: 47 },
   table:   { left: 21, top: 65 },
-  window:  { left: 30, top: 30 }, // 
+   window:  { left: 24, top: 21, radiusPx: 300 }, // 
 };
 
 function isDarrenNearPoint(point) {
@@ -339,7 +357,11 @@ function isDarrenNearPoint(point) {
   const rect = layer.getBoundingClientRect();
   const dx = (darrenPos.left - point.left) / 100 * rect.width;
   const dy = (darrenPos.top - point.top) / 100 * rect.height;
-  return Math.hypot(dx, dy) <= DARREN_PROXIMITY_PX;
+  const distance = Math.hypot(dx, dy);
+  
+  // Use the custom radius if provided (like for the window), otherwise default to 150px
+  const threshold = point.radiusPx || DARREN_PROXIMITY_PX;
+  return distance <= threshold;
 }
 
 // The center button does whichever of these applies, in order:
@@ -422,10 +444,10 @@ function wireHotspots() {
       const spotId = spotEl.dataset.spot;
       spotEl.classList.add('open'); // visual: door swings/sash slides open
 
+ 
       if (spotId === 'window') {
-        if (!windowOpened) {
-          setWindowOpened();
-          esgi.onWindowOpened(game);
+        if (!catCollected) {
+          esgi.onWindowOpened(game); // Let esgi.js handle the distance/inventory checks
         } else {
           showDialog({ text: 'Nothing else out there right now.', buttons: [{ label: 'Close', onClick: hideDialog }] });
         }
