@@ -200,7 +200,7 @@ function renderCharacterSprites() {
     nameTag.textContent = character.name;
     el.appendChild(nameTag);
 
-    el.addEventListener('click', () => {
+    el.addEventListener('click', (e) => {
       if (!isDarrenNear(character)) {
         showDialog({
           text: `Get Darren closer to ${character.name} first! (double-click/double-tap the floor to move him)`,
@@ -209,7 +209,7 @@ function renderCharacterSprites() {
         });
         return;
       }
-      character.onInteract(game);
+      character.onInteract(game, e.clientX, e.clientY);
     });
     el.addEventListener('contextmenu', (e) => {
       e.preventDefault();
@@ -348,15 +348,21 @@ function isDarrenNearPoint(point) {
 //  3. Standing at a hotspot with a revealed, not-yet-collected item
 //     -> pick it up
 //  4. Otherwise -> a small "nothing here" nudge
-function pressCenterButton() {
-  if (isDarrenNear(sharad) && !game.isRecruited('sharad') && typeof sharad.sayYoBro === 'function') {
-    sharad.sayYoBro(game);
-    return;
-  }
+// Screen-space center of Darren's sprite — used to position the
+// context menu sensibly when it's opened via the joystick's center
+// button rather than an actual click (which already has coordinates).
+function getDarrenScreenCenter() {
+  const el = document.getElementById('darren-sprite');
+  if (!el) return { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+  const rect = el.getBoundingClientRect();
+  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+}
 
+function pressCenterButton() {
   const nearCharacter = ALL_CHARACTERS.find(c => isDarrenNear(c));
   if (nearCharacter) {
-    nearCharacter.onInteract(game);
+    const pos = getDarrenScreenCenter();
+    nearCharacter.onInteract(game, pos.x, pos.y);
     return;
   }
 

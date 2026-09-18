@@ -153,19 +153,40 @@ function closeContextMenuOnOutsideClick(e) {
     hideContextMenu();
   }
 }
-export function showContextMenu(x, y, options) {
+// title = optional status line shown above the options (e.g. current
+// progress), so the player can see where they stand before picking.
+// An option can set `hint` for a short second line under its label
+// (e.g. "+1 progress") so the effect is clear before clicking it.
+export function showContextMenu(x, y, options, title) {
   if (!contextMenuEl) return;
   contextMenuEl.innerHTML = '';
+
+  if (title) {
+    const heading = document.createElement('div');
+    heading.className = 'context-menu-title';
+    heading.textContent = title;
+    contextMenuEl.appendChild(heading);
+  }
+
   options.forEach(opt => {
     const btn = document.createElement('button');
-    btn.textContent = opt.label;
+    const labelEl = document.createElement('span');
+    labelEl.className = 'context-menu-label';
+    labelEl.textContent = opt.label;
+    btn.appendChild(labelEl);
+    if (opt.hint) {
+      const hintEl = document.createElement('span');
+      hintEl.className = 'context-menu-hint';
+      hintEl.textContent = opt.hint;
+      btn.appendChild(hintEl);
+    }
     btn.onclick = () => { opt.onClick(); };
     contextMenuEl.appendChild(btn);
   });
 
   // Keep it on-screen even if the click was near an edge.
-  const menuWidth = 220;
-  const menuHeight = options.length * 42 + 12;
+  const menuWidth = 230;
+  const menuHeight = options.length * 46 + (title ? 30 : 0) + 12;
   const left = Math.min(x, window.innerWidth - menuWidth - 10);
   const top = Math.min(y, window.innerHeight - menuHeight - 10);
   contextMenuEl.style.left = `${Math.max(10, left)}px`;

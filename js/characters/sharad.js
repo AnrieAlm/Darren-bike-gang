@@ -1,11 +1,13 @@
 // ========================================================
-// sharad.js — recruited through a right-click dialogue menu. Right-
-// click his sprite to get 4 things you can say:
+// sharad.js — recruited through a dialogue menu. However you reach
+// him (click, right-click, or the joystick's center button while
+// standing next to him), you get the same 4 things you can say —
+// each one's second line spells out exactly what it does, so you
+// know before you pick it:
 //   "How's your mum?"          -> just a reply, no effect
 //   "Hi yourself"               -> just a reply, no effect
 //   "Yo bro"                    -> +1 toward recruiting him
 //   "I love you my best bro"    -> maxes him out and recruits him instantly
-// Left-clicking him just shows his current status.
 // ========================================================
 import { showDialog, hideDialog, showContextMenu, hideContextMenu } from '../ui.js';
 
@@ -25,9 +27,9 @@ const sharad = {
     return { done: successCount, total: SUCCESSES_NEEDED };
   },
 
-  // Left-click: just a status check, doesn't do anything by itself —
-  // the real interaction is the right-click menu below.
-  onInteract(game) {
+  // Click (or the joystick center button when standing next to him):
+  // opens the same menu as right-clicking. See openMenu() below.
+  onInteract(game, x, y) {
     if (game.isRecruited('sharad')) {
       showDialog({
         portraitUrl: sharad.portraitHappy,
@@ -36,44 +38,17 @@ const sharad = {
       });
       return;
     }
-    showDialog({
-      portraitUrl: sharad.portraitNeutral,
-      text: `${sharad.name}: (${successCount}/${SUCCESSES_NEEDED} — right-click me to chat!)`,
-      buttons: [{ label: 'Close', onClick: hideDialog }]
-    });
+    openMenu(game, x, y);
   },
 
-  // Right-click: the dialogue menu that actually recruits him.
+  // Right-click: same menu, kept as an extra way in for anyone used to it.
   onRightClick(game, x, y) {
     if (game.isRecruited('sharad')) return;
-
-    showContextMenu(x, y, [
-      {
-        label: `How's your mum?`,
-        onClick: () => reply(`She's grand, thanks for asking! 😄`)
-      },
-      {
-        label: `Hi yourself`,
-        onClick: () => reply(`Haha, sound.`)
-      },
-      {
-        label: `Yo bro`,
-        onClick: () => sharad.sayYoBro(game)
-      },
-      {
-        label: `I love you my best bro`,
-        onClick: () => {
-          successCount = SUCCESSES_NEEDED;
-          hideContextMenu();
-          recruitNow(game);
-        }
-      }
-    ]);
+    openMenu(game, x, y);
   },
 
-  // The actual "Yo bro" action — pulled out so both the right-click
-  // menu option and the joystick's center button (see main.js's
-  // pressCenterButton()) can trigger the exact same thing.
+  // The actual "Yo bro" action — used by the menu option below. Kept
+  // as its own method in case anything else wants to trigger it directly.
   sayYoBro(game) {
     if (game.isRecruited('sharad')) return;
     hideContextMenu();
@@ -90,6 +65,39 @@ const sharad = {
   start() {},
   stop() { successCount = 0; }
 };
+
+// Shared by onInteract and onRightClick so clicking, right-clicking,
+// and the joystick center button all land on the exact same menu.
+// The title line shows current progress; each option's hint spells
+// out its effect before you click it.
+function openMenu(game, x, y) {
+  showContextMenu(x, y, [
+    {
+      label: `How's your mum?`,
+      hint: `Just chatting — no effect`,
+      onClick: () => reply(`She's grand, thanks for asking! 😄`)
+    },
+    {
+      label: `Hi yourself`,
+      hint: `Just chatting — no effect`,
+      onClick: () => reply(`Haha, sound.`)
+    },
+    {
+      label: `Yo bro`,
+      hint: `+1 toward recruiting him`,
+      onClick: () => sharad.sayYoBro(game)
+    },
+    {
+      label: `I love you my best bro`,
+      hint: `Recruits him instantly!`,
+      onClick: () => {
+        successCount = SUCCESSES_NEEDED;
+        hideContextMenu();
+        recruitNow(game);
+      }
+    }
+  ], `Sharad — ${successCount}/${SUCCESSES_NEEDED}`);
+}
 
 function reply(text) {
   hideContextMenu();

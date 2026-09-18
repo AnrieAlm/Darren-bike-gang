@@ -533,18 +533,39 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  min-width: 200px;
+  min-width: 210px;
+}
+.context-menu-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #ffd166;
+  padding: 4px 10px 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  margin-bottom: 2px;
 }
 #context-menu button {
   font-size: 0.82rem;
   text-align: left;
-  padding: 9px 12px;
+  padding: 8px 12px;
   border-radius: 8px;
   border: none;
   background: #3a3d5c;
   color: #fff;
   cursor: pointer;
   min-height: 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.context-menu-label { font-weight: 600; }
+.context-menu-hint {
+  font-size: 0.68rem;
+  font-weight: 400;
+  opacity: 0.75;
+}
+#context-menu button:hover .context-menu-hint,
+#context-menu button:active .context-menu-hint {
+  opacity: 0.85;
 }
 #context-menu button:hover,
 #context-menu button:active {
