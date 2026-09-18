@@ -572,3 +572,24 @@ html, body {
   background: #ffd166;
   color: #222;
 }
+
+/* Makes the inventory items look clickable when a character is waiting */
+.inventory-bar.selectable .inventory-slot.filled {
+    cursor: pointer;
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+    animation: pulse-select 1.5s infinite alternate;
+}
+
+@keyframes pulse-select {
+    from { box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+    to { box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
+}
+
+/* The specific glow for the item the player actually clicked */
+.inventory-slot.glowing {
+    border: 2px solid gold !important;
+    box-shadow: 0 0 20px gold !important;
+    animation: none;
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
