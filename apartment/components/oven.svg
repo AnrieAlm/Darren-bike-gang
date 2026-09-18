@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 230 300"
+    width="230"
+    height="300">
+
+  <defs>
+
+    <linearGradient
+        id="ovenBody"
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="1">
+
+      <stop offset="0%"
+            stop-color="#343536"/>
+
+      <stop offset="100%"
+            stop-color="#1f2021"/>
+
+    </linearGradient>
+
+    <linearGradient
+        id="glass"
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="1">
+
+      <stop offset="0%"
+            stop-color="#3d4041"/>
+
+      <stop offset="100%"
+            stop-color="#151617"/>
+
+    </linearGradient>
+
+  </defs>
+
+
+  <!-- =========================================================
+       OVEN ROOT
+       IMPORTANT:
+       Keep this ID so main.svg can call:
+
+       components/oven.svg#oven
+       ========================================================= -->
+
+  <g
+      id="oven"
+      class="hotspot"
+      data-spot="oven">
+
+
+    <!-- Invisible game interaction area -->
+
+    <rect
+        class="hit"
+        x="0"
+        y="0"
+        width="230"
+        height="300"
+        fill="#ffffff"
+        opacity="0"/>
+
+
+    <!-- =========================================================
+         MAIN OVEN BODY
+         ========================================================= -->
+
+    <rect
+        x="2"
+        y="2"
+        width="226"
+        height="296"
+        rx="3"
+        fill="url(#ovenBody)"
+        stroke="#171819"
+        stroke-width="4"/>
+
+
+    <!-- =========================================================
+         TOP CONTROL PANEL
+         ========================================================= -->
+
+    <rect
+        x="10"
+        y="12"
+        width="210"
+        height="52"
+        rx="2"
+        fill="#292a2b"/>
+
+
+    <!-- =========================================================
+         FOUR CONTROL KNOBS
+         ========================================================= -->
+
+    <g
+        fill="#777875"
+        stroke="#515251"
+        stroke-width="2">
+
+      <circle
+          cx="38"
+          cy="38"
+          r="10"/>
+
+      <circle
+          cx="87"
+          cy="38"
+          r="10"/>
+
+      <circle
+          cx="136"
+          cy="38"
+          r="10"/>
+
+      <circle
+          cx="185"
+          cy="38"
+          r="10"/>
+
+    </g>
+
+
+    <!-- knob highlights -->
+
+    <g
+        stroke="#a5a6a2"
+        stroke-width="2"
+        stroke-linecap="round">
+
+      <line
+          x1="38"
+          y1="30"
+          x2="38"
+          y2="35"/>
+
+      <line
+          x1="87"
+          y1="30"
+          x2="87"
+          y2="35"/>
+
+      <line
+          x1="136"
+          y1="30"
+          x2="136"
+          y2="35"/>
+
+      <line
+          x1="185"
+          y1="30"
+          x2="185"
+          y2="35"/>
+
+    </g>
+
+
+    <!-- =========================================================
+         OVEN DOOR FRAME
+         ========================================================= -->
+
+    <rect
+        x="13"
+        y="75"
+        width="204"
+        height="140"
+        rx="3"
+        fill="#111213"
+        stroke="#080909"
+        stroke-width="3"/>
+
+
+    <!-- =========================================================
+         OVEN GLASS
+         ========================================================= -->
+
+    <rect
+        x="23"
+        y="85"
+        width="184"
+        height="120"
+        rx="2"
+        fill="url(#glass)"/>
+
+
+    <!-- subtle glass reflection -->
+
+    <path
+        d="
+          M30 91
+          L200 91
+          L165 120
+          L30 120
+          Z"
+        fill="#ffffff"
+        opacity=".045"/>
+
+
+    <!-- =========================================================
+         OVEN HANDLE
+         ========================================================= -->
+
+    <rect
+        x="30"
+        y="205"
+        width="170"
+        height="11"
+        rx="5"
+        fill="#151617"/>
+
+    <rect
+        x="40"
+        y="208"
+        width="150"
+        height="5"
+        rx="2"
+        fill="#555655"/>
+
+
+    <!-- =========================================================
+         LOWER OVEN DRAWER / PANEL
+         ========================================================= -->
+
+    <rect
+        x="13"
+        y="225"
+        width="204"
+        height="62"
+        fill="#242526"
+        stroke="#151617"
+        stroke-width="3"/>
+
+
+    <!-- lower panel highlight -->
+
+    <rect
+        x="24"
+        y="237"
+        width="182"
+        height="3"
+        fill="#4b4c4c"
+        opacity=".55"/>
+
+
+    <!-- =========================================================
+         SUBTLE INTERACTION GLOW
+         ========================================================= -->
+
+    <rect
+        class="glow"
+        x="2"
+        y="2"
+        width="226"
+        height="296"
+        rx="3"
+        fill="none"
+        pointer-events="none"/>
+
+  </g>
+
+</svg>

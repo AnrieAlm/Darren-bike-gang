@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 300 500"
+    width="300"
+    height="500">
+
+  <defs>
+
+    <linearGradient
+        id="chairFrame"
+        x1="0"
+        y1="0"
+        x2="1"
+        y2="0">
+
+      <stop offset="0%"
+            stop-color="#505556"/>
+
+      <stop offset="50%"
+            stop-color="#737777"/>
+
+      <stop offset="100%"
+            stop-color="#45494a"/>
+
+    </linearGradient>
+
+
+    <linearGradient
+        id="chairSeat"
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="1">
+
+      <stop offset="0%"
+            stop-color="#777b7b"/>
+
+      <stop offset="100%"
+            stop-color="#535757"/>
+
+    </linearGradient>
+
+  </defs>
+
+
+  <!-- =========================================================
+       LEFT CHAIR
+       ========================================================= -->
+
+  <g
+      id="left-chair"
+      class="hotspot"
+      data-spot="chair-left">
+
+
+    <!-- interaction -->
+
+    <rect
+        class="hit"
+        x="15"
+        y="0"
+        width="270"
+        height="500"
+        fill="#ffffff"
+        opacity="0"/>
+
+
+    <!-- =======================================================
+         BACK
+         ======================================================= -->
+
+    <path
+        d="
+          M45 25
+          Q150 0 255 25
+          L245 250
+          Q150 275 55 250
+          Z"
+        fill="url(#chairFrame)"
+        stroke="#454849"
+        stroke-width="5"/>
+
+
+    <!-- inner back -->
+
+    <path
+        d="
+          M62 43
+          Q150 22 238 43
+          L231 230
+          Q150 250 69 230
+          Z"
+        fill="#666b6b"/>
+
+
+    <!-- =======================================================
+         PERFORATION PATTERN
+         ======================================================= -->
+
+    <g
+        fill="#363a3a"
+        opacity=".72">
+
+      <circle cx="90" cy="65" r="5"/>
+      <circle cx="120" cy="60" r="5"/>
+      <circle cx="150" cy="58" r="5"/>
+      <circle cx="180" cy="60" r="5"/>
+      <circle cx="210" cy="65" r="5"/>
+
+      <circle cx="105" cy="90" r="5"/>
+      <circle cx="135" cy="86" r="5"/>
+      <circle cx="165" cy="86" r="5"/>
+      <circle cx="195" cy="90" r="5"/>
+
+      <circle cx="90" cy="118" r="5"/>
+      <circle cx="120" cy="114" r="5"/>
+      <circle cx="150" cy="112" r="5"/>
+      <circle cx="180" cy="114" r="5"/>
+      <circle cx="210" cy="118" r="5"/>
+
+      <circle cx="105" cy="145" r="5"/>
+      <circle cx="135" cy="141" r="5"/>
+      <circle cx="165" cy="141" r="5"/>
+      <circle cx="195" cy="145" r="5"/>
+
+      <circle cx="90" cy="173" r="5"/>
+      <circle cx="120" cy="169" r="5"/>
+      <circle cx="150" cy="167" r="5"/>
+      <circle cx="180" cy="169" r="5"/>
+      <circle cx="210" cy="173" r="5"/>
+
+    </g>
+
+
+    <!-- =======================================================
+         SEAT
+         ======================================================= -->
+
+    <path
+        d="
+          M45 245
+          Q150 220 255 245
+          L265 305
+          Q150 330 35 305
+          Z"
+        fill="url(#chairSeat)"
+        stroke="#454849"
+        stroke-width="5"/>
+
+
+    <!-- =======================================================
+         LEGS
+         ======================================================= -->
+
+    <path
+        d="
+          M55 300
+          L72 490
+          L90 490
+          L105 315
+          Z"
+        fill="url(#chairFrame)"/>
+
+
+    <path
+        d="
+          M195 315
+          L210 490
+          L228 490
+          L245 300
+          Z"
+        fill="url(#chairFrame)"/>
+
+
+    <!-- lower support -->
+
+    <path
+        d="
+          M75 400
+          L220 400"
+        fill="none"
+        stroke="#4c5050"
+        stroke-width="9"/>
+
+
+    <!-- interaction outline -->
+
+    <rect
+        class="glow"
+        x="15"
+        y="0"
+        width="270"
+        height="500"
+        fill="none"
+        pointer-events="none"/>
+
+  </g>
+
+
+  <!-- =========================================================
+       RIGHT CHAIR
+       ========================================================= -->
+
+  <g
+      id="right-chair"
+      transform="translate(0 0)"
+      class="hotspot"
+      data-spot="chair-right">
+
+
+    <rect
+        class="hit"
+        x="15"
+        y="0"
+        width="270"
+        height="500"
+        fill="#ffffff"
+        opacity="0"/>
+
+
+    <path
+        d="
+          M45 25
+          Q150 0 255 25
+          L245 250
+          Q150 275 55 250
+          Z"
+        fill="url(#chairFrame)"
+        stroke="#454849"
+        stroke-width="5"/>
+
+
+    <path
+        d="
+          M62 43
+          Q150 22 238 43
+          L231 230
+          Q150 250 69 230
+          Z"
+        fill="#666b6b"/>
+
+
+    <!-- perforations -->
+
+    <g
+        fill="#363a3a"
+        opacity=".72">
+
+      <circle cx="90" cy="65" r="5"/>
+      <circle cx="120" cy="60" r="5"/>
+      <circle cx="150" cy="58" r="5"/>
+      <circle cx="180" cy="60" r="5"/>
+      <circle cx="210" cy="65" r="5"/>
+
+      <circle cx="105" cy="90" r="5"/>
+      <circle cx="135" cy="86" r="5"/>
+      <circle cx="165" cy="86" r="5"/>
+      <circle cx="195" cy="90" r="5"/>
+
+      <circle cx="90" cy="118" r="5"/>
+      <circle cx="120" cy="114" r="5"/>
+      <circle cx="150" cy="112" r="5"/>
+      <circle cx="180" cy="114" r="5"/>
+      <circle cx="210" cy="118" r="5"/>
+
+      <circle cx="105" cy="145" r="5"/>
+      <circle cx="135" cy="141" r="5"/>
+      <circle cx="165" cy="141" r="5"/>
+      <circle cx="195" cy="145" r="5"/>
+
+      <circle cx="90" cy="173" r="5"/>
+      <circle cx="120" cy="169" r="5"/>
+      <circle cx="150" cy="167" r="5"/>
+      <circle cx="180" cy="169" r="5"/>
+      <circle cx="210" cy="173" r="5"/>
+
+    </g>
+
+
+    <!-- seat -->
+
+    <path
+        d="
+          M45 245
+          Q150 220 255 245
+          L265 305
+          Q150 330 35 305
+          Z"
+        fill="url(#chairSeat)"
+        stroke="#454849"
+        stroke-width="5"/>
+
+
+    <!-- legs -->
+
+    <path
+        d="
+          M55 300
+          L72 490
+          L90 490
+          L105 315
+          Z"
+        fill="url(#chairFrame)"/>
+
+
+    <path
+        d="
+          M195 315
+          L210 490
+          L228 490
+          L245 300
+          Z"
+        fill="url(#chairFrame)"/>
+
+
+    <path
+        d="
+          M75 400
+          L220 400"
+        fill="none"
+        stroke="#4c5050"
+        stroke-width="9"/>
+
+
+    <rect
+        class="glow"
+        x="15"
+        y="0"
+        width="270"
+        height="500"
+        fill="none"
+        pointer-events="none"/>
+
+  </g>
+
+</svg>

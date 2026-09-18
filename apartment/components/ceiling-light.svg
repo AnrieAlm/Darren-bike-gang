@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 180 230"
+     width="180"
+     height="230">
+
+  <defs>
+    <!-- Warm glow around the bulb -->
+    <radialGradient id="bulbGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff8cf" stop-opacity=".75"/>
+      <stop offset="55%" stop-color="#fff4b8" stop-opacity=".30"/>
+      <stop offset="100%" stop-color="#fff4b8" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Warm exposed bulb -->
+    <radialGradient id="bulb" cx="42%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#fffef0"/>
+      <stop offset="45%" stop-color="#fff4bc"/>
+      <stop offset="100%" stop-color="#e5cf91"/>
+    </radialGradient>
+  </defs>
+
+  <g id="ceiling-light"
+     class="hotspot"
+     data-spot="ceiling-light">
+
+    <!-- Invisible interaction area -->
+    <rect class="hit"
+          x="10"
+          y="0"
+          width="160"
+          height="230"
+          fill="#fff"
+          opacity="0"/>
+
+    <!-- ========================= -->
+    <!-- BLACK CEILING MOUNT       -->
+    <!-- ========================= -->
+
+    <ellipse cx="90"
+             cy="17"
+             rx="27"
+             ry="13"
+             fill="#090909"/>
+
+    <ellipse cx="90"
+             cy="13"
+             rx="20"
+             ry="8"
+             fill="#171717"/>
+
+
+    <!-- ========================= -->
+    <!-- BLACK HANGING CORD        -->
+    <!-- ========================= -->
+
+    <path d="M90 25
+             C90 39 89 48 90 58"
+          fill="none"
+          stroke="#090909"
+          stroke-width="7"
+          stroke-linecap="round"/>
+
+
+    <!-- ========================= -->
+    <!-- BLACK LAMP SHADE / SOCKET -->
+    <!-- ========================= -->
+
+    <path d="M79 58
+             Q90 52 101 58
+             L99 73
+             Q90 78 81 73
+             Z"
+          fill="#0a0a0a"/>
+
+    <ellipse cx="90"
+             cy="58"
+             rx="11"
+             ry="5"
+             fill="#151515"/>
+
+
+    <!-- ========================= -->
+    <!-- WARM LIGHT GLOW            -->
+    <!-- ========================= -->
+
+    <circle cx="90"
+            cy="112"
+            r="42"
+            fill="url(#bulbGlow)"/>
+
+
+    <!-- ========================= -->
+    <!-- BLACK WIRE-FRAME CAGE      -->
+    <!-- ========================= -->
+
+    <g fill="none"
+       stroke="#090909"
+       stroke-width="2.4"
+       stroke-linecap="round"
+       stroke-linejoin="round">
+
+      <!-- Outer cage -->
+      <path d="M90 70
+               L116 79
+               L143 103
+               L148 137
+               L136 184
+               L105 207
+               L72 212
+               L42 194
+               L35 155
+               L38 118
+               L61 91
+               Z"/>
+
+      <!-- Upper cage -->
+      <path d="M61 91
+               L90 70
+               L116 79
+               L143 103
+               L118 111
+               L90 101
+               L61 91"/>
+
+      <path d="M38 118
+               L61 91
+               L90 101
+               L118 111
+               L143 103"/>
+
+
+      <!-- Middle ring -->
+      <path d="M35 155
+               L90 154
+               L148 137"/>
+
+
+      <!-- Lower ring -->
+      <path d="M42 194
+               L90 185
+               L136 184"/>
+
+
+      <!-- Bottom structure -->
+      <path d="M72 212
+               L90 185
+               L105 207"/>
+
+
+      <!-- Diagonal grid -->
+      <path d="M61 91
+               L38 118
+               L90 154
+               L143 103"/>
+
+      <path d="M38 118
+               L35 155
+               L90 185
+               L148 137"/>
+
+      <path d="M35 155
+               L42 194
+               L90 185
+               L136 184"/>
+
+      <path d="M61 91
+               L90 101
+               L72 212"/>
+
+      <path d="M90 70
+               L90 101
+               L90 154
+               L90 185"/>
+
+      <path d="M116 79
+               L90 101
+               L118 111
+               L90 154
+               L136 184"/>
+
+      <path d="M143 103
+               L118 111
+               L148 137
+               L90 154"/>
+
+      <path d="M118 111
+               L90 185"/>
+
+      <path d="M61 91
+               L90 154
+               L42 194"/>
+
+      <path d="M38 118
+               L90 101"/>
+    </g>
+
+
+    <!-- ========================= -->
+    <!-- EXPOSED GLOWING BULB      -->
+    <!-- ========================= -->
+
+    <ellipse cx="90"
+             cy="119"
+             rx="18"
+             ry="28"
+             fill="url(#bulb)"
+             stroke="#d5c58d"
+             stroke-width="1"/>
+
+
+    <!-- Bulb highlight -->
+    <ellipse cx="84"
+             cy="111"
+             rx="6"
+             ry="11"
+             fill="#fffef3"
+             opacity=".75"/>
+
+
+    <!-- ========================= -->
+    <!-- SMALL BLACK SOCKET        -->
+    <!-- ========================= -->
+
+    <path d="M82 88
+             Q90 84 98 88
+             L97 96
+             Q90 99 83 96
+             Z"
+          fill="#0a0a0a"/>
+
+  </g>
+
+</svg>

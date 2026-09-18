@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="1536"
+    height="1152"
+    viewBox="0 0 1536 1152" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTowOTY0MWIzZS1iY2I5LTRhMWEtYjgyYy0yODM0YzM1ZDJlZTUAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaFooH4rtP6JJV0OoHxyxcWkAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo1M2FmZWIwYi0wZjI0LTRiZDYtYTM2Ny01YTZmNTc5Yjg0ZTlscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoybSNhEQgQ/gt6POhCytlBwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggPkPYOEIWCJ55GFgm2y2tAHL/umQ1TTru5eZtfLZscoKkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaFl4Cv4OXI3F2dqDEcmSf6YAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIJRlxLuoKYFRDHTmy0UebENyzDMptsF/0G4Xk9cT6roRZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GQEBZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjA5NjQxYjNlLWJjYjktNGExYS1iODJjLTI4MzRjMzVkMmVlNS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjNmMzNkOTRkLThhMjctNGJmNy1iYzE5LWQwY2M2ODdhZDI3YXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCA+Q9g4QhYInnkYWCbbLa0Acv+6ZDVNOu7l5m18tmxygqJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggfsWC4cUpVdcvX5xT27KDQ65KysFWwlKUsvSN8oG36NOiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggLXqchi8R6NghEJr5KIiwjMfXk2IG6dEetSP4WRCIZL10Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQJS6+sLUTEWj4emuaPlxiLSRy4p6zteJ0lC/ZexyEIj1pIWzrpnJAE6i4haKuLULKWL8Yboh3ass2Z8RRj+b3u0=</c2pa:manifest></metadata>
+
+  <defs>
+
+    <!-- =========================================================
+         WALL
+         ========================================================= -->
+
+    <linearGradient
+        id="wall"
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="1">
+
+      <stop
+          offset="0%"
+          stop-color="#f3f3ef"/>
+
+      <stop
+          offset="100%"
+          stop-color="#e7e8e5"/>
+
+    </linearGradient>
+
+
+    <!-- =========================================================
+         BLUE/GREY WALL
+         ========================================================= -->
+
+    <linearGradient
+        id="blueWall"
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="1">
+
+      <stop
+          offset="0%"
+          stop-color="#c5ccd0"/>
+
+      <stop
+          offset="100%"
+          stop-color="#b8c2c7"/>
+
+    </linearGradient>
+
+
+    <!-- =========================================================
+         FLOOR
+         ========================================================= -->
+
+    <linearGradient
+        id="floor"
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="1">
+
+      <stop
+          offset="0%"
+          stop-color="#d5c3ae"/>
+
+      <stop
+          offset="100%"
+          stop-color="#bda58b"/>
+
+    </linearGradient>
+
+
+    <!-- =========================================================
+         SOFT SHADOW
+         ========================================================= -->
+
+    <filter
+        id="softShadow"
+        x="-30%"
+        y="-30%"
+        width="160%"
+        height="160%">
+
+      <feGaussianBlur
+          stdDeviation="12"/>
+
+    </filter>
+
+  </defs>
+
+
+  <!-- =========================================================
+       ROOM FOUNDATION
+       ========================================================= -->
+
+  <rect
+      x="0"
+      y="0"
+      width="1536"
+      height="1152"
+      fill="url(#wall)"/>
+
+
+  <!-- Upper wall -->
+
+  <rect
+      x="0"
+      y="0"
+      width="1536"
+      height="185"
+      fill="#f1f1ed"/>
+
+
+  <!-- Blue/grey wall -->
+
+  <rect
+      x="0"
+      y="185"
+      width="1536"
+      height="375"
+      fill="url(#blueWall)"/>
+
+
+  <!-- Lower wall -->
+
+  <rect
+      x="0"
+      y="560"
+      width="1536"
+      height="145"
+      fill="#e9e9e5"/>
+
+
+  <!-- Floor -->
+
+  <rect
+      x="0"
+      y="705"
+      width="1536"
+      height="447"
+      fill="url(#floor)"/>
+
+
+  <!-- =========================================================
+       FLOOR BOARDS
+       ========================================================= -->
+
+  <g
+      stroke="#8f765d"
+      stroke-width="2"
+      opacity=".20">
+
+    <line x1="0" y1="770" x2="1536" y2="770"/>
+    <line x1="0" y1="840" x2="1536" y2="840"/>
+    <line x1="0" y1="910" x2="1536" y2="910"/>
+    <line x1="0" y1="980" x2="1536" y2="980"/>
+    <line x1="0" y1="1050" x2="1536" y2="1050"/>
+    <line x1="0" y1="1120" x2="1536" y2="1120"/>
+
+  </g>
+
+
+  <!-- =========================================================
+       KITCHEN SHADOW
+       ========================================================= -->
+
+  <rect
+      x="0"
+      y="690"
+      width="620"
+      height="40"
+      fill="#555"
+      opacity=".12"
+      filter="url(#softShadow)"/>
+
+
+  <!-- =========================================================
+       KITCHEN
+       ========================================================= -->
+
+  <g id="kitchen">
+
+    <!-- Cabinets -->
+
+    <use
+        href="components/cabinets.svg#cabinets"
+        x="0"
+        y="0"/>
+
+
+    <!-- Oven -->
+
+    <use
+        href="components/oven.svg#oven"
+        x="145"
+        y="445"/>
+
+
+    <!-- Fridge -->
+
+    <use
+        href="components/fridge.svg#fridge"
+        x="390"
+        y="450"/>
+
+
+    <!-- Microwave -->
+
+    <use
+        href="components/microwave.svg#microwave"
+        x="330"
+        y="300"/>
+
+  </g>
+
+
+  <!-- =========================================================
+       WINDOW
+       ========================================================= -->
+
+  <use
+      href="components/window.svg#window"
+      x="1180"
+      y="45"/>
+
+
+  <!-- =========================================================
+       WALL PICTURE
+       ========================================================= -->
+
+  <use
+      href="components/wall-picture.svg#wall-picture"
+      transform="translate(760 105) scale(.72)"/>
+
+
+  <!-- =========================================================
+       UTILITY UNIT
+       ========================================================= -->
+
+  <use
+      href="components/utility-unit.svg#utility-unit"
+      transform="translate(590 330) scale(.72)"/>
+
+
+  <!-- =========================================================
+       SOFA
+       ========================================================= -->
+
+  <use
+      href="components/sofa.svg#sofa"
+      x="780"
+      y="395"/>
+
+
+  <!-- =========================================================
+       CUSHIONS
+       ========================================================= -->
+
+  <use
+      href="components/cushions.svg#cushions"
+      x="780"
+      y="395"/>
+
+
+  <!-- =========================================================
+       TABLE
+       ========================================================= -->
+
+  <use
+      href="components/table.svg#table"
+      x="380"
+      y="535"/>
+
+
+  <!-- =========================================================
+       CHAIRS
+       ========================================================= -->
+
+  <use
+      href="components/chairs.svg#left-chair"
+      x="70"
+      y="660"/>
+
+  <use
+      href="components/chairs.svg#right-chair"
+      x="1080"
+      y="590"/>
+
+
+  <!-- =========================================================
+       CEILING LIGHT
+       
+       NEW BLACK WIRE-FRAME CHANDELIER
+       ========================================================= -->
+
+  <use
+      href="components/ceiling-light.svg#ceiling-light"
+      x="1120"
+      y="0"
+      width="180"
+      height="230"/>
+
+
+  <!-- =========================================================
+       CEILING FIRE / SMOKE ALARM
+       ========================================================= -->
+
+  <g id="ceiling-alarm">
+
+    <ellipse
+        cx="1100"
+        cy="65"
+        rx="22"
+        ry="10"
+        fill="#d8d9d5"
+        stroke="#b5b7b4"
+        stroke-width="2"/>
+
+    <circle
+        cx="1092"
+        cy="65"
+        r="3"
+        fill="#777b78"/>
+
+    <circle
+        cx="1106"
+        cy="65"
+        r="3"
+        fill="#777b78"/>
+
+  </g>
+
+
+  <!-- =========================================================
+       WINDOW BLIND
+       ========================================================= -->
+
+  <g id="window-blind">
+
+    <rect
+        x="1190"
+        y="85"
+        width="325"
+        height="48"
+        fill="#74869b"/>
+
+    <g
+        stroke="#66788b"
+        stroke-width="4"
+        opacity=".65">
+
+      <line x1="1210" y1="90" x2="1210" y2="128"/>
+      <line x1="1240" y1="90" x2="1240" y2="128"/>
+      <line x1="1270" y1="90" x2="1270" y2="128"/>
+      <line x1="1300" y1="90" x2="1300" y2="128"/>
+      <line x1="1330" y1="90" x2="1330" y2="128"/>
+
+    </g>
+
+  </g>
+
+
+  <!-- =========================================================
+       NATURAL WINDOW LIGHT
+       ========================================================= -->
+
+  <path
+      d="
+        M1090 400
+        L1500 400
+        L1536 780
+        L950 780
+        Z"
+      fill="#ffffff"
+      opacity=".075"
+      pointer-events="none"/>
+
+
+  <!-- =========================================================
+       OVERALL LIGHT
+       ========================================================= -->
+
+  <rect
+      x="0"
+      y="0"
+      width="1536"
+      height="1152"
+      fill="#ffffff"
+      opacity=".025"
+      pointer-events="none"/>
+
+
+  <!-- =========================================================
+       ROOM EDGE
+       ========================================================= -->
+
+  <rect
+      x="6"
+      y="6"
+      width="1524"
+      height="1140"
+      fill="none"
+      stroke="#555"
+      stroke-width="12"
+      opacity=".08"
+      pointer-events="none"/>
+
+</svg>

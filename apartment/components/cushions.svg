@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 170 130"
+    width="170"
+    height="130">
+
+  <defs>
+
+    <linearGradient
+        id="cushion"
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="1">
+
+      <stop offset="0%"
+            stop-color="#e7c968"/>
+
+      <stop offset="100%"
+            stop-color="#c5a94d"/>
+
+    </linearGradient>
+
+  </defs>
+
+
+  <g id="cushion">
+
+
+    <!-- =======================================================
+         CUSHION
+         ======================================================= -->
+
+    <path
+        d="
+          M18 28
+          Q20 12 38 8
+          Q85 0 132 8
+          Q150 12 152 28
+          L147 102
+          Q143 118 126 121
+          L43 121
+          Q25 118 21 102
+          Z"
+        fill="url(#cushion)"
+        stroke="#aa903e"
+        stroke-width="4"/>
+
+
+    <!-- fabric highlight -->
+
+    <path
+        d="
+          M32 25
+          Q75 12 130 24"
+        fill="none"
+        stroke="#f5df91"
+        stroke-width="5"
+        opacity=".45"/>
+
+
+    <!-- subtle seam -->
+
+    <path
+        d="
+          M25 96
+          Q85 112 145 96"
+        fill="none"
+        stroke="#ad9343"
+        stroke-width="3"
+        opacity=".55"/>
+
+  </g>
+
+</svg>
