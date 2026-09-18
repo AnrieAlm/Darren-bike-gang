@@ -15,22 +15,23 @@ export const hiddenItems = [
   { spotId: 'oven',    owner: 'grace', type: 'juice', label: 'Grape Juice Carton' },
 
   // Mimi's movie ticket (needs 1) — second thing you find in the
-  // cabinet, ahead of the waffle backlog so it doesn't take forever.
+  // cabinet, ahead of the other items queued there so it doesn't take forever.
   { spotId: 'cabinet', owner: 'mimi', type: 'ticket', label: 'Movie Ticket' },
 
-  // Waffles — shared pool, not earmarked for anyone. 10 total hidden
-  // around the flat; Boris and Maya each need 5, but any waffle you've
-  // collected can go to whichever of them you hand it to first.
-  { spotId: 'fridge',  owner: 'shared', type: 'waffle', label: 'Waffle' },
-  { spotId: 'cabinet', owner: 'shared', type: 'waffle', label: 'Waffle' },
-  { spotId: 'table',   owner: 'shared', type: 'waffle', label: 'Waffle' },
-  { spotId: 'oven',    owner: 'shared', type: 'waffle', label: 'Waffle' },
-  { spotId: 'fridge',  owner: 'shared', type: 'waffle', label: 'Waffle' },
-  { spotId: 'cabinet', owner: 'shared', type: 'waffle', label: 'Waffle' },
-  { spotId: 'table',   owner: 'shared', type: 'waffle', label: 'Waffle' },
-  { spotId: 'oven',    owner: 'shared', type: 'waffle', label: 'Waffle' },
-  { spotId: 'fridge',  owner: 'shared', type: 'waffle', label: 'Waffle' },
-  { spotId: 'cabinet', owner: 'shared', type: 'waffle', label: 'Waffle' },
+  // Maya's waffles (needs 5) — hers specifically, not shared with Boris.
+  { spotId: 'fridge',  owner: 'maya', type: 'waffle', label: 'Waffle' },
+  { spotId: 'cabinet', owner: 'maya', type: 'waffle', label: 'Waffle' },
+  { spotId: 'table',   owner: 'maya', type: 'waffle', label: 'Waffle' },
+  { spotId: 'oven',    owner: 'maya', type: 'waffle', label: 'Waffle' },
+  { spotId: 'fridge',  owner: 'maya', type: 'waffle', label: 'Waffle' },
+
+  // Boris's lollipops (needs 5) — his own item, separate from Maya's
+  // waffles, so there's no mix-up about which is meant for whom.
+  { spotId: 'cabinet', owner: 'boris', type: 'lollipop', label: 'Lollipop' },
+  { spotId: 'table',   owner: 'boris', type: 'lollipop', label: 'Lollipop' },
+  { spotId: 'oven',    owner: 'boris', type: 'lollipop', label: 'Lollipop' },
+  { spotId: 'fridge',  owner: 'boris', type: 'lollipop', label: 'Lollipop' },
+  { spotId: 'cabinet', owner: 'boris', type: 'lollipop', label: 'Lollipop' },
 ];
 
 // Esgi's item isn't hidden in a spot — it's revealed by clicking the window.
@@ -69,6 +70,7 @@ export const ITEM_EMOJI = {
   waffle: '🧇',
   cat: '🐈‍⬛',
   ticket: '🎫',
+  lollipop: '🍭',
 };
 
 // The backpack only holds this many items at once (regardless of mix —

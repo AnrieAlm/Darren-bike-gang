@@ -1,7 +1,6 @@
 // ========================================================
-// maya.js — recruited by handing over 5 waffles. Waffles are a
-// shared pool (see room.js) — any waffle found anywhere counts,
-// it doesn't matter whether it was "meant" for her or Boris.
+// maya.js — recruited by handing over 5 waffles (hers specifically,
+// separate from Boris's lollipops — see room.js).
 // ========================================================
 import { showDialog, hideDialog } from '../ui.js';
 
@@ -17,7 +16,7 @@ const maya = {
 
   getProgress(game) {
     if (game.isRecruited('maya')) return { done: 1, total: 1 };
-    return { done: Math.min(game.getInventoryCount('shared', 'waffle'), WAFFLES_NEEDED), total: WAFFLES_NEEDED };
+    return { done: Math.min(game.getInventoryCount('maya', 'waffle'), WAFFLES_NEEDED), total: WAFFLES_NEEDED };
   },
 
   onInteract(game) {
@@ -30,7 +29,7 @@ const maya = {
       return;
     }
 
-    const have = game.getInventoryCount('shared', 'waffle');
+    const have = game.getInventoryCount('maya', 'waffle');
 
     if (have < WAFFLES_NEEDED) {
       showDialog({
@@ -41,7 +40,7 @@ const maya = {
       return;
     }
 
-    game.removeInventory('shared', 'waffle', WAFFLES_NEEDED);
+    game.removeInventory('maya', 'waffle', WAFFLES_NEEDED);
     game.recruit('maya');
     showDialog({
       portraitUrl: maya.portraitHappy,

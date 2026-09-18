@@ -1,11 +1,10 @@
 // ========================================================
-// boris.js — recruited by handing over 5 waffles. Waffles are a
-// shared pool (see room.js) — any waffle found anywhere counts,
-// it doesn't matter whether it was "meant" for him or Maya.
+// boris.js — recruited by handing over 5 lollipops (his own item,
+// separate from Maya's waffles — see room.js).
 // ========================================================
 import { showDialog, hideDialog } from '../ui.js';
 
-const WAFFLES_NEEDED = 5;
+const LOLLIPOPS_NEEDED = 5;
 
 const boris = {
   id: 'boris',
@@ -13,11 +12,11 @@ const boris = {
   position: { top: '75%', left: '60%' },
   portraitNeutral: '../assets/boris_neutral.png',
   portraitHappy: '../assets/boris_happy.png',
-  emojiFallback: '🧇',
+  emojiFallback: '🍭',
 
   getProgress(game) {
     if (game.isRecruited('boris')) return { done: 1, total: 1 };
-    return { done: Math.min(game.getInventoryCount('shared', 'waffle'), WAFFLES_NEEDED), total: WAFFLES_NEEDED };
+    return { done: Math.min(game.getInventoryCount('boris', 'lollipop'), LOLLIPOPS_NEEDED), total: LOLLIPOPS_NEEDED };
   },
 
   onInteract(game) {
@@ -30,18 +29,18 @@ const boris = {
       return;
     }
 
-    const have = game.getInventoryCount('shared', 'waffle');
+    const have = game.getInventoryCount('boris', 'lollipop');
 
-    if (have < WAFFLES_NEEDED) {
+    if (have < LOLLIPOPS_NEEDED) {
       showDialog({
         portraitUrl: boris.portraitNeutral,
-        text: `${boris.name}: I could really go for a waffle right now. (${have}/${WAFFLES_NEEDED} found)`,
+        text: `${boris.name}: I could really go for a lollipop right now. (${have}/${LOLLIPOPS_NEEDED} found)`,
         buttons: [{ label: 'Close', onClick: hideDialog }]
       });
       return;
     }
 
-    game.removeInventory('shared', 'waffle', WAFFLES_NEEDED);
+    game.removeInventory('boris', 'lollipop', LOLLIPOPS_NEEDED);
     game.recruit('boris');
     showDialog({
       portraitUrl: boris.portraitHappy,
