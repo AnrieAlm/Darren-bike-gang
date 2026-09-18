@@ -50,22 +50,14 @@ const grace = {
       return;
     }
 
+    // Carrying enough — hand it straight over, no extra confirm click.
+    game.removeInventory('grace', 'juice', JUICE_NEEDED);
+    game.recruit('grace');
     showDialog({
-      portraitUrl: grace.portraitNeutral,
-      text: `${grace.name}: Is that all my grape juice?!`,
-      buttons: [{
-        label: 'Give her the juice',
-        onClick: () => {
-          game.removeInventory('grace', 'juice', JUICE_NEEDED);
-          game.recruit('grace');
-          showDialog({
-            portraitUrl: grace.portraitHappy,
-            text: `${grace.name}: You're a legend, I'm in!`,
-            buttons: [{ label: 'Close', onClick: hideDialog }],
-            autoHideMs: 2500
-          });
-        }
-      }]
+      portraitUrl: grace.portraitHappy,
+      text: `${grace.name}: You're a legend, I'm in!`,
+      buttons: [{ label: 'Close', onClick: hideDialog }],
+      autoHideMs: 2500
     });
   }
 };

@@ -41,22 +41,13 @@ const maya = {
       return;
     }
 
+    game.removeInventory('shared', 'waffle', WAFFLES_NEEDED);
+    game.recruit('maya');
     showDialog({
-      portraitUrl: maya.portraitNeutral,
-      text: `${maya.name}: You remembered my waffles!`,
-      buttons: [{
-        label: 'Give her the waffles',
-        onClick: () => {
-          game.removeInventory('shared', 'waffle', WAFFLES_NEEDED);
-          game.recruit('maya');
-          showDialog({
-            portraitUrl: maya.portraitHappy,
-            text: `${maya.name}: Okay, I'm in. Let's steal some bikes.`,
-            buttons: [{ label: 'Close', onClick: hideDialog }],
-            autoHideMs: 2500
-          });
-        }
-      }]
+      portraitUrl: maya.portraitHappy,
+      text: `${maya.name}: Okay, I'm in. Let's steal some bikes.`,
+      buttons: [{ label: 'Close', onClick: hideDialog }],
+      autoHideMs: 2500
     });
   }
 };

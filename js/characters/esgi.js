@@ -39,22 +39,13 @@ const esgi = {
       return;
     }
 
+    game.removeInventory('esgi', 'cat', 1);
+    game.recruit('esgi');
     showDialog({
-      portraitUrl: esgi.portraitNeutral,
-      text: `${esgi.name}: Wait... is that BOOTS?!`,
-      buttons: [{
-        label: 'Give her the cat',
-        onClick: () => {
-          game.removeInventory('esgi', 'cat', 1);
-          game.recruit('esgi');
-          showDialog({
-            portraitUrl: esgi.portraitHappy,
-            text: `${esgi.name}: I'm in! Anything for Boots. 🐱`,
-            buttons: [{ label: 'Close', onClick: hideDialog }],
-            autoHideMs: 2500
-          });
-        }
-      }]
+      portraitUrl: esgi.portraitHappy,
+      text: `${esgi.name}: I'm in! Anything for Boots. 🐱`,
+      buttons: [{ label: 'Close', onClick: hideDialog }],
+      autoHideMs: 2500
     });
   },
 

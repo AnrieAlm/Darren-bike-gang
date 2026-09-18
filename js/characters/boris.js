@@ -41,22 +41,13 @@ const boris = {
       return;
     }
 
+    game.removeInventory('shared', 'waffle', WAFFLES_NEEDED);
+    game.recruit('boris');
     showDialog({
-      portraitUrl: boris.portraitNeutral,
-      text: `${boris.name}: Are those all for me?`,
-      buttons: [{
-        label: 'Give him the waffles',
-        onClick: () => {
-          game.removeInventory('shared', 'waffle', WAFFLES_NEEDED);
-          game.recruit('boris');
-          showDialog({
-            portraitUrl: boris.portraitHappy,
-            text: `${boris.name}: Best gift ever. I'm in the gang!`,
-            buttons: [{ label: 'Close', onClick: hideDialog }],
-            autoHideMs: 2500
-          });
-        }
-      }]
+      portraitUrl: boris.portraitHappy,
+      text: `${boris.name}: Best gift ever. I'm in the gang!`,
+      buttons: [{ label: 'Close', onClick: hideDialog }],
+      autoHideMs: 2500
     });
   }
 };

@@ -38,22 +38,13 @@ const mimi = {
       return;
     }
 
+    game.removeInventory('mimi', 'ticket', 1);
+    game.recruit('mimi');
     showDialog({
-      portraitUrl: mimi.portraitNeutral,
-      text: `${mimi.name}: Wait, is that a movie ticket?!`,
-      buttons: [{
-        label: 'Give her the ticket',
-        onClick: () => {
-          game.removeInventory('mimi', 'ticket', 1);
-          game.recruit('mimi');
-          showDialog({
-            portraitUrl: mimi.portraitHappy,
-            text: `${mimi.name}: Yesss! Okay, I'm in the gang!`,
-            buttons: [{ label: 'Close', onClick: hideDialog }],
-            autoHideMs: 2500
-          });
-        }
-      }]
+      portraitUrl: mimi.portraitHappy,
+      text: `${mimi.name}: Yesss! Okay, I'm in the gang!`,
+      buttons: [{ label: 'Close', onClick: hideDialog }],
+      autoHideMs: 2500
     });
   }
 };
