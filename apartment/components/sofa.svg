@@ -13,7 +13,7 @@
          ========================================================= -->
 
     <linearGradient
-        id="sofaFabric"
+        id="sofa-fabric"
         x1="0"
         y1="0"
         x2="0"
@@ -29,7 +29,7 @@
 
 
     <linearGradient
-        id="sofaSeat"
+        id="sofa-seat"
         x1="0"
         y1="0"
         x2="0"
@@ -45,7 +45,7 @@
 
 
     <linearGradient
-        id="sofaSide"
+        id="sofa-side"
         x1="0"
         y1="0"
         x2="1"
@@ -102,7 +102,7 @@
           L75 400
           Q35 390 35 355
           Z"
-        fill="url(#sofaFabric)"
+        fill="url(#sofa-fabric)"
         stroke="#65696b"
         stroke-width="5"/>
 
@@ -121,7 +121,7 @@
           L55 375
           Q35 365 35 340
           Z"
-        fill="url(#sofaSide)"
+        fill="url(#sofa-side)"
         stroke="#626668"
         stroke-width="5"/>
 
@@ -153,7 +153,7 @@
           L600 385
           Q585 370 585 345
           Z"
-        fill="url(#sofaSide)"
+        fill="url(#sofa-side)"
         stroke="#626668"
         stroke-width="5"/>
 
@@ -191,7 +191,7 @@
           L150 350
           Q130 345 125 325
           Z"
-        fill="url(#sofaSeat)"
+        fill="url(#sofa-seat)"
         stroke="#777b7d"
         stroke-width="4"/>
 
@@ -225,7 +225,7 @@
           L380 350
           Q360 345 355 325
           Z"
-        fill="url(#sofaSeat)"
+        fill="url(#sofa-seat)"
         stroke="#777b7d"
         stroke-width="4"/>
 
@@ -342,7 +342,7 @@
           L590 405
           Q565 395 565 370
           Z"
-        fill="url(#sofaFabric)"
+        fill="url(#sofa-fabric)"
         stroke="#65696b"
         stroke-width="5"/>
 
@@ -377,7 +377,7 @@
           L600 375
           Q580 368 575 350
           Z"
-        fill="url(#sofaSeat)"
+        fill="url(#sofa-seat)"
         stroke="#777b7d"
         stroke-width="4"/>
 

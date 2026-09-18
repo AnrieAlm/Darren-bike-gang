@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 145 300"
+    width="145"
+    height="300">
+
+  <defs>
+
+    <linearGradient
+        id="bin-body"
+        x1="0"
+        y1="0"
+        x2="1"
+        y2="0">
+
+      <stop offset="0%"
+            stop-color="#e9eae6"/>
+
+      <stop offset="50%"
+            stop-color="#f6f6f2"/>
+
+      <stop offset="100%"
+            stop-color="#dcdedb"/>
+
+    </linearGradient>
+
+  </defs>
+
+
+  <!-- =========================================================
+       UTILITY UNIT ROOT
+       Small bin + leaning broom, tucked in the gap between the
+       oven cabinet and the fridge, as in the reference photo.
+       ========================================================= -->
+
+  <g
+      id="utility-unit"
+      class="hotspot"
+      data-spot="utility-unit">
+
+
+    <!-- Game interaction area -->
+
+    <rect
+        class="hit"
+        x="0"
+        y="0"
+        width="145"
+        height="300"
+        fill="#ffffff"
+        opacity="0"/>
+
+
+    <!-- =========================================================
+         SMALL BIN
+         ========================================================= -->
+
+    <path
+        d="
+          M18 210
+          L100 210
+          L92 292
+          L26 292
+          Z"
+        fill="url(#bin-body)"
+        stroke="#c3c5c1"
+        stroke-width="3"/>
+
+
+    <!-- bin lid -->
+
+    <ellipse
+        cx="59"
+        cy="210"
+        rx="42"
+        ry="10"
+        fill="#3f8f5f"/>
+
+    <ellipse
+        cx="59"
+        cy="207"
+        rx="34"
+        ry="7"
+        fill="#4fa870"/>
+
+
+    <!-- lid flap -->
+
+    <path
+        d="
+          M35 205
+          Q59 192 83 205
+          Q59 200 35 205
+          Z"
+        fill="#3f8f5f"
+        opacity=".8"/>
+
+
+    <!-- vertical shading -->
+
+    <rect
+        x="24"
+        y="216"
+        width="10"
+        height="68"
+        fill="#00000010"/>
+
+
+    <!-- =========================================================
+         LEANING BROOM
+         ========================================================= -->
+
+    <g transform="rotate(9 110 150)">
+
+      <!-- handle -->
+
+      <rect
+          x="106"
+          y="10"
+          width="7"
+          height="235"
+          rx="3"
+          fill="#8a5a34"/>
+
+      <rect
+          x="107"
+          y="10"
+          width="2.5"
+          height="235"
+          fill="#c99a68"
+          opacity=".6"/>
+
+
+      <!-- ferrule -->
+
+      <rect
+          x="103"
+          y="238"
+          width="13"
+          height="14"
+          fill="#8d8f8c"/>
+
+
+      <!-- bristles -->
+
+      <path
+          d="
+            M92 252
+            L127 252
+            L133 292
+            L86 292
+            Z"
+          fill="#d7a23c"/>
+
+      <g
+          stroke="#b8862c"
+          stroke-width="1.6"
+          opacity=".6">
+
+        <line x1="95" y1="256" x2="90" y2="290"/>
+        <line x1="103" y1="256" x2="100" y2="291"/>
+        <line x1="111" y1="256" x2="111" y2="292"/>
+        <line x1="119" y1="256" x2="122" y2="291"/>
+        <line x1="127" y1="256" x2="130" y2="290"/>
+
+      </g>
+
+    </g>
+
+
+    <!-- floor contact shadow -->
+
+    <ellipse
+        cx="70"
+        cy="294"
+        rx="55"
+        ry="8"
+        fill="#000000"
+        opacity=".12"/>
+
+
+    <!-- =========================================================
+         INTERACTION GLOW
+         ========================================================= -->
+
+    <rect
+        class="glow"
+        x="0"
+        y="0"
+        width="145"
+        height="300"
+        fill="none"
+        pointer-events="none"/>
+
+  </g>
+
+</svg>

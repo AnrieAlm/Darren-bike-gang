@@ -2,81 +2,91 @@
 
 <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 150 190"
-    width="150"
-    height="190">
+    viewBox="0 0 195 155"
+    width="195"
+    height="155">
+
+  <!-- =========================================================
+       WALL PICTURE — landscape framed abstract print
+       (tan/beige geometric shapes, light wood frame),
+       matching the picture above the sofa in the photo.
+       ========================================================= -->
 
   <g id="wall-picture">
 
 
-    <!-- =======================================================
-         SHADOW
-         ======================================================= -->
+    <!-- shadow -->
 
     <rect
-        x="13"
-        y="13"
-        width="124"
-        height="164"
-        fill="#aeb1ae"
-        opacity=".25"/>
+        x="9"
+        y="9"
+        width="182"
+        height="142"
+        fill="#8a8a86"
+        opacity=".2"/>
 
 
-    <!-- =======================================================
-         FRAME
-         ======================================================= -->
+    <!-- frame -->
 
     <rect
-        x="5"
-        y="5"
-        width="125"
-        height="165"
-        fill="#9c7958"
-        stroke="#73583f"
+        x="3"
+        y="3"
+        width="182"
+        height="142"
+        fill="#c3a37a"
+        stroke="#96754f"
         stroke-width="4"/>
 
 
-    <!-- inner frame -->
+    <!-- mat / inner frame -->
 
     <rect
-        x="16"
-        y="16"
-        width="103"
-        height="143"
-        fill="#e4e6e2"/>
+        x="15"
+        y="15"
+        width="158"
+        height="118"
+        fill="#f1ede2"/>
 
 
-    <!-- =======================================================
-         SIMPLE ART
-         ======================================================= -->
+    <!-- =========================================================
+         ABSTRACT ARTWORK — overlapping angular tan/grey shapes,
+         echoing the mountain-like print in the photo
+         ========================================================= -->
 
     <path
         d="
-          M20 135
-          Q45 95 65 115
-          Q80 130 100 95
-          Q108 80 115 72
-          L115 155
-          L20 155
+          M28 118
+          L58 55
+          L82 90
+          L102 40
+          L118 62
+          L140 32
+          L160 118
           Z"
-        fill="#b8c4c0"/>
+        fill="#cf9f56"
+        opacity=".85"/>
 
+    <path
+        d="
+          M28 122
+          L70 78
+          L104 122
+          Z"
+        fill="#8d7c62"
+        opacity=".8"/>
 
     <circle
-        cx="83"
-        cy="58"
-        r="18"
-        fill="#d8c98f"/>
-
+        cx="132"
+        cy="46"
+        r="12"
+        fill="#dccf9d"/>
 
     <path
-        d="
-          M20 125
-          Q48 100 70 112"
+        d="M32 100 Q60 68 88 84"
         fill="none"
-        stroke="#899d99"
-        stroke-width="8"/>
-
+        stroke="#a9bcb4"
+        stroke-width="5"
+        opacity=".7"/>
 
   </g>
 

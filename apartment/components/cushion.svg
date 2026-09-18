@@ -9,7 +9,7 @@
   <defs>
 
     <linearGradient
-        id="cushion"
+        id="cushion-fill"
         x1="0"
         y1="0"
         x2="0"
@@ -44,7 +44,7 @@
           L43 121
           Q25 118 21 102
           Z"
-        fill="url(#cushion)"
+        fill="url(#cushion-fill)"
         stroke="#aa903e"
         stroke-width="4"/>
 

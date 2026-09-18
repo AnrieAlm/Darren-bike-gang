@@ -2,54 +2,62 @@
 
 <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 355 385"
-    width="355"
-    height="385">
+    viewBox="0 0 340 400"
+    width="340"
+    height="400">
 
   <defs>
 
-    <!-- =========================================================
-         OUTDOOR LIGHT
-         ========================================================= -->
-
     <linearGradient
-        id="windowSky"
+        id="window-sky"
         x1="0"
         y1="0"
         x2="0"
         y2="1">
 
       <stop offset="0%"
-            stop-color="#f8fcfc"/>
+            stop-color="#fbfdfd"/>
 
       <stop offset="65%"
-            stop-color="#dceff1"/>
+            stop-color="#e4f1f2"/>
 
       <stop offset="100%"
-            stop-color="#c5dfe2"/>
+            stop-color="#cfe6e8"/>
 
     </linearGradient>
 
 
-    <!-- =========================================================
-         WOOD FRAME
-         ========================================================= -->
-
     <linearGradient
-        id="woodFrame"
+        id="window-frame"
         x1="0"
         y1="0"
         x2="1"
         y2="0">
 
       <stop offset="0%"
-            stop-color="#a77d54"/>
+            stop-color="#d9cfb8"/>
 
       <stop offset="45%"
-            stop-color="#c19a6d"/>
+            stop-color="#ece4d0"/>
 
       <stop offset="100%"
-            stop-color="#956d49"/>
+            stop-color="#cabfa3"/>
+
+    </linearGradient>
+
+
+    <linearGradient
+        id="window-blind"
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="1">
+
+      <stop offset="0%"
+            stop-color="#8296ab"/>
+
+      <stop offset="100%"
+            stop-color="#6d8195"/>
 
     </linearGradient>
 
@@ -57,7 +65,8 @@
 
 
   <!-- =========================================================
-       WINDOW ROOT
+       WINDOW — tall wood-framed sash window with a blue-grey
+       roller blind pulled up to the top, as in the photo.
        ========================================================= -->
 
   <g
@@ -74,8 +83,8 @@
         class="hit"
         x="0"
         y="0"
-        width="355"
-        height="385"
+        width="340"
+        height="400"
         fill="#ffffff"
         opacity="0"/>
 
@@ -87,22 +96,22 @@
     <rect
         x="0"
         y="0"
-        width="355"
-        height="370"
-        fill="#e7e7e2"/>
+        width="340"
+        height="380"
+        fill="#e9ebee"/>
 
 
     <!-- =========================================================
-         OUTER WOOD FRAME
+         OUTER FRAME — light, weathered cream/wood tone
          ========================================================= -->
 
     <rect
-        x="20"
-        y="35"
-        width="315"
-        height="315"
-        fill="url(#woodFrame)"
-        stroke="#8e6746"
+        x="15"
+        y="25"
+        width="310"
+        height="325"
+        fill="#e7e0cf"
+        stroke="#b7a97e"
         stroke-width="3"/>
 
 
@@ -111,83 +120,95 @@
          ========================================================= -->
 
     <rect
-        x="35"
-        y="55"
-        width="285"
-        height="255"
-        fill="url(#windowSky)"/>
+        x="32"
+        y="42"
+        width="276"
+        height="280"
+        fill="url(#window-sky)"/>
 
 
-    <!-- =========================================================
-         BRIGHT OUTSIDE
-         ========================================================= -->
+    <!-- bright outside wash -->
 
     <rect
-        x="35"
-        y="55"
-        width="285"
-        height="255"
-        fill="#f5fbfb"
-        opacity=".38"/>
+        x="32"
+        y="42"
+        width="276"
+        height="280"
+        fill="#f6fbfb"
+        opacity=".3"/>
 
 
-    <!-- =========================================================
-         ABSTRACT OUTDOOR BUILDINGS / LIGHT
-         ========================================================= -->
+    <!-- soft hint of buildings/sky outside -->
 
     <path
         d="
-          M35 205
-          C80 180 115 192 155 208
-          C195 225 235 185 270 195
-          C292 201 305 194 320 180
-          L320 310
-          L35 310
+          M32 220
+          C75 195 110 208 150 222
+          C190 238 230 200 265 210
+          C285 216 298 208 308 196
+          L308 322
+          L32 322
           Z"
         fill="#c7dfe1"
-        opacity=".60"/>
-
-
-    <rect
-        x="65"
-        y="130"
-        width="70"
-        height="80"
-        fill="#e8f3f3"
-        opacity=".6"/>
-
-
-    <rect
-        x="210"
-        y="110"
-        width="55"
-        height="100"
-        fill="#e2eeee"
         opacity=".5"/>
 
 
     <!-- =========================================================
-         WINDOW DIVIDER — VERTICAL
+         WINDOW SASH DIVISIONS — one vertical, one horizontal,
+         matching the four-pane look in the photo
          ========================================================= -->
 
     <rect
-        x="174"
-        y="55"
+        x="166"
+        y="42"
         width="8"
-        height="255"
-        fill="#a87d52"/>
+        height="280"
+        fill="#c2b48c"/>
+
+    <rect
+        x="32"
+        y="178"
+        width="276"
+        height="8"
+        fill="#c2b48c"/>
 
 
     <!-- =========================================================
-         WINDOW DIVIDER — HORIZONTAL
+         ROLLER BLIND — pulled all the way up, tucked behind
+         the top of the frame, spanning the full width
          ========================================================= -->
 
-    <rect
-        x="35"
-        y="177"
-        width="285"
-        height="8"
-        fill="#a87d52"/>
+    <g id="window-blind">
+
+      <rect
+          x="15"
+          y="25"
+          width="310"
+          height="46"
+          fill="url(#window-blind)"/>
+
+      <rect
+          x="15"
+          y="66"
+          width="310"
+          height="6"
+          fill="#59697b"/>
+
+      <g
+          stroke="#5c6f82"
+          stroke-width="3"
+          opacity=".6">
+
+        <line x1="55" y1="30" x2="55" y2="66"/>
+        <line x1="105" y1="30" x2="105" y2="66"/>
+        <line x1="155" y1="30" x2="155" y2="66"/>
+        <line x1="205" y1="30" x2="205" y2="66"/>
+        <line x1="255" y1="30" x2="255" y2="66"/>
+        <line x1="300" y1="30" x2="300" y2="66"/>
+
+      </g>
+
+    </g>
 
 
     <!-- =========================================================
@@ -195,21 +216,12 @@
          ========================================================= -->
 
     <rect
-        x="22"
-        y="38"
-        width="7"
-        height="308"
-        fill="#d1a477"
-        opacity=".45"/>
-
-
-    <rect
-        x="24"
-        y="38"
-        width="307"
-        height="7"
-        fill="#d1a477"
-        opacity=".45"/>
+        x="17"
+        y="27"
+        width="6"
+        height="321"
+        fill="#f2ecdc"
+        opacity=".5"/>
 
 
     <!-- =========================================================
@@ -217,32 +229,18 @@
          ========================================================= -->
 
     <rect
-        x="5"
+        x="0"
         y="350"
-        width="345"
-        height="25"
-        fill="#e0ddd5"/>
-
-
-    <rect
-        x="5"
-        y="373"
-        width="345"
-        height="12"
-        fill="#c9c4ba"/>
-
-
-    <!-- =========================================================
-         SILL SHADOW
-         ========================================================= -->
+        width="340"
+        height="22"
+        fill="#dedad0"/>
 
     <rect
-        x="25"
-        y="375"
-        width="305"
-        height="7"
-        fill="#99958c"
-        opacity=".25"/>
+        x="0"
+        y="370"
+        width="340"
+        height="10"
+        fill="#c7c2b6"/>
 
 
     <!-- =========================================================
@@ -251,11 +249,11 @@
 
     <rect
         class="glow"
-        x="0"
-        y="0"
-        width="355"
-        height="385"
-        rx="5"
+        x="15"
+        y="25"
+        width="310"
+        height="325"
+        rx="4"
         fill="none"
         pointer-events="none"/>
 

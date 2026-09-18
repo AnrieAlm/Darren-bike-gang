@@ -9,7 +9,7 @@
   <defs>
 
     <linearGradient
-        id="ovenBody"
+        id="oven-body"
         x1="0"
         y1="0"
         x2="0"
@@ -24,7 +24,7 @@
     </linearGradient>
 
     <linearGradient
-        id="glass"
+        id="oven-glass"
         x1="0"
         y1="0"
         x2="0"
@@ -77,7 +77,7 @@
         width="226"
         height="296"
         rx="3"
-        fill="url(#ovenBody)"
+        fill="url(#oven-body)"
         stroke="#171819"
         stroke-width="4"/>
 
@@ -186,7 +186,7 @@
         width="184"
         height="120"
         rx="2"
-        fill="url(#glass)"/>
+        fill="url(#oven-glass)"/>
 
 
     <!-- subtle glass reflection -->

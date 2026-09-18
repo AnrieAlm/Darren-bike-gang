@@ -2,8 +2,8 @@
 
 <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 650 720"
-    width="650"
+    viewBox="0 0 800 720"
+    width="800"
     height="720">
 
   <defs>
@@ -13,7 +13,7 @@
          ========================================================= -->
 
     <linearGradient
-        id="cabinetWhite"
+        id="cabinet-white"
         x1="0"
         y1="0"
         x2="1"
@@ -36,7 +36,7 @@
          ========================================================= -->
 
     <linearGradient
-        id="counter"
+        id="cabinet-counter"
         x1="0"
         y1="0"
         x2="0"
@@ -72,11 +72,40 @@
       <rect
           x="110"
           y="0"
-          width="475"
+          width="625"
           height="275"
-          fill="url(#cabinetWhite)"
+          fill="url(#cabinet-white)"
           stroke="#b8b9b6"
           stroke-width="3"/>
+
+
+      <!-- extra division for the widened run -->
+
+      <line
+          x1="655"
+          y1="0"
+          x2="655"
+          y2="275"
+          stroke="#b6b7b4"
+          stroke-width="3"/>
+
+
+      <!-- extra handle -->
+
+      <rect
+          x="615"
+          y="120"
+          width="10"
+          height="52"
+          rx="4"
+          fill="#8e908d"/>
+
+
+      <!-- =======================================================
+           (extractor hood moved below, after the backsplash,
+           so it isn't painted over — see near the end of this
+           group)
+           ======================================================= -->
 
 
       <!-- Left vertical division -->
@@ -161,7 +190,7 @@
     <rect
         x="0"
         y="275"
-        width="600"
+        width="780"
         height="170"
         fill="#e7e8e4"/>
 
@@ -182,25 +211,25 @@
       <line
           x1="0"
           y1="315"
-          x2="600"
+          x2="780"
           y2="315"/>
 
       <line
           x1="0"
           y1="355"
-          x2="600"
+          x2="780"
           y2="355"/>
 
       <line
           x1="0"
           y1="395"
-          x2="600"
+          x2="780"
           y2="395"/>
 
       <line
           x1="0"
           y1="435"
-          x2="600"
+          x2="780"
           y2="435"/>
 
 
@@ -213,6 +242,8 @@
         <line x1="275" y1="275" x2="275" y2="315"/>
         <line x1="385" y1="275" x2="385" y2="315"/>
         <line x1="495" y1="275" x2="495" y2="315"/>
+        <line x1="605" y1="275" x2="605" y2="315"/>
+        <line x1="715" y1="275" x2="715" y2="315"/>
 
         <line x1="0" y1="315" x2="0" y2="355"/>
         <line x1="110" y1="315" x2="110" y2="355"/>
@@ -220,12 +251,16 @@
         <line x1="330" y1="315" x2="330" y2="355"/>
         <line x1="440" y1="315" x2="440" y2="355"/>
         <line x1="550" y1="315" x2="550" y2="355"/>
+        <line x1="660" y1="315" x2="660" y2="355"/>
+        <line x1="770" y1="315" x2="770" y2="355"/>
 
         <line x1="55" y1="355" x2="55" y2="395"/>
         <line x1="165" y1="355" x2="165" y2="395"/>
         <line x1="275" y1="355" x2="275" y2="395"/>
         <line x1="385" y1="355" x2="385" y2="395"/>
         <line x1="495" y1="355" x2="495" y2="395"/>
+        <line x1="605" y1="355" x2="605" y2="395"/>
+        <line x1="715" y1="355" x2="715" y2="395"/>
 
         <line x1="0" y1="395" x2="0" y2="435"/>
         <line x1="110" y1="395" x2="110" y2="435"/>
@@ -233,6 +268,8 @@
         <line x1="330" y1="395" x2="330" y2="435"/>
         <line x1="440" y1="395" x2="440" y2="435"/>
         <line x1="550" y1="395" x2="550" y2="435"/>
+        <line x1="660" y1="395" x2="660" y2="435"/>
+        <line x1="770" y1="395" x2="770" y2="435"/>
 
       </g>
 
@@ -246,9 +283,9 @@
     <rect
         x="0"
         y="438"
-        width="600"
+        width="780"
         height="32"
-        fill="url(#counter)"/>
+        fill="url(#cabinet-counter)"/>
 
 
     <!-- Counter front edge -->
@@ -256,7 +293,7 @@
     <rect
         x="0"
         y="466"
-        width="600"
+        width="780"
         height="12"
         fill="#292c2d"/>
 
@@ -273,9 +310,9 @@
       <rect
           x="0"
           y="478"
-          width="600"
+          width="780"
           height="242"
-          fill="url(#cabinetWhite)"
+          fill="url(#cabinet-white)"
           stroke="#b5b6b3"
           stroke-width="3"/>
 
@@ -381,6 +418,73 @@
           fill="#858783"/>
 
 
+      <!-- =======================================================
+           EXTENSION CABINET (widened run)
+           ======================================================= -->
+
+      <line
+          x1="600"
+          y1="478"
+          x2="600"
+          y2="720"
+          stroke="#b5b6b3"
+          stroke-width="3"/>
+
+      <rect
+          x="608"
+          y="486"
+          width="164"
+          height="226"
+          fill="#e4e5e1"
+          opacity=".5"/>
+
+      <rect
+          x="670"
+          y="585"
+          width="48"
+          height="7"
+          rx="3"
+          fill="#858783"/>
+
+
+    </g>
+
+
+    <!-- =========================================================
+         EXTRACTOR HOOD — mounted under the cabinets, centered
+         above the hob/oven column. Drawn here (after the
+         backsplash) so it isn't painted over.
+         ========================================================= -->
+
+    <g id="extractor-hood">
+
+      <path
+          d="
+            M240 275
+            L460 275
+            L415 345
+            L285 345
+            Z"
+          fill="#4a4d4f"
+          stroke="#333537"
+          stroke-width="3"/>
+
+      <rect
+          x="240"
+          y="270"
+          width="220"
+          height="10"
+          rx="2"
+          fill="#3a3c3e"/>
+
+      <rect
+          x="300"
+          y="320"
+          width="100"
+          height="8"
+          fill="#5c5f61"
+          opacity=".6"/>
+
     </g>
 
 
@@ -391,7 +495,7 @@
     <rect
         x="0"
         y="712"
-        width="600"
+        width="780"
         height="8"
         fill="#aaaCA9"/>
 

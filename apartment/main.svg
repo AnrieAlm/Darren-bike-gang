@@ -1,413 +1,496 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<svg
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="1536"
-    height="1152"
-    viewBox="0 0 1536 1152">
-
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1152" viewBox="0 0 1536 1152">
   <defs>
-
-    <!-- =========================================================
-         WALL
-         ========================================================= -->
-
-    <linearGradient
-        id="wall"
-        x1="0"
-        y1="0"
-        x2="0"
-        y2="1">
-
-      <stop
-          offset="0%"
-          stop-color="#f3f3ef"/>
-
-      <stop
-          offset="100%"
-          stop-color="#e7e8e5"/>
-
+    <linearGradient id="cabinet-white" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d9dad7" />
+      <stop offset="50%" stop-color="#f0f0ec" />
+      <stop offset="100%" stop-color="#d1d2cf" />
     </linearGradient>
-
-
-    <!-- =========================================================
-         BLUE/GREY WALL
-         ========================================================= -->
-
-    <linearGradient
-        id="blueWall"
-        x1="0"
-        y1="0"
-        x2="0"
-        y2="1">
-
-      <stop
-          offset="0%"
-          stop-color="#c5ccd0"/>
-
-      <stop
-          offset="100%"
-          stop-color="#b8c2c7"/>
-
+    <linearGradient id="cabinet-counter" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#55595a" />
+      <stop offset="100%" stop-color="#35383a" />
     </linearGradient>
-
-
-    <!-- =========================================================
-         FLOOR
-         ========================================================= -->
-
-    <linearGradient
-        id="floor"
-        x1="0"
-        y1="0"
-        x2="0"
-        y2="1">
-
-      <stop
-          offset="0%"
-          stop-color="#d5c3ae"/>
-
-      <stop
-          offset="100%"
-          stop-color="#bda58b"/>
-
+    <linearGradient id="oven-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#343536" />
+      <stop offset="100%" stop-color="#1f2021" />
     </linearGradient>
-
-
-    <!-- =========================================================
-         SOFT SHADOW
-         ========================================================= -->
-
-    <filter
-        id="softShadow"
-        x="-30%"
-        y="-30%"
-        width="160%"
-        height="160%">
-
-      <feGaussianBlur
-          stdDeviation="12"/>
-
+    <linearGradient id="oven-glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3d4041" />
+      <stop offset="100%" stop-color="#151617" />
+    </linearGradient>
+    <linearGradient id="fridge-body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d6d7d3" />
+      <stop offset="45%" stop-color="#eeeeea" />
+      <stop offset="100%" stop-color="#c6c8c5" />
+    </linearGradient>
+    <linearGradient id="microwave-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eeeeea" />
+      <stop offset="100%" stop-color="#cfd0cc" />
+    </linearGradient>
+    <linearGradient id="sofa-fabric" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9a9da0" />
+      <stop offset="100%" stop-color="#777b7e" />
+    </linearGradient>
+    <linearGradient id="sofa-seat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a5a8aa" />
+      <stop offset="100%" stop-color="#85898b" />
+    </linearGradient>
+    <linearGradient id="sofa-side" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#686c6e" />
+      <stop offset="100%" stop-color="#85898b" />
+    </linearGradient>
+    <linearGradient id="cushion-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e7c968" />
+      <stop offset="100%" stop-color="#c5a94d" />
+    </linearGradient>
+    <linearGradient id="table-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f4f4f1" />
+      <stop offset="70%" stop-color="#e6e6e2" />
+      <stop offset="100%" stop-color="#d3d4d1" />
+    </linearGradient>
+    <linearGradient id="table-pedestal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4b4b4e" />
+      <stop offset="50%" stop-color="#6a6a6d" />
+      <stop offset="100%" stop-color="#3a3a3d" />
+    </linearGradient>
+    <linearGradient id="chair-frame" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#505556" />
+      <stop offset="50%" stop-color="#737777" />
+      <stop offset="100%" stop-color="#45494a" />
+    </linearGradient>
+    <linearGradient id="chair-seat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#777b7b" />
+      <stop offset="100%" stop-color="#535757" />
+    </linearGradient>
+    <linearGradient id="window-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fbfdfd" />
+      <stop offset="65%" stop-color="#e4f1f2" />
+      <stop offset="100%" stop-color="#cfe6e8" />
+    </linearGradient>
+    <linearGradient id="window-frame" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d9cfb8" />
+      <stop offset="45%" stop-color="#ece4d0" />
+      <stop offset="100%" stop-color="#cabfa3" />
+    </linearGradient>
+    <linearGradient id="window-blind" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8296ab" />
+      <stop offset="100%" stop-color="#6d8195" />
+    </linearGradient>
+    <radialGradient id="ceiling-bulb-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff8cf" stop-opacity=".75" />
+      <stop offset="55%" stop-color="#fff4b8" stop-opacity=".30" />
+      <stop offset="100%" stop-color="#fff4b8" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="ceiling-bulb" cx="42%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#fffef0" />
+      <stop offset="45%" stop-color="#fff4bc" />
+      <stop offset="100%" stop-color="#e5cf91" />
+    </radialGradient>
+    <linearGradient id="bin-body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e9eae6" />
+      <stop offset="50%" stop-color="#f6f6f2" />
+      <stop offset="100%" stop-color="#dcdedb" />
+    </linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c7ced2" />
+      <stop offset="100%" stop-color="#b8c2c7" />
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d5c3ae" />
+      <stop offset="100%" stop-color="#bda58b" />
+    </linearGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" />
     </filter>
-
   </defs>
-
-
-  <!-- =========================================================
-       ROOM FOUNDATION
-       ========================================================= -->
-
-  <rect
-      x="0"
-      y="0"
-      width="1536"
-      height="1152"
-      fill="url(#wall)"/>
-
-
-  <!-- Upper wall -->
-
-  <rect
-      x="0"
-      y="0"
-      width="1536"
-      height="185"
-      fill="#f1f1ed"/>
-
-
-  <!-- Blue/grey wall -->
-
-  <rect
-      x="0"
-      y="185"
-      width="1536"
-      height="375"
-      fill="url(#blueWall)"/>
-
-
-  <!-- Lower wall -->
-
-  <rect
-      x="0"
-      y="560"
-      width="1536"
-      height="145"
-      fill="#e9e9e5"/>
-
-
-  <!-- Floor -->
-
-  <rect
-      x="0"
-      y="705"
-      width="1536"
-      height="447"
-      fill="url(#floor)"/>
-
-
-  <!-- =========================================================
-       FLOOR BOARDS
-       ========================================================= -->
-
-  <g
-      stroke="#8f765d"
-      stroke-width="2"
-      opacity=".20">
-
-    <line x1="0" y1="770" x2="1536" y2="770"/>
-    <line x1="0" y1="840" x2="1536" y2="840"/>
-    <line x1="0" y1="910" x2="1536" y2="910"/>
-    <line x1="0" y1="980" x2="1536" y2="980"/>
-    <line x1="0" y1="1050" x2="1536" y2="1050"/>
-    <line x1="0" y1="1120" x2="1536" y2="1120"/>
-
+  <!-- ROOM BACKGROUND -->
+  <rect x="0" y="0" width="1536" height="1152" fill="url(#wall)" />
+  <!-- CEILING STRIP -->
+  <rect x="0" y="0" width="1536" height="128" fill="#f4f3ef" />
+  <rect x="0" y="124" width="1536" height="8" fill="#dcd9d2" />
+  <!-- FLOOR -->
+  <rect x="0" y="705" width="1536" height="447" fill="url(#floor)" />
+  <g stroke="#8f765d" stroke-width="2" opacity=".20">
+    <line x1="0" y1="760" x2="1536" y2="760" />
+    <line x1="0" y1="830" x2="1536" y2="830" />
+    <line x1="0" y1="900" x2="1536" y2="900" />
+    <line x1="0" y1="970" x2="1536" y2="970" />
+    <line x1="0" y1="1040" x2="1536" y2="1040" />
+    <line x1="0" y1="1110" x2="1536" y2="1110" />
   </g>
-
-
-  <!-- =========================================================
-       KITCHEN SHADOW
-       ========================================================= -->
-
-  <rect
-      x="0"
-      y="690"
-      width="620"
-      height="40"
-      fill="#555"
-      opacity=".12"
-      filter="url(#softShadow)"/>
-
-
-  <!-- =========================================================
-       KITCHEN
-       ========================================================= -->
-
+  <!-- KITCHEN SHADOW -->
+  <rect x="0" y="690" width="870" height="35" fill="#555" opacity=".12" filter="url(#softShadow)" />
+  <!-- ================= KITCHEN ================= -->
   <g id="kitchen">
-
-    <!-- Cabinets -->
-
-    <use
-        href="components/cabinets.svg#cabinets"
-        x="0"
-        y="0"/>
-
-
-    <!-- Oven -->
-
-    <use
-        href="components/oven.svg#oven"
-        x="145"
-        y="445"/>
-
-
-    <!-- Fridge -->
-
-    <use
-        href="components/fridge.svg#fridge"
-        x="390"
-        y="450"/>
-
-
-    <!-- Microwave -->
-
-    <use
-        href="components/microwave.svg#microwave"
-        x="330"
-        y="300"/>
-
-  </g>
-
-
-  <!-- =========================================================
-       WINDOW
-       ========================================================= -->
-
-  <use
-      href="components/window.svg#window"
-      x="1180"
-      y="45"/>
-
-
-  <!-- =========================================================
-       WALL PICTURE
-       ========================================================= -->
-
-  <use
-      href="components/wall-picture.svg#wall-picture"
-      transform="translate(760 105) scale(.72)"/>
-
-
-  <!-- =========================================================
-       UTILITY UNIT
-       ========================================================= -->
-
-  <use
-      href="components/utility-unit.svg#utility-unit"
-      transform="translate(590 330) scale(.72)"/>
-
-
-  <!-- =========================================================
-       SOFA
-       ========================================================= -->
-
-  <use
-      href="components/sofa.svg#sofa"
-      x="780"
-      y="395"/>
-
-
-  <!-- =========================================================
-       CUSHIONS
-       ========================================================= -->
-
-  <use
-      href="components/cushions.svg#cushions"
-      x="780"
-      y="395"/>
-
-
-  <!-- =========================================================
-       TABLE
-       ========================================================= -->
-
-  <use
-      href="components/table.svg#table"
-      x="380"
-      y="535"/>
-
-
-  <!-- =========================================================
-       CHAIRS
-       ========================================================= -->
-
-  <use
-      href="components/chairs.svg#left-chair"
-      x="70"
-      y="660"/>
-
-  <use
-      href="components/chairs.svg#right-chair"
-      x="1080"
-      y="590"/>
-
-
-  <!-- =========================================================
-       CEILING LIGHT
-       
-       NEW BLACK WIRE-FRAME CHANDELIER
-       ========================================================= -->
-
-  <use
-      href="components/ceiling-light.svg#ceiling-light"
-      x="1300"
-      y="0"
-      width="180"
-      height="230"/>
-
-
-  <!-- =========================================================
-       CEILING FIRE / SMOKE ALARM
-       ========================================================= -->
-
-  <g id="ceiling-alarm">
-
-    <ellipse
-        cx="1100"
-        cy="65"
-        rx="22"
-        ry="10"
-        fill="#d8d9d5"
-        stroke="#b5b7b4"
-        stroke-width="2"/>
-
-    <circle
-        cx="1092"
-        cy="65"
-        r="3"
-        fill="#777b78"/>
-
-    <circle
-        cx="1106"
-        cy="65"
-        r="3"
-        fill="#777b78"/>
-
-  </g>
-
-
-  <!-- =========================================================
-       WINDOW BLIND
-       ========================================================= -->
-
-  <g id="window-blind">
-
-    <rect
-        x="1190"
-        y="85"
-        width="325"
-        height="48"
-        fill="#74869b"/>
-
-    <g
-        stroke="#66788b"
-        stroke-width="4"
-        opacity=".65">
-
-      <line x1="1210" y1="90" x2="1210" y2="128"/>
-      <line x1="1240" y1="90" x2="1240" y2="128"/>
-      <line x1="1270" y1="90" x2="1270" y2="128"/>
-      <line x1="1300" y1="90" x2="1300" y2="128"/>
-      <line x1="1330" y1="90" x2="1330" y2="128"/>
-
+    <g transform="translate(0,-15)">
+      <g id="cabinets">
+        <g id="upper-cabinets">
+          <rect x="110" y="0" width="625" height="275" fill="url(#cabinet-white)" stroke="#b8b9b6" stroke-width="3" />
+          <line x1="655" y1="0" x2="655" y2="275" stroke="#b6b7b4" stroke-width="3" />
+          <rect x="615" y="120" width="10" height="52" rx="4" fill="#8e908d" />
+          <line x1="340" y1="0" x2="340" y2="275" stroke="#b6b7b4" stroke-width="3" />
+          <line x1="505" y1="0" x2="505" y2="275" stroke="#b6b7b4" stroke-width="3" />
+          <rect x="118" y="8" width="214" height="255" fill="#ffffff" opacity=".18" />
+          <rect x="348" y="8" width="148" height="255" fill="#ffffff" opacity=".12" />
+          <rect x="513" y="8" width="64" height="255" fill="#ffffff" opacity=".08" />
+          <rect x="300" y="120" width="10" height="52" rx="4" fill="#8e908d" />
+          <rect x="470" y="120" width="10" height="52" rx="4" fill="#8e908d" />
+        </g>
+        <rect x="0" y="275" width="780" height="170" fill="#e7e8e4" />
+        <g id="backsplash" stroke="#c4c6c3" stroke-width="2" opacity=".85">
+          <line x1="0" y1="315" x2="780" y2="315" />
+          <line x1="0" y1="355" x2="780" y2="355" />
+          <line x1="0" y1="395" x2="780" y2="395" />
+          <line x1="0" y1="435" x2="780" y2="435" />
+          <g>
+            <line x1="55" y1="275" x2="55" y2="315" />
+            <line x1="165" y1="275" x2="165" y2="315" />
+            <line x1="275" y1="275" x2="275" y2="315" />
+            <line x1="385" y1="275" x2="385" y2="315" />
+            <line x1="495" y1="275" x2="495" y2="315" />
+            <line x1="605" y1="275" x2="605" y2="315" />
+            <line x1="715" y1="275" x2="715" y2="315" />
+            <line x1="0" y1="315" x2="0" y2="355" />
+            <line x1="110" y1="315" x2="110" y2="355" />
+            <line x1="220" y1="315" x2="220" y2="355" />
+            <line x1="330" y1="315" x2="330" y2="355" />
+            <line x1="440" y1="315" x2="440" y2="355" />
+            <line x1="550" y1="315" x2="550" y2="355" />
+            <line x1="660" y1="315" x2="660" y2="355" />
+            <line x1="770" y1="315" x2="770" y2="355" />
+            <line x1="55" y1="355" x2="55" y2="395" />
+            <line x1="165" y1="355" x2="165" y2="395" />
+            <line x1="275" y1="355" x2="275" y2="395" />
+            <line x1="385" y1="355" x2="385" y2="395" />
+            <line x1="495" y1="355" x2="495" y2="395" />
+            <line x1="605" y1="355" x2="605" y2="395" />
+            <line x1="715" y1="355" x2="715" y2="395" />
+            <line x1="0" y1="395" x2="0" y2="435" />
+            <line x1="110" y1="395" x2="110" y2="435" />
+            <line x1="220" y1="395" x2="220" y2="435" />
+            <line x1="330" y1="395" x2="330" y2="435" />
+            <line x1="440" y1="395" x2="440" y2="435" />
+            <line x1="550" y1="395" x2="550" y2="435" />
+            <line x1="660" y1="395" x2="660" y2="435" />
+            <line x1="770" y1="395" x2="770" y2="435" />
+          </g>
+        </g>
+        <rect x="0" y="438" width="780" height="32" fill="url(#cabinet-counter)" />
+        <rect x="0" y="466" width="780" height="12" fill="#292c2d" />
+        <g id="lower-cabinets">
+          <rect x="0" y="478" width="780" height="242" fill="url(#cabinet-white)" stroke="#b5b6b3" stroke-width="3" />
+          <line x1="125" y1="478" x2="125" y2="720" stroke="#b5b6b3" stroke-width="3" />
+          <line x1="390" y1="478" x2="390" y2="720" stroke="#b5b6b3" stroke-width="3" />
+          <line x1="500" y1="478" x2="500" y2="720" stroke="#b5b6b3" stroke-width="3" />
+          <rect x="8" y="486" width="109" height="226" fill="#e4e5e1" opacity=".55" />
+          <rect x="40" y="585" width="48" height="7" rx="3" fill="#858783" />
+          <rect x="400" y="486" width="90" height="226" fill="#e3e4e0" opacity=".35" />
+          <rect x="420" y="585" width="48" height="7" rx="3" fill="#858783" />
+          <rect x="510" y="486" width="82" height="226" fill="#e1e2de" opacity=".45" />
+          <rect x="525" y="585" width="45" height="7" rx="3" fill="#858783" />
+          <line x1="600" y1="478" x2="600" y2="720" stroke="#b5b6b3" stroke-width="3" />
+          <rect x="608" y="486" width="164" height="226" fill="#e4e5e1" opacity=".5" />
+          <rect x="670" y="585" width="48" height="7" rx="3" fill="#858783" />
+        </g>
+        <g id="extractor-hood">
+          <path d="             M240 275             L460 275             L415 345             L285 345             Z" fill="#4a4d4f" stroke="#333537" stroke-width="3" />
+          <rect x="240" y="270" width="220" height="10" rx="2" fill="#3a3c3e" />
+          <rect x="300" y="320" width="100" height="8" fill="#5c5f61" opacity=".6" />
+        </g>
+        <rect x="0" y="712" width="780" height="8" fill="#aaaCA9" />
+      </g>
     </g>
-
+    <g transform="translate(258,465) scale(.8)">
+      <g id="oven" class="hotspot" data-spot="oven">
+        <rect class="hit" x="0" y="0" width="230" height="300" fill="#ffffff" opacity="0" />
+        <rect x="2" y="2" width="226" height="296" rx="3" fill="url(#oven-body)" stroke="#171819" stroke-width="4" />
+        <rect x="10" y="12" width="210" height="52" rx="2" fill="#292a2b" />
+        <g fill="#777875" stroke="#515251" stroke-width="2">
+          <circle cx="38" cy="38" r="10" />
+          <circle cx="87" cy="38" r="10" />
+          <circle cx="136" cy="38" r="10" />
+          <circle cx="185" cy="38" r="10" />
+        </g>
+        <g stroke="#a5a6a2" stroke-width="2" stroke-linecap="round">
+          <line x1="38" y1="30" x2="38" y2="35" />
+          <line x1="87" y1="30" x2="87" y2="35" />
+          <line x1="136" y1="30" x2="136" y2="35" />
+          <line x1="185" y1="30" x2="185" y2="35" />
+        </g>
+        <rect x="13" y="75" width="204" height="140" rx="3" fill="#111213" stroke="#080909" stroke-width="3" />
+        <rect x="23" y="85" width="184" height="120" rx="2" fill="url(#oven-glass)" />
+        <path d="           M30 91           L200 91           L165 120           L30 120           Z" fill="#ffffff" opacity=".045" />
+        <rect x="30" y="205" width="170" height="11" rx="5" fill="#151617" />
+        <rect x="40" y="208" width="150" height="5" rx="2" fill="#555655" />
+        <rect x="13" y="225" width="204" height="62" fill="#242526" stroke="#151617" stroke-width="3" />
+        <rect x="24" y="237" width="182" height="3" fill="#4b4c4c" opacity=".55" />
+        <rect class="glow" x="2" y="2" width="226" height="296" rx="3" fill="none" pointer-events="none" />
+      </g>
+    </g>
+    <g transform="translate(429,331) scale(.8)">
+      <g id="microwave" class="hotspot" data-spot="microwave">
+        <rect class="hit" x="0" y="0" width="180" height="115" fill="#ffffff" opacity="0" />
+        <rect x="2" y="2" width="176" height="111" rx="5" fill="url(#microwave-body)" stroke="#aaa9a4" stroke-width="3" />
+        <rect x="13" y="14" width="113" height="82" rx="3" fill="#292b2c" />
+        <rect x="20" y="20" width="99" height="69" fill="#151718" />
+        <path d="           M24 24           L113 24           L85 45           L24 45           Z" fill="#ffffff" opacity=".045" />
+        <rect x="117" y="28" width="5" height="55" rx="2" fill="#5e6060" />
+        <rect x="135" y="14" width="30" height="82" rx="3" fill="#d0d1cd" />
+        <circle cx="150" cy="34" r="8" fill="#888a87" stroke="#6d6f6d" stroke-width="2" />
+        <circle cx="150" cy="62" r="8" fill="#888a87" stroke="#6d6f6d" stroke-width="2" />
+        <rect x="141" y="78" width="18" height="9" rx="2" fill="#666966" />
+        <rect x="15" y="105" width="18" height="6" rx="2" fill="#858682" />
+        <rect x="142" y="105" width="18" height="6" rx="2" fill="#858682" />
+        <rect class="glow" x="2" y="2" width="176" height="111" rx="5" fill="none" pointer-events="none" />
+      </g>
+    </g>
+    <g transform="translate(583,517) scale(.8)">
+      <g id="fridge" class="hotspot" data-spot="fridge">
+        <rect class="hit" x="0" y="0" width="190" height="235" fill="#ffffff" opacity="0" />
+        <rect x="3" y="2" width="184" height="231" rx="4" fill="url(#fridge-body)" stroke="#aeb1ae" stroke-width="3" />
+        <rect x="3" y="2" width="184" height="8" fill="#f4f4f0" />
+        <rect x="10" y="16" width="170" height="195" rx="3" fill="#e4e5e1" stroke="#b9bbb8" stroke-width="2" />
+        <path d="           M20 26           L165 26           L165 200           L20 200           Z" fill="#f2f2ee" opacity=".4" />
+        <rect x="163" y="55" width="8" height="110" rx="3" fill="#999b98" />
+        <rect x="165" y="60" width="2.5" height="95" rx="1" fill="#d4d5d1" />
+        <text x="95" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" letter-spacing="1" fill="#b9bbb7" opacity=".85">
+      NORDMENOK
+    </text>
+        <rect x="10" y="221" width="170" height="9" fill="#c2c4c1" />
+        <rect class="glow" x="3" y="2" width="184" height="231" rx="4" fill="none" pointer-events="none" />
+      </g>
+    </g>
+    <g transform="translate(750,501) scale(.68)">
+      <g id="utility-unit" class="hotspot" data-spot="utility-unit">
+        <rect class="hit" x="0" y="0" width="145" height="300" fill="#ffffff" opacity="0" />
+        <path d="           M18 210           L100 210           L92 292           L26 292           Z" fill="url(#bin-body)" stroke="#c3c5c1" stroke-width="3" />
+        <ellipse cx="59" cy="210" rx="42" ry="10" fill="#3f8f5f" />
+        <ellipse cx="59" cy="207" rx="34" ry="7" fill="#4fa870" />
+        <path d="           M35 205           Q59 192 83 205           Q59 200 35 205           Z" fill="#3f8f5f" opacity=".8" />
+        <rect x="24" y="216" width="10" height="68" fill="#00000010" />
+        <g transform="rotate(9 110 150)">
+          <rect x="106" y="10" width="7" height="235" rx="3" fill="#8a5a34" />
+          <rect x="107" y="10" width="2.5" height="235" fill="#c99a68" opacity=".6" />
+          <rect x="103" y="238" width="13" height="14" fill="#8d8f8c" />
+          <path d="             M92 252             L127 252             L133 292             L86 292             Z" fill="#d7a23c" />
+          <g stroke="#b8862c" stroke-width="1.6" opacity=".6">
+            <line x1="95" y1="256" x2="90" y2="290" />
+            <line x1="103" y1="256" x2="100" y2="291" />
+            <line x1="111" y1="256" x2="111" y2="292" />
+            <line x1="119" y1="256" x2="122" y2="291" />
+            <line x1="127" y1="256" x2="130" y2="290" />
+          </g>
+        </g>
+        <ellipse cx="70" cy="294" rx="55" ry="8" fill="#000000" opacity=".12" />
+        <rect class="glow" x="0" y="0" width="145" height="300" fill="none" pointer-events="none" />
+      </g>
+    </g>
   </g>
-
-
-  <!-- =========================================================
-       NATURAL WINDOW LIGHT
-       ========================================================= -->
-
-  <path
-      d="
-        M1090 400
-        L1500 400
-        L1536 780
-        L950 780
-        Z"
-      fill="#ffffff"
-      opacity=".075"
-      pointer-events="none"/>
-
-
-  <!-- =========================================================
-       OVERALL LIGHT
-       ========================================================= -->
-
-  <rect
-      x="0"
-      y="0"
-      width="1536"
-      height="1152"
-      fill="#ffffff"
-      opacity=".025"
-      pointer-events="none"/>
-
-
-  <!-- =========================================================
-       ROOM EDGE
-       ========================================================= -->
-
-  <rect
-      x="6"
-      y="6"
-      width="1524"
-      height="1140"
-      fill="none"
-      stroke="#555"
-      stroke-width="12"
-      opacity=".08"
-      pointer-events="none"/>
-
+  <!-- ================= WALL PICTURE ================= -->
+  <g transform="translate(825,170)">
+    <g id="wall-picture">
+      <rect x="9" y="9" width="182" height="142" fill="#8a8a86" opacity=".2" />
+      <rect x="3" y="3" width="182" height="142" fill="#c3a37a" stroke="#96754f" stroke-width="4" />
+      <rect x="15" y="15" width="158" height="118" fill="#f1ede2" />
+      <path d="           M28 118           L58 55           L82 90           L102 40           L118 62           L140 32           L160 118           Z" fill="#cf9f56" opacity=".85" />
+      <path d="           M28 122           L70 78           L104 122           Z" fill="#8d7c62" opacity=".8" />
+      <circle cx="132" cy="46" r="12" fill="#dccf9d" />
+      <path d="M32 100 Q60 68 88 84" fill="none" stroke="#a9bcb4" stroke-width="5" opacity=".7" />
+    </g>
+  </g>
+  <!-- ================= WINDOW ================= -->
+  <g transform="translate(1058,150)">
+    <g id="window" class="hotspot" data-spot="window">
+      <rect class="hit" x="0" y="0" width="340" height="400" fill="#ffffff" opacity="0" />
+      <rect x="0" y="0" width="340" height="380" fill="#e9ebee" />
+      <rect x="15" y="25" width="310" height="325" fill="#e7e0cf" stroke="#b7a97e" stroke-width="3" />
+      <rect x="32" y="42" width="276" height="280" fill="url(#window-sky)" />
+      <rect x="32" y="42" width="276" height="280" fill="#f6fbfb" opacity=".3" />
+      <path d="           M32 220           C75 195 110 208 150 222           C190 238 230 200 265 210           C285 216 298 208 308 196           L308 322           L32 322           Z" fill="#c7dfe1" opacity=".5" />
+      <rect x="166" y="42" width="8" height="280" fill="#c2b48c" />
+      <rect x="32" y="178" width="276" height="8" fill="#c2b48c" />
+      <g id="window-blind">
+        <rect x="15" y="25" width="310" height="46" fill="url(#window-blind)" />
+        <rect x="15" y="66" width="310" height="6" fill="#59697b" />
+        <g stroke="#5c6f82" stroke-width="3" opacity=".6">
+          <line x1="55" y1="30" x2="55" y2="66" />
+          <line x1="105" y1="30" x2="105" y2="66" />
+          <line x1="155" y1="30" x2="155" y2="66" />
+          <line x1="205" y1="30" x2="205" y2="66" />
+          <line x1="255" y1="30" x2="255" y2="66" />
+          <line x1="300" y1="30" x2="300" y2="66" />
+        </g>
+      </g>
+      <rect x="17" y="27" width="6" height="321" fill="#f2ecdc" opacity=".5" />
+      <rect x="0" y="350" width="340" height="22" fill="#dedad0" />
+      <rect x="0" y="370" width="340" height="10" fill="#c7c2b6" />
+      <rect class="glow" x="15" y="25" width="310" height="325" rx="4" fill="none" pointer-events="none" />
+    </g>
+  </g>
+  <!-- ================= SOFA ================= -->
+  <g transform="translate(940,560) scale(.8)">
+    <g id="sofa" class="hotspot" data-spot="sofa">
+      <rect class="hit" x="0" y="0" width="720" height="430" rx="18" fill="#ffffff" opacity="0" />
+      <path d="           M35 150           Q35 125 65 115           L600 115           Q635 115 650 145           L650 355           Q650 390 615 400           L75 400           Q35 390 35 355           Z" fill="url(#sofa-fabric)" stroke="#65696b" stroke-width="5" />
+      <path d="           M35 150           Q35 120 68 112           Q105 105 125 135           L125 335           Q125 365 95 375           L55 375           Q35 365 35 340           Z" fill="url(#sofa-side)" stroke="#626668" stroke-width="5" />
+      <path d="           M40 148           Q42 122 70 116           Q100 112 119 137           Q91 128 63 138           Z" fill="#a1a4a5" opacity=".65" />
+      <path d="           M585 135           Q605 108 638 118           Q662 126 665 153           L665 345           Q662 375 635 385           L600 385           Q585 370 585 345           Z" fill="url(#sofa-side)" stroke="#626668" stroke-width="5" />
+      <path d="           M110 275           Q110 245 140 235           L580 235           Q605 245 610 275           L610 350           Q600 375 570 380           L145 380           Q115 370 110 345           Z" fill="#707477" />
+      <path d="           M125 250           Q125 232 145 225           L330 225           Q350 230 355 250           L350 325           Q345 345 325 350           L150 350           Q130 345 125 325           Z" fill="url(#sofa-seat)" stroke="#777b7d" stroke-width="4" />
+      <path d="           M142 244           Q160 232 190 232           L320 232           Q337 235 343 250" fill="none" stroke="#c0c2c2" stroke-width="5" opacity=".25" />
+      <path d="           M355 250           Q355 230 375 225           L560 225           Q585 230 590 250           L585 325           Q580 345 560 350           L380 350           Q360 345 355 325           Z" fill="url(#sofa-seat)" stroke="#777b7d" stroke-width="4" />
+      <path d="           M372 244           Q390 232 420 232           L550 232           Q570 235 578 250" fill="none" stroke="#c0c2c2" stroke-width="5" opacity=".25" />
+      <path d="           M125 105           Q130 80 155 72           Q205 62 255 72           Q280 80 285 108           L280 225           Q275 245 255 250           L155 250           Q130 245 125 225           Z" fill="#989b9d" stroke="#777b7d" stroke-width="4" />
+      <path d="           M285 105           Q290 80 315 72           Q365 62 415 72           Q440 80 445 108           L440 225           Q435 245 415 250           L315 250           Q290 245 285 225           Z" fill="#96999b" stroke="#777b7d" stroke-width="4" />
+      <path d="           M445 108           Q450 82 475 74           Q520 65 565 75           Q590 83 595 110           L590 225           Q585 245 565 250           L475 250           Q450 245 445 225           Z" fill="#929598" stroke="#777b7d" stroke-width="4" />
+      <path d="M145 91 Q190 75 240 88" fill="none" stroke="#c4c6c6" stroke-width="5" opacity=".25" />
+      <path d="M305 91 Q350 75 400 88" fill="none" stroke="#c4c6c6" stroke-width="5" opacity=".25" />
+      <path d="M465 94 Q510 78 555 91" fill="none" stroke="#c4c6c6" stroke-width="5" opacity=".25" />
+      <path d="           M565 260           L680 260           Q705 265 710 290           L710 365           Q705 395 675 405           L590 405           Q565 395 565 370           Z" fill="url(#sofa-fabric)" stroke="#65696b" stroke-width="5" />
+      <path d="           M580 275           Q590 265 610 265           L675 265           Q695 270 700 290           L700 305           Q650 292 580 300           Z" fill="#a0a3a4" opacity=".6" />
+      <path d="           M580 275           Q590 260 615 258           L680 260           Q700 265 705 285           L700 350           Q695 370 675 375           L600 375           Q580 368 575 350           Z" fill="url(#sofa-seat)" stroke="#777b7d" stroke-width="4" />
+      <path d="           M75 390           Q300 410 610 395           Q650 390 680 395" fill="none" stroke="#4f5355" stroke-width="10" opacity=".35" />
+      <rect class="glow" x="0" y="0" width="720" height="430" rx="18" fill="none" pointer-events="none" />
+    </g>
+  </g>
+  <g transform="translate(1390,764) scale(.75)">
+    <g id="cushion">
+      <path d="           M18 28           Q20 12 38 8           Q85 0 132 8           Q150 12 152 28           L147 102           Q143 118 126 121           L43 121           Q25 118 21 102           Z" fill="url(#cushion-fill)" stroke="#aa903e" stroke-width="4" />
+      <path d="           M32 25           Q75 12 130 24" fill="none" stroke="#f5df91" stroke-width="5" opacity=".45" />
+      <path d="           M25 96           Q85 112 145 96" fill="none" stroke="#ad9343" stroke-width="3" opacity=".55" />
+    </g>
+  </g>
+  <!-- ================= TABLE + CHAIRS ================= -->
+  <g transform="translate(770,790)">
+    <g id="table" class="hotspot table" data-spot="table">
+      <ellipse class="hit" cx="210" cy="110" rx="205" ry="90" fill="#ffffff" opacity="0" />
+      <ellipse cx="210" cy="258" rx="150" ry="16" fill="#000000" opacity=".14" />
+      <rect x="200" y="150" width="20" height="95" fill="url(#table-pedestal)" />
+      <ellipse cx="210" cy="248" rx="60" ry="13" fill="#3a3a3d" />
+      <ellipse cx="210" cy="244" rx="52" ry="9" fill="#55565a" />
+      <ellipse cx="210" cy="128" rx="205" ry="88" fill="#b7b9b6" />
+      <ellipse cx="210" cy="118" rx="205" ry="88" fill="url(#table-top)" stroke="#c6c7c4" stroke-width="3" />
+      <ellipse cx="185" cy="95" rx="140" ry="45" fill="#ffffff" opacity=".25" />
+      <g class="interior">
+        <text class="found-item-emoji" data-spot="table" x="210" y="185" font-size="30" text-anchor="middle" />
+      </g>
+      <ellipse class="glow" cx="210" cy="118" rx="205" ry="88" fill="none" pointer-events="none" />
+    </g>
+  </g>
+  <g transform="translate(590,840) scale(.85)">
+    <g id="left-chair" class="hotspot" data-spot="chair-left">
+      <rect class="hit" x="15" y="0" width="270" height="500" fill="#ffffff" opacity="0" />
+      <path d="           M45 25           Q150 0 255 25           L245 250           Q150 275 55 250           Z" fill="url(#chair-frame)" stroke="#454849" stroke-width="5" />
+      <path d="           M62 43           Q150 22 238 43           L231 230           Q150 250 69 230           Z" fill="#666b6b" />
+      <g fill="#363a3a" opacity=".72">
+        <circle cx="90" cy="65" r="5" />
+        <circle cx="120" cy="60" r="5" />
+        <circle cx="150" cy="58" r="5" />
+        <circle cx="180" cy="60" r="5" />
+        <circle cx="210" cy="65" r="5" />
+        <circle cx="105" cy="90" r="5" />
+        <circle cx="135" cy="86" r="5" />
+        <circle cx="165" cy="86" r="5" />
+        <circle cx="195" cy="90" r="5" />
+        <circle cx="90" cy="118" r="5" />
+        <circle cx="120" cy="114" r="5" />
+        <circle cx="150" cy="112" r="5" />
+        <circle cx="180" cy="114" r="5" />
+        <circle cx="210" cy="118" r="5" />
+        <circle cx="105" cy="145" r="5" />
+        <circle cx="135" cy="141" r="5" />
+        <circle cx="165" cy="141" r="5" />
+        <circle cx="195" cy="145" r="5" />
+        <circle cx="90" cy="173" r="5" />
+        <circle cx="120" cy="169" r="5" />
+        <circle cx="150" cy="167" r="5" />
+        <circle cx="180" cy="169" r="5" />
+        <circle cx="210" cy="173" r="5" />
+      </g>
+      <path d="           M45 245           Q150 220 255 245           L265 305           Q150 330 35 305           Z" fill="url(#chair-seat)" stroke="#454849" stroke-width="5" />
+      <path d="           M55 300           L72 490           L90 490           L105 315           Z" fill="url(#chair-frame)" />
+      <path d="           M195 315           L210 490           L228 490           L245 300           Z" fill="url(#chair-frame)" />
+      <path d="           M75 400           L220 400" fill="none" stroke="#4c5050" stroke-width="9" />
+      <rect class="glow" x="15" y="0" width="270" height="500" fill="none" pointer-events="none" />
+    </g>
+  </g>
+  <g transform="translate(1050,840) scale(.85)">
+    <g id="right-chair" transform="translate(0 0)" class="hotspot" data-spot="chair-right">
+      <rect class="hit" x="15" y="0" width="270" height="500" fill="#ffffff" opacity="0" />
+      <path d="           M45 25           Q150 0 255 25           L245 250           Q150 275 55 250           Z" fill="url(#chair-frame)" stroke="#454849" stroke-width="5" />
+      <path d="           M62 43           Q150 22 238 43           L231 230           Q150 250 69 230           Z" fill="#666b6b" />
+      <g fill="#363a3a" opacity=".72">
+        <circle cx="90" cy="65" r="5" />
+        <circle cx="120" cy="60" r="5" />
+        <circle cx="150" cy="58" r="5" />
+        <circle cx="180" cy="60" r="5" />
+        <circle cx="210" cy="65" r="5" />
+        <circle cx="105" cy="90" r="5" />
+        <circle cx="135" cy="86" r="5" />
+        <circle cx="165" cy="86" r="5" />
+        <circle cx="195" cy="90" r="5" />
+        <circle cx="90" cy="118" r="5" />
+        <circle cx="120" cy="114" r="5" />
+        <circle cx="150" cy="112" r="5" />
+        <circle cx="180" cy="114" r="5" />
+        <circle cx="210" cy="118" r="5" />
+        <circle cx="105" cy="145" r="5" />
+        <circle cx="135" cy="141" r="5" />
+        <circle cx="165" cy="141" r="5" />
+        <circle cx="195" cy="145" r="5" />
+        <circle cx="90" cy="173" r="5" />
+        <circle cx="120" cy="169" r="5" />
+        <circle cx="150" cy="167" r="5" />
+        <circle cx="180" cy="169" r="5" />
+        <circle cx="210" cy="173" r="5" />
+      </g>
+      <path d="           M45 245           Q150 220 255 245           L265 305           Q150 330 35 305           Z" fill="url(#chair-seat)" stroke="#454849" stroke-width="5" />
+      <path d="           M55 300           L72 490           L90 490           L105 315           Z" fill="url(#chair-frame)" />
+      <path d="           M195 315           L210 490           L228 490           L245 300           Z" fill="url(#chair-frame)" />
+      <path d="           M75 400           L220 400" fill="none" stroke="#4c5050" stroke-width="9" />
+      <rect class="glow" x="15" y="0" width="270" height="500" fill="none" pointer-events="none" />
+    </g>
+  </g>
+  <!-- ================= CEILING LIGHT ================= -->
+  <g transform="translate(1000,0)">
+    <g id="ceiling-light" class="hotspot" data-spot="ceiling-light">
+      <rect class="hit" x="10" y="0" width="160" height="230" fill="#fff" opacity="0" />
+      <ellipse cx="90" cy="17" rx="27" ry="13" fill="#090909" />
+      <ellipse cx="90" cy="13" rx="20" ry="8" fill="#171717" />
+      <path d="M90 25              C90 39 89 48 90 58" fill="none" stroke="#090909" stroke-width="7" stroke-linecap="round" />
+      <path d="M79 58              Q90 52 101 58              L99 73              Q90 78 81 73              Z" fill="#0a0a0a" />
+      <ellipse cx="90" cy="58" rx="11" ry="5" fill="#151515" />
+      <circle cx="90" cy="112" r="42" fill="url(#ceiling-bulb-glow)" />
+      <g fill="none" stroke="#090909" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M90 70                L116 79                L143 103                L148 137                L136 184                L105 207                L72 212                L42 194                L35 155                L38 118                L61 91                Z" />
+        <path d="M61 91                L90 70                L116 79                L143 103                L118 111                L90 101                L61 91" />
+        <path d="M38 118                L61 91                L90 101                L118 111                L143 103" />
+        <path d="M35 155                L90 154                L148 137" />
+        <path d="M42 194                L90 185                L136 184" />
+        <path d="M72 212                L90 185                L105 207" />
+        <path d="M61 91                L38 118                L90 154                L143 103" />
+        <path d="M38 118                L35 155                L90 185                L148 137" />
+        <path d="M35 155                L42 194                L90 185                L136 184" />
+        <path d="M61 91                L90 101                L72 212" />
+        <path d="M90 70                L90 101                L90 154                L90 185" />
+        <path d="M116 79                L90 101                L118 111                L90 154                L136 184" />
+        <path d="M143 103                L118 111                L148 137                L90 154" />
+        <path d="M118 111                L90 185" />
+        <path d="M61 91                L90 154                L42 194" />
+        <path d="M38 118                L90 101" />
+      </g>
+      <ellipse cx="90" cy="119" rx="18" ry="28" fill="url(#ceiling-bulb)" stroke="#d5c58d" stroke-width="1" />
+      <ellipse cx="84" cy="111" rx="6" ry="11" fill="#fffef3" opacity=".75" />
+      <path d="M82 88              Q90 84 98 88              L97 96              Q90 99 83 96              Z" fill="#0a0a0a" />
+    </g>
+  </g>
+  <!-- ================= SMOKE ALARM ================= -->
+  <g id="ceiling-alarm">
+    <ellipse cx="830" cy="45" rx="22" ry="10" fill="#d8d9d5" stroke="#b5b7b4" stroke-width="2" />
+    <circle cx="822" cy="45" r="3" fill="#777b78" />
+    <circle cx="838" cy="45" r="3" fill="#777b78" />
+  </g>
+  <!-- ================= AMBIENT LIGHT / EDGE ================= -->
+  <rect x="0" y="0" width="1536" height="1152" fill="#ffffff" opacity=".03" pointer-events="none" />
+  <rect x="6" y="6" width="1524" height="1140" fill="none" stroke="#555" stroke-width="12" opacity=".08" pointer-events="none" />
 </svg>

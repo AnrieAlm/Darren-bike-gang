@@ -2,27 +2,27 @@
 
 <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 190 305"
+    viewBox="0 0 190 235"
     width="190"
-    height="305">
+    height="235">
 
   <defs>
 
     <linearGradient
-        id="fridgeBody"
+        id="fridge-body"
         x1="0"
         y1="0"
         x2="1"
         y2="0">
 
       <stop offset="0%"
-            stop-color="#d8d9d5"/>
+            stop-color="#d6d7d3"/>
 
       <stop offset="45%"
             stop-color="#eeeeea"/>
 
       <stop offset="100%"
-            stop-color="#c8cac7"/>
+            stop-color="#c6c8c5"/>
 
     </linearGradient>
 
@@ -30,7 +30,9 @@
 
 
   <!-- =========================================================
-       FRIDGE
+       FRIDGE — small under-counter unit, single door.
+       Matches the height of the oven/counter run in the photo,
+       not a full-height fridge-freezer.
        ========================================================= -->
 
   <g
@@ -46,7 +48,7 @@
         x="0"
         y="0"
         width="190"
-        height="305"
+        height="235"
         fill="#ffffff"
         opacity="0"/>
 
@@ -59,52 +61,35 @@
         x="3"
         y="2"
         width="184"
-        height="300"
+        height="231"
         rx="4"
-        fill="url(#fridgeBody)"
+        fill="url(#fridge-body)"
         stroke="#aeb1ae"
         stroke-width="3"/>
 
 
+    <!-- top edge highlight -->
+
+    <rect
+        x="3"
+        y="2"
+        width="184"
+        height="8"
+        fill="#f4f4f0"/>
+
+
     <!-- =========================================================
-         TOP FREEZER DOOR
+         SINGLE DOOR
          ========================================================= -->
 
     <rect
         x="10"
-        y="10"
+        y="16"
         width="170"
-        height="78"
+        height="195"
         rx="3"
-        fill="#dedfdb"
+        fill="#e4e5e1"
         stroke="#b9bbb8"
-        stroke-width="2"/>
-
-
-    <!-- freezer subtle highlight -->
-
-    <rect
-        x="18"
-        y="18"
-        width="154"
-        height="58"
-        rx="2"
-        fill="#e9e9e5"
-        opacity=".55"/>
-
-
-    <!-- =========================================================
-         MAIN FRIDGE DOOR
-         ========================================================= -->
-
-    <rect
-        x="10"
-        y="94"
-        width="170"
-        height="197"
-        rx="3"
-        fill="#dfe0dc"
-        stroke="#b8bab7"
         stroke-width="2"/>
 
 
@@ -112,81 +97,50 @@
 
     <path
         d="
-          M20 105
-          L165 105
-          L165 280
-          L20 280
+          M20 26
+          L165 26
+          L165 200
+          L20 200
           Z"
         fill="#f2f2ee"
-        opacity=".35"/>
+        opacity=".4"/>
 
 
     <!-- =========================================================
-         DOOR SEAM
-         ========================================================= -->
-
-    <line
-        x1="10"
-        y1="91"
-        x2="180"
-        y2="91"
-        stroke="#aeb0ad"
-        stroke-width="3"/>
-
-
-    <!-- =========================================================
-         HANDLES
+         HANDLE — single vertical bar, right edge
          ========================================================= -->
 
     <rect
-        x="164"
-        y="27"
-        width="7"
-        height="43"
+        x="163"
+        y="55"
+        width="8"
+        height="110"
         rx="3"
         fill="#999b98"/>
 
     <rect
-        x="164"
-        y="125"
-        width="7"
-        height="85"
-        rx="3"
-        fill="#999b98"/>
-
-
-    <!-- handle highlights -->
-
-    <rect
-        x="166"
-        y="30"
-        width="2"
-        height="37"
-        rx="1"
-        fill="#d4d5d1"/>
-
-    <rect
-        x="166"
-        y="130"
-        width="2"
-        height="74"
+        x="165"
+        y="60"
+        width="2.5"
+        height="95"
         rx="1"
         fill="#d4d5d1"/>
 
 
     <!-- =========================================================
-         SMALL FRIDGE BRAND DETAIL
+         BRAND — matches the "NORDMENOK" fridge in the photo
          ========================================================= -->
 
     <text
         x="95"
-        y="150"
+        y="60"
         text-anchor="middle"
         font-family="Arial, sans-serif"
-        font-size="8"
-        fill="#858784"
-        opacity=".7">
-      HOME
+        font-size="11"
+        letter-spacing="1"
+        fill="#b9bbb7"
+        opacity=".85">
+      NORDMENOK
     </text>
 
 
@@ -196,9 +150,9 @@
 
     <rect
         x="10"
-        y="291"
+        y="221"
         width="170"
-        height="10"
+        height="9"
         fill="#c2c4c1"/>
 
 
@@ -211,7 +165,7 @@
         x="3"
         y="2"
         width="184"
-        height="300"
+        height="231"
         rx="4"
         fill="none"
         pointer-events="none"/>

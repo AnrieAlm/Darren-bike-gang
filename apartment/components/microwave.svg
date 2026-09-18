@@ -9,7 +9,7 @@
   <defs>
 
     <linearGradient
-        id="microwaveBody"
+        id="microwave-body"
         x1="0"
         y1="0"
         x2="0"
@@ -58,7 +58,7 @@
         width="176"
         height="111"
         rx="5"
-        fill="url(#microwaveBody)"
+        fill="url(#microwave-body)"
         stroke="#aaa9a4"
         stroke-width="3"/>
 
