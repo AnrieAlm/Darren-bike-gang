@@ -79,17 +79,17 @@ function openMenu(game, x, y) {
     },
     {
       label: `Hi yourself`,
-      hint: `Just chatting — no effect`,
+      hint: `Just chatting`,
       onClick: () => reply(`Haha, sound.`)
     },
     {
       label: `Yo bro`,
-      hint: `+1 toward recruiting him`,
+      hint: `You are a Bro now`,
       onClick: () => sharad.sayYoBro(game)
     },
     {
       label: `I love you my best bro`,
-      hint: `Recruits him instantly!`,
+      hint: `Bros 4eva!`,
       onClick: () => {
         successCount = SUCCESSES_NEEDED;
         hideContextMenu();

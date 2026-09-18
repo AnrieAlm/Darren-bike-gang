@@ -1,20 +1,21 @@
 // ========================================================
-// mimi.js — recruited by giving her a movie ticket, found hidden
-// around the flat (see room.js — she's the second thing in the cabinet).
+// mimi.js — recruited by giving her a movie ticket (1 at a time)
 // ========================================================
-import { showDialog, hideDialog } from '../ui.js';
+import { showDialog, hideDialog, promptGiveItem } from '../ui.js';
+
+let ticketGiven = 0;
 
 const mimi = {
   id: 'mimi',
   name: 'Mimi',
-  position: { top: '66%', left: '47%' }, // open floor, central
+  position: { top: '66%', left: '47%' },
   portraitNeutral: '../assets/mimi_neutral.png',
   portraitHappy: '../assets/mimi_happy.png',
   emojiFallback: '🎬',
 
   getProgress(game) {
     if (game.isRecruited('mimi')) return { done: 1, total: 1 };
-    return { done: game.getInventoryCount('mimi', 'ticket') > 0 ? 1 : 0, total: 1 };
+    return { done: ticketGiven, total: 1 };
   },
 
   onInteract(game) {
@@ -27,24 +28,24 @@ const mimi = {
       return;
     }
 
-    const hasTicket = game.getInventoryCount('mimi', 'ticket') > 0;
-
-    if (!hasTicket) {
-      showDialog({
-        portraitUrl: mimi.portraitNeutral,
-        text: `${mimi.name}: I really want to catch a film tonight... if only I had a ticket. 🎬`,
-        buttons: [{ label: 'Close', onClick: hideDialog }]
-      });
-      return;
-    }
-
-    game.removeInventory('mimi', 'ticket', 1);
-    game.recruit('mimi');
-    showDialog({
-      portraitUrl: mimi.portraitHappy,
-      text: `${mimi.name}: Yesss! Okay, I'm in the gang!`,
-      buttons: [{ label: 'Close', onClick: hideDialog }],
-      autoHideMs: 2500
+    promptGiveItem(mimi.name, (selectedItem) => {
+      if (selectedItem.type === 'ticket') {
+        game.removeInventory('mimi', 'ticket', 1);
+        ticketGiven = 1;
+        game.recruit('mimi');
+        showDialog({
+          portraitUrl: mimi.portraitHappy,
+          text: `${mimi.name}: Yesss! Okay, I'm in the gang!`,
+          buttons: [{ label: 'Close', onClick: hideDialog }],
+          autoHideMs: 2500
+        });
+      } else {
+        showDialog({
+          portraitUrl: mimi.portraitNeutral,
+          text: `${mimi.name}: I really just want to catch a film... I need a ticket. 🎬`,
+          buttons: [{ label: 'Close', onClick: hideDialog }]
+        });
+      }
     });
   }
 };

@@ -51,9 +51,10 @@ const game = {
   getInventoryCount(owner, type) {
     return inventory.filter(i => i.owner === owner && i.type === type).length;
   },
+  getDarrenPos() { return darrenPos; }, // <-- This is correct!
   isInventoryFull() { return inventory.length >= MAX_INVENTORY; },
   addInventory(item) {
-    if (inventory.length >= MAX_INVENTORY) return false; // backpack full — caller should check isInventoryFull() first
+    if (inventory.length >= MAX_INVENTORY) return false;
     inventory.push(item);
     renderInventory(inventory);
     refreshHappiness();
@@ -71,7 +72,7 @@ const game = {
     renderInventory(inventory);
     refreshHappiness();
   },
-
+ 
   isRecruited(id) { return recruited.has(id); },
   recruit(id) {
     recruited.add(id);
@@ -329,6 +330,7 @@ const HOTSPOT_POSITIONS = {
   cabinet: { left: 62, top: 50 },
   oven:    { left: 52, top: 47 },
   table:   { left: 21, top: 65 },
+  window:  { left: 30, top: 30 }, // 
 };
 
 function isDarrenNearPoint(point) {

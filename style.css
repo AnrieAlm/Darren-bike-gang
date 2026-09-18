@@ -453,8 +453,16 @@ html, body {
   flex-shrink: 0;
 }
 #dialog-text { flex: 1; font-size: 0.9rem; line-height: 1.3; }
-#dialog-actions { display: flex; flex-direction: column; gap: 6px; margin-left: 8px; }
+#dialog-actions { 
+  display: flex; 
+ flex-direction: row;
+    gap: 12px; /* Space between the Yes and No buttons */
+    justify-content: center; /* Centers the buttons in the dialog box */
+    margin-top: 15px; 
+}
 #dialog-actions button {
+  flex: 1; 
+  min-width: 80px;
   font-size: 0.8rem;
   padding: 8px 10px;
   border-radius: 8px;

@@ -92,6 +92,7 @@ export function setRecruitedCount(current, total) {
     recruitedCount.textContent = `Recruited: ${current} / ${total}`;
 }
 
+// UPDATED: Renders the backpack and makes filled slots clickable when in "give" mode
 export function renderInventory(items) {
     inventoryBar.innerHTML = '';
     const capacity = document.createElement('div');
@@ -107,7 +108,7 @@ export function renderInventory(items) {
             slot.title = item.label; 
             slot.textContent = ITEM_EMOJI[item.type] || '❔';
             
-            // NEW: Handle item selection for giving
+            // Handle item selection for giving
             slot.onclick = () => {
                 if (pendingGiveCallback) {
                     pendingGiveCallback(item, slot);

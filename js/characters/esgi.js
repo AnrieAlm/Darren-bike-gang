@@ -1,23 +1,28 @@
 // ========================================================
 // esgi.js — recruited by giving her Boots the Cat (found via the window)
 // ========================================================
-import { showDialog, hideDialog } from '../ui.js';
+import { showDialog, hideDialog, promptGiveItem } from '../ui.js';
+
+let catGiven = 0;
+
+// --- PROXIMITY SETTINGS ---
+const WINDOW_POS = { top: 30, left: 30 }; // Matches the new hotspot position
+const PROXIMITY_THRESHOLD = 60; // Increased to 60 for a very generous, easy pickup radius!
+// --------------------------
 
 const esgi = {
   id: 'esgi',
   name: 'Esgi',
-  position: { top: '38%', left: '30%' }, // standing on the floor below the window
-  // TODO: swap in your generated portraits
+  position: { top: '38%', left: '30%' }, 
   portraitNeutral: '../assets/esgi_neutral.png',
   portraitHappy: '../assets/esgi_happy.png',
-  emojiFallback: '😿', // shown until portrait images exist
+  emojiFallback: '😿',
 
   getProgress(game) {
     if (game.isRecruited('esgi')) return { done: 1, total: 1 };
-    return { done: game.getInventoryCount('esgi', 'cat') > 0 ? 1 : 0, total: 1 };
+    return { done: catGiven, total: 1 };
   },
 
-  // Called whenever the player clicks Esgi's sprite in the room.
   onInteract(game) {
     if (game.isRecruited('esgi')) {
       showDialog({
@@ -28,29 +33,47 @@ const esgi = {
       return;
     }
 
-    const hasCat = game.getInventoryCount('esgi', 'cat') > 0;
-
-    if (!hasCat) {
-      showDialog({
-        portraitUrl: esgi.portraitNeutral,
-        text: `${esgi.name}: I miss Boots so much... 😢 (Try the window?)`,
-        buttons: [{ label: 'Close', onClick: hideDialog }]
-      });
-      return;
-    }
-
-    game.removeInventory('esgi', 'cat', 1);
-    game.recruit('esgi');
-    showDialog({
-      portraitUrl: esgi.portraitHappy,
-      text: `${esgi.name}: I'm in! Anything for Boots. 🐱`,
-      buttons: [{ label: 'Close', onClick: hideDialog }],
-      autoHideMs: 2500
+    promptGiveItem(esgi.name, (selectedItem) => {
+      if (selectedItem.type === 'cat') {
+        game.removeInventory('esgi', 'cat', 1);
+        catGiven = 1;
+        game.recruit('esgi');
+        showDialog({
+          portraitUrl: esgi.portraitHappy,
+          text: `${esgi.name}: I'm in! Anything for Boots. 🐱`,
+          buttons: [{ label: 'Close', onClick: hideDialog }],
+          autoHideMs: 2500
+        });
+      } else {
+        showDialog({
+          portraitUrl: esgi.portraitNeutral,
+          text: `${esgi.name}: I only want Boots the cat! 😢`,
+          buttons: [{ label: 'Close', onClick: hideDialog }]
+        });
+      }
     });
   },
 
-  // Called when the player clicks the window hotspot.
   onWindowOpened(game) {
+    // Safely get Darren's position from the game object
+    const darrenPos = game.getDarrenPos ? game.getDarrenPos() : { top: 80, left: 50 };
+    const pTop = darrenPos.top;
+    const pLeft = darrenPos.left;
+    
+    // Calculate the distance to the window
+    const distance = Math.hypot(pTop - WINDOW_POS.top, pLeft - WINDOW_POS.left);
+
+    // If Darren is too far away, stop him!
+    if (distance > PROXIMITY_THRESHOLD) {
+      showDialog({
+        text: `Darren: It's too far! I need to walk closer to the window to reach Boots.`,
+        buttons: [{ label: 'Okay', onClick: hideDialog }],
+        autoHideMs: 2000
+      });
+      return; 
+    }
+
+    // If he's close enough, proceed with the original logic
     showDialog({
       text: `You open the window — Boots the Cat is sitting right there on the ledge!`,
       buttons: [{
@@ -62,9 +85,9 @@ const esgi = {
               buttons: [{ label: 'Okay', onClick: hideDialog }],
               autoHideMs: 2000
             });
-            return; // Boots stays on the ledge
+            return; 
           }
-          document.getElementById('window-cat')?.classList.add('collected'); // disappears from the sill
+          document.getElementById('window-cat')?.classList.add('collected'); 
           game.addInventory({ owner: 'esgi', type: 'cat', label: 'Boots the Cat' });
           hideDialog();
         }
