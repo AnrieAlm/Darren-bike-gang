@@ -362,9 +362,23 @@ function pressCenterButton() {
 
   for (const spotId of Object.keys(HOTSPOT_POSITIONS)) {
     if (!isDarrenNearPoint(HOTSPOT_POSITIONS[spotId])) continue;
-    const el = document.querySelector(`.found-item-emoji[data-spot="${spotId}"]`);
-    if (el && el.textContent && !el.classList.contains('collected')) {
-      el.dispatchEvent(new Event('click', { bubbles: true })); // reuse the exact same pickup logic as tapping it directly
+
+    // Something's already sitting there, revealed — collect it directly.
+    const itemEl = document.querySelector(`.found-item-emoji[data-spot="${spotId}"]`);
+    if (itemEl && itemEl.textContent && !itemEl.classList.contains('collected')) {
+      itemEl.dispatchEvent(new Event('click', { bubbles: true }));
+      return;
+    }
+
+    // Otherwise "press" the spot itself — this opens it if it's closed,
+    // or (if it's already open) re-checks it the exact same way tapping
+    // it directly would, including the "Nothing else here" message if
+    // it's genuinely empty. Either way, the player standing at a
+    // fridge/cabinet/oven/table and pressing center should never do
+    // nothing at all.
+    const spotEl = document.getElementById(`spot-${spotId}`);
+    if (spotEl) {
+      spotEl.dispatchEvent(new Event('click', { bubbles: true }));
       return;
     }
   }
