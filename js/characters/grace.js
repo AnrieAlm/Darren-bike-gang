@@ -4,8 +4,27 @@
 import { showDialog, hideDialog, promptGiveItem } from '../ui.js';
 import { getChoreProgress } from '../room.js';
 
-const JUICE_NEEDED = 4;
+const JUICE_NEEDED = 2;
 let juicesGiven = 0;
+
+// All three — juice, sweeping, and dishes — must be fully done before
+// Grace will actually join. Juice alone used to be enough; now Darren
+// has to help clean up too.
+function tryRecruit(game) {
+  if (game.isRecruited('grace')) return;
+  const sweep = getChoreProgress('grace', 'sweep');
+  const dishes = getChoreProgress('grace', 'dishes');
+  const ready = juicesGiven >= JUICE_NEEDED && sweep.done >= sweep.total && dishes.done >= dishes.total;
+  if (ready) {
+    game.recruit('grace');
+    showDialog({
+      portraitUrl: grace.portraitHappy,
+      text: `${grace.name}: The flat's spotless and I've got my juice — you're a legend, I'm in!`,
+      buttons: [{ label: 'Close', onClick: hideDialog }],
+      autoHideMs: 2500
+    });
+  }
+}
 
 const grace = {
   id: 'grace',
@@ -27,6 +46,13 @@ const grace = {
     return { done, total };
   },
 
+  // Called by main.js whenever one of Grace's chores gets completed —
+  // lets her check whether juice + sweeping + dishes are ALL done now,
+  // in case the last chore finishes after she already has enough juice.
+  onChoreProgress(game) {
+    tryRecruit(game);
+  },
+
   onInteract(game) {
     if (game.isRecruited('grace')) {
       showDialog({
@@ -41,19 +67,20 @@ const grace = {
       if (selectedItem.type === 'juice') {
         game.removeInventory('grace', 'juice', 1);
         juicesGiven++;
-        
-        if (juicesGiven >= JUICE_NEEDED) {
-          game.recruit('grace');
-          showDialog({
-            portraitUrl: grace.portraitHappy,
-            text: `${grace.name}: You're a legend, I'm in!`,
-            buttons: [{ label: 'Close', onClick: hideDialog }],
-            autoHideMs: 2500
-          });
+
+        const sweep = getChoreProgress('grace', 'sweep');
+        const dishes = getChoreProgress('grace', 'dishes');
+        const stillNeeded = [];
+        if (juicesGiven < JUICE_NEEDED) stillNeeded.push(`${JUICE_NEEDED - juicesGiven} more juice`);
+        if (sweep.done < sweep.total) stillNeeded.push('sweeping the floor');
+        if (dishes.done < dishes.total) stillNeeded.push('the dishes');
+
+        if (stillNeeded.length === 0) {
+          tryRecruit(game);
         } else {
           showDialog({
             portraitUrl: grace.portraitNeutral,
-            text: `${grace.name}: Thanks! Need ${JUICE_NEEDED - juicesGiven} more.`,
+            text: `${grace.name}: Thanks! Still need: ${stillNeeded.join(', ')}.`,
             buttons: [{ label: 'Close', onClick: hideDialog }]
           });
         }

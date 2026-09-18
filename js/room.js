@@ -8,11 +8,10 @@
 // spotId must match a .hotspot element's data-spot in index.html.
 
 export const hiddenItems = [
-  // Grace's grape juice cartons — spread across 4 spots
+  // Grace's grape juice cartons — only 2 now; she also requires her
+  // chores (sweeping + dishes) to be done, see grace.js.
   { spotId: 'fridge',  owner: 'grace', type: 'juice', label: 'Grape Juice Carton' },
   { spotId: 'cabinet', owner: 'grace', type: 'juice', label: 'Grape Juice Carton' },
-  { spotId: 'table',   owner: 'grace', type: 'juice', label: 'Grape Juice Carton' },
-  { spotId: 'oven',    owner: 'grace', type: 'juice', label: 'Grape Juice Carton' },
 
   // Mimi's movie ticket (needs 1) — second thing you find in the
   // cabinet, ahead of the other items queued there so it doesn't take forever.
@@ -95,7 +94,9 @@ export const choreTasks = [
   { taskId: 'sweep-0', owner: 'grace', task: 'sweep',  label: 'Sweep the floor' },
   { taskId: 'sweep-1', owner: 'grace', task: 'sweep',  label: 'Sweep the floor' },
   { taskId: 'sweep-2', owner: 'grace', task: 'sweep',  label: 'Sweep the floor' },
-  { taskId: 'sweep-3', owner: 'grace', task: 'sweep',  label: 'Sweep the floor' },
+  // sweep-3 left out of the required list on purpose — that mess-spot
+  // sits behind Mimi's sprite and is hard/impossible to reach, so it's
+  // still visible in the scene but no longer counted toward Grace's total.
   { taskId: 'dish-0',  owner: 'grace', task: 'dishes', label: 'Wash the dirty plate' },
   { taskId: 'dish-1',  owner: 'grace', task: 'dishes', label: 'Wash the dirty plate' },
 ];

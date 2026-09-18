@@ -24,6 +24,7 @@ import {
 } from './ui.js';
 
 // All playable characters. Add/remove ids here to change who's required.
+console.log('MAIN.JS BOOTED - script is running');
 const ALL_CHARACTERS = [esgi, sharad, grace, boris, maya, mimi];
 
 // Characters that must be recruited to win.
@@ -82,13 +83,22 @@ const game = {
     refreshHappiness();
     const character = ALL_CHARACTERS.find(c => c.id === id);
     if (character) showRecruitToast(character.name);
+    if (recruited.size >= 3) {
+      const darrenEl = document.getElementById('darren-sprite');
+      if (darrenEl) darrenEl.style.backgroundImage = "url('../assets/darren_happy.png')";
+    }
     checkWinCondition();
   },
   // Chore tasks (sweeping, dishes) — no inventory involved, just marks
   // the task done and refreshes whichever character owns it.
   completeChore(taskId) {
     const chore = completeChore(taskId);
-    if (chore) refreshHappiness();
+    if (chore) {
+      refreshHappiness();
+      if (chore.owner === 'grace' && typeof grace.onChoreProgress === 'function') {
+        grace.onChoreProgress(game);
+      }
+    }
     return chore;
   },
   increaseSecurity(amount) {
@@ -134,14 +144,16 @@ function refreshHappiness() {
 
 function checkWinCondition() {
   const allIn = requiredCharacters.every(id => recruited.has(id));
+  console.log('checkWinCondition:', { recruited: [...recruited], required: requiredCharacters, allIn });
   if (allIn) {
-    startHeistSequence();
+    game.endGame('win', 'Darren and the gang stole every bike in Dublin. Darren is now a millionaire. 💰');
   }
 }
 
 // A short beat before the win screen — customize this however you like
 // (e.g. swap in a bike animation, extra dialog, etc.)
 function startHeistSequence() {
+  console.log('startHeistSequence called');
   showDialog({
     text: `The whole gang is assembled. Time to steal every bike in Dublin... 🚲🚲🚲`,
     buttons: [{
@@ -194,8 +206,12 @@ function renderCharacterSprites() {
     el.id = `sprite-${character.id}`;
     el.style.top = character.position.top;
     el.style.left = character.position.left;
-    el.textContent = character.emojiFallback || '🙂';
     el.title = character.name;
+    if (character.portraitNeutral) {
+      el.style.backgroundImage = `url('${character.portraitNeutral}')`;
+    } else {
+      el.textContent = character.emojiFallback || '🙂';
+    }
 
     const nameTag = document.createElement('div');
     nameTag.className = 'sprite-name';
@@ -236,7 +252,12 @@ function renderCharacterSprites() {
 
 function updateSpriteState(id) {
   const el = document.getElementById(`sprite-${id}`);
-  if (el) el.classList.add('recruited');
+  if (!el) return;
+  el.classList.add('recruited');
+  const character = ALL_CHARACTERS.find(c => c.id === id);
+  if (character && character.portraitHappy) {
+    el.style.backgroundImage = `url('${character.portraitHappy}')`;
+  }
 }
 
 // ---------------- Darren (the player's avatar) ----------------
@@ -247,7 +268,7 @@ function renderDarrenSprite() {
   el.id = 'darren-sprite';
   el.style.top = `${darrenPos.top}%`;
   el.style.left = `${darrenPos.left}%`;
-  el.textContent = '🧑';
+  el.style.backgroundImage = "url('../assets/darren_neutral.png')";
   el.title = 'Darren (you)';
 
   const nameTag = document.createElement('div');
