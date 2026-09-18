@@ -17,8 +17,8 @@ const sharad = {
   id: 'sharad',
   name: 'Sharad',
   position: { top: '60%', left: '10%' },
-  portraitNeutral: '../assets/sharad_neutral.png',
-  portraitHappy: '../assets/sharad_happy.png',
+  portraitNeutral: 'assets/sharad_neutral.png',
+  portraitHappy: 'assets/sharad_happy.png',
   emojiFallback: '🧢',
 
   getProgress(game) {

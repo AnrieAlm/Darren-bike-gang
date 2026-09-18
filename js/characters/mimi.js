@@ -9,8 +9,8 @@ const mimi = {
   id: 'mimi',
   name: 'Mimi',
   position: { top: '66%', left: '47%' },
-  portraitNeutral: '../assets/mimi_neutral.png',
-  portraitHappy: '../assets/mimi_happy.png',
+  portraitNeutral: 'assets/mimi_neutral.png',
+  portraitHappy: 'assets/mimi_happy.png',
   emojiFallback: '🎬',
 
   getProgress(game) {

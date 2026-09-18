@@ -10,8 +10,8 @@ const boris = {
   id: 'boris',
   name: 'Boris',
   position: { top: '75%', left: '60%' },
-  portraitNeutral: '../assets/boris_neutral.png',
-  portraitHappy: '../assets/boris_happy.png',
+  portraitNeutral: 'assets/boris_neutral.png',
+  portraitHappy: 'assets/boris_happy.png',
   emojiFallback: '🍭',
 
   getProgress(game) {

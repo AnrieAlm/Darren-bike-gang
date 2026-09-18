@@ -85,7 +85,7 @@ const game = {
     if (character) showRecruitToast(character.name);
     if (recruited.size >= 3) {
       const darrenEl = document.getElementById('darren-sprite');
-      if (darrenEl) darrenEl.style.backgroundImage = "url('../assets/darren_happy.png')";
+      if (darrenEl) darrenEl.style.backgroundImage = "url('assets/darren_happy.png')";
     }
     checkWinCondition();
   },
@@ -268,7 +268,7 @@ function renderDarrenSprite() {
   el.id = 'darren-sprite';
   el.style.top = `${darrenPos.top}%`;
   el.style.left = `${darrenPos.left}%`;
-  el.style.backgroundImage = "url('../assets/darren_neutral.png')";
+  el.style.backgroundImage = "url('assets/darren_neutral.png')";
   el.title = 'Darren (you)';
 
   const nameTag = document.createElement('div');

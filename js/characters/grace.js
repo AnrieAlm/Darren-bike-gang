@@ -30,8 +30,8 @@ const grace = {
   id: 'grace',
   name: 'Grace',
   position: { top: '66%', left: '90%' },
-  portraitNeutral: '../assets/grace_neutral.png',
-  portraitHappy: '../assets/grace_happy.png',
+  portraitNeutral: 'assets/grace_neutral.png',
+  portraitHappy: 'assets/grace_happy.png',
   emojiFallback: '🧃',
 
   getProgress(game) {

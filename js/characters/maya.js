@@ -10,8 +10,8 @@ const maya = {
   id: 'maya',
   name: 'Maya',
   position: { top: '75%', left: '25%' },
-  portraitNeutral: '../assets/maya_neutral.png',
-  portraitHappy: '../assets/maya_happy.png',
+  portraitNeutral: 'assets/maya_neutral.png',
+  portraitHappy: 'assets/maya_happy.png',
   emojiFallback: '🧇',
 
   getProgress(game) {

@@ -16,8 +16,8 @@ const esgi = {
   id: 'esgi',
   name: 'Esgi',
   position: { top: '38%', left: '30%' }, 
-  portraitNeutral: '../assets/esgi_neutral.png',
-  portraitHappy: '../assets/esgi_happy.png',
+  portraitNeutral: 'assets/esgi_neutral.png',
+  portraitHappy: 'assets/esgi_happy.png',
   emojiFallback: '😿',
 
   getProgress(game) {
